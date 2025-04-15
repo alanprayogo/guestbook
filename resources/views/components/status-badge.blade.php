@@ -2,7 +2,7 @@
 
 @php
     $statusMap = [
-        'draft' => 'bg-gray-800 text-white dark:bg-white dark:text-neutral-800',
+        'pending' => 'bg-gray-800 text-white dark:bg-white dark:text-neutral-800',
         'sent' => 'bg-gray-500 text-white',
         'failed' => 'bg-red-500 text-white',
         'accepted' => 'bg-teal-500 text-white',
@@ -12,7 +12,7 @@
     ];
 
     $labelMap = [
-        'draft' => 'Draft',
+        'pending' => 'Pending',
         'sent' => 'Sent',
         'failed' => 'Failed',
         'accepted' => 'Accepted',
