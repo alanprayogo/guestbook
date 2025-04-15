@@ -1,10 +1,10 @@
  <!-- ========== HEADER ========== -->
  <header
      class="z-48 lg:ps-65 sticky inset-x-0 top-0 flex w-full flex-wrap border-b border-gray-200 bg-white py-2.5 text-sm md:flex-nowrap md:justify-start dark:border-neutral-700 dark:bg-neutral-800">
-     <nav class="mx-auto flex w-full basis-full items-center px-4 sm:px-6">
-         <div class="me-5 flex items-center lg:me-0 lg:hidden">
+     <nav class="flex items-center w-full px-4 mx-auto basis-full sm:px-6">
+         <div class="flex items-center me-5 lg:me-0 lg:hidden">
              <!-- Logo -->
-             <a class="focus:outline-hidden inline-block flex-none rounded-md text-xl font-semibold focus:opacity-80"
+             <a class="flex-none inline-block text-xl font-semibold rounded-md focus:outline-hidden focus:opacity-80"
                  href="#" aria-label="Preline">
                  <svg class="h-auto w-28" width="116" height="32" viewBox="0 0 116 32" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
@@ -24,20 +24,20 @@
              <!-- End Logo -->
          </div>
 
-         <div class="ms-auto flex w-full items-center justify-end gap-x-1 md:justify-between md:gap-x-3">
+         <div class="flex items-center justify-end w-full ms-auto gap-x-1 md:justify-between md:gap-x-3">
 
              <div class="hidden md:block">
                  <div class="hidden lg:block">
-                     @include('components.breadcrumb')
+                     @include('components.page-title')
                  </div>
              </div>
 
              <div class="flex flex-row items-center justify-end gap-x-2">
 
                  <button type="button"
-                     class="hs-dark-mode focus:outline-hidden block rounded-full font-medium text-gray-800 hover:bg-gray-200 focus:bg-gray-200 hs-dark-mode-active:hidden dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                     class="block font-medium text-gray-800 rounded-full hs-dark-mode focus:outline-hidden hover:bg-gray-200 focus:bg-gray-200 hs-dark-mode-active:hidden dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
                      data-hs-theme-click-value="dark">
-                     <span class="group inline-flex size-auto items-center justify-center gap-x-2 px-3 py-2">
+                     <span class="inline-flex items-center justify-center px-3 py-2 group size-auto gap-x-2">
                          <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                              stroke-linecap="round" stroke-linejoin="round">
@@ -47,9 +47,9 @@
                      </span>
                  </button>
                  <button type="button"
-                     class="hs-dark-mode focus:outline-hidden hidden rounded-full font-medium text-gray-800 hover:bg-gray-200 focus:bg-gray-200 hs-dark-mode-active:block dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                     class="hidden font-medium text-gray-800 rounded-full hs-dark-mode focus:outline-hidden hover:bg-gray-200 focus:bg-gray-200 hs-dark-mode-active:block dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
                      data-hs-theme-click-value="light">
-                     <span class="group inline-flex size-auto items-center justify-center gap-x-2 px-3 py-2">
+                     <span class="inline-flex items-center justify-center px-3 py-2 group size-auto gap-x-2">
                          <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                              stroke-linecap="round" stroke-linejoin="round">
@@ -68,7 +68,7 @@
                  </button>
 
                  <button type="button"
-                     class="inline-flex items-center justify-center gap-x-2 rounded-full border border-transparent px-4 py-2 text-sm font-semibold text-gray-800 transition-colors duration-200 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+                     class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-gray-800 transition-colors duration-200 border border-transparent rounded-full gap-x-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
                      <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round">

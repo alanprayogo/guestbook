@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('pages.dashboard');
 });
 
+Route::get('/license', function () {
+    return view('pages.license');
+});
+
+Route::get('/profile', function () {
+    return view('pages.profile');
+});
+
 Route::get('/manage-user', function () {
     return view('pages.manage-user');
 });

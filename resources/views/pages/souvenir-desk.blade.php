@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page-title', 'Souvenir Desk')
+
 @section('content')
     <!-- Card -->
     <div class="flex flex-col">

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page-title', 'Dashboard')
+
 @section('content')
     <!-- Grid -->
     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page-title', 'Gift Handling')
+
 @section('content')
     <!-- Card -->
     <div class="flex flex-col">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title', 'Settings')
+@section('page-title', 'Lincense')
 
 @section('content')
    Coming Soon

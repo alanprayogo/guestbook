@@ -1,16 +1,18 @@
 @extends('layouts.app')
 
+@section('page-title', 'Guess Management')
+
 @section('content')
-    <nav class="relative z-0 flex overflow-hidden rounded-xl border border-gray-200 dark:border-neutral-700" aria-label="Tabs"
+    <nav class="relative z-0 flex overflow-hidden border border-gray-200 rounded-xl dark:border-neutral-700" aria-label="Tabs"
         role="tablist" aria-orientation="horizontal">
         <button type="button"
-            class="focus:outline-hidden active relative min-w-0 flex-1 overflow-hidden border-b-2 border-s border-gray-200 bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 first:border-s-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 focus:text-blue-600 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:border-b-blue-600 hs-tab-active:text-gray-900 dark:border-b-neutral-700 dark:border-l-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-400 dark:hs-tab-active:border-b-blue-600 dark:hs-tab-active:text-white"
+            class="relative flex-1 min-w-0 px-4 py-4 overflow-hidden text-sm font-medium text-center text-gray-500 bg-white border-b-2 border-gray-200 focus:outline-hidden active border-s first:border-s-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 focus:text-blue-600 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:border-b-blue-600 hs-tab-active:text-gray-900 dark:border-b-neutral-700 dark:border-l-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-400 dark:hs-tab-active:border-b-blue-600 dark:hs-tab-active:text-white"
             id="bar-with-underline-item-1" aria-selected="true" data-hs-tab="#bar-with-underline-1"
             aria-controls="bar-with-underline-1" role="tab">
             Guest Book
         </button>
         <button type="button"
-            class="focus:outline-hidden relative min-w-0 flex-1 overflow-hidden border-b-2 border-s border-gray-200 bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 first:border-s-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 focus:text-blue-600 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:border-b-blue-600 hs-tab-active:text-gray-900 dark:border-b-neutral-700 dark:border-l-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-400 dark:hs-tab-active:border-b-blue-600 dark:hs-tab-active:text-white"
+            class="relative flex-1 min-w-0 px-4 py-4 overflow-hidden text-sm font-medium text-center text-gray-500 bg-white border-b-2 border-gray-200 focus:outline-hidden border-s first:border-s-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 focus:text-blue-600 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:border-b-blue-600 hs-tab-active:text-gray-900 dark:border-b-neutral-700 dark:border-l-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-400 dark:hs-tab-active:border-b-blue-600 dark:hs-tab-active:text-white"
             id="bar-with-underline-item-2" aria-selected="false" data-hs-tab="#bar-with-underline-2"
             aria-controls="bar-with-underline-2" role="tab">
             Broadcast
@@ -25,10 +27,10 @@
                 <div class="-m-1.5 overflow-x-auto">
                     <div class="inline-block min-w-full p-1.5 align-middle">
                         <div
-                            class="shadow-2xs overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800">
+                            class="overflow-hidden bg-white border border-gray-200 shadow-2xs rounded-xl dark:border-neutral-700 dark:bg-neutral-800">
                             <!-- Header -->
                             <div
-                                class="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
+                                class="grid gap-3 px-6 py-4 border-b border-gray-200 md:flex md:items-center md:justify-between dark:border-neutral-700">
                                 <!-- Input -->
                                 <x-search-input id="hs-as-table-product-review-search" name="product-review-search"
                                     label="Search Produk" placeholder="Search" class="sm:col-span-1" />
@@ -50,7 +52,7 @@
                                         <th scope="col" class="py-3 ps-6 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                                     No
                                                 </span>
                                             </div>
@@ -59,7 +61,7 @@
                                         <th scope="col" class="py-3 pe-6 ps-6 text-start lg:ps-3 xl:ps-0">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                                     Name
                                                 </span>
                                             </div>
@@ -68,7 +70,7 @@
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                                     Category
                                                 </span>
                                             </div>
@@ -77,7 +79,7 @@
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                                     Session
                                                 </span>
                                             </div>
@@ -86,7 +88,7 @@
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                                     Limit
                                                 </span>
                                             </div>
@@ -95,7 +97,7 @@
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                                     Relation
                                                 </span>
                                             </div>
@@ -104,7 +106,7 @@
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                                     Status
                                                 </span>
                                             </div>
@@ -122,7 +124,7 @@
                                                     class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">1</span>
                                             </div>
                                         </td>
-                                        <td class="h-px w-1/4 whitespace-nowrap">
+                                        <td class="w-1/4 h-px whitespace-nowrap">
                                             <div class="py-3 pe-6 ps-6 lg:ps-3 xl:ps-0">
                                                 <div class="grow">
                                                     <span
@@ -181,11 +183,11 @@
 
                             <!-- Footer -->
                             <div
-                                class="grid gap-3 border-t border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
+                                class="grid gap-3 px-6 py-4 border-t border-gray-200 md:flex md:items-center md:justify-between dark:border-neutral-700">
                                 <div class="max-w-sm space-y-3">
                                     <span class="font-semibold text-gray-800 dark:text-neutral-200">Show</span>
                                     <select
-                                        class="inline rounded-lg border-gray-200 px-3 py-2 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
+                                        class="inline px-3 py-2 text-sm border-gray-200 rounded-lg pe-9 focus:border-blue-500 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -233,7 +235,7 @@
         <div id="bar-with-underline-2" class="hidden" role="tabpanel" aria-labelledby="bar-with-underline-item-2">
 
             <!-- Card -->
-            <div class="shadow-xs rounded-xl bg-white p-4 sm:p-7 dark:bg-neutral-900">
+            <div class="p-4 bg-white shadow-xs rounded-xl sm:p-7 dark:bg-neutral-900">
                 <div class="mb-8 text-center">
                     <h2 class="text-2xl font-bold text-gray-800 md:text-3xl dark:text-neutral-200">
                         Send Attarivitation Kit
@@ -247,7 +249,7 @@
 
                     <!-- Section -->
                     <div
-                        class="border-t border-gray-200 py-6 first:border-transparent first:pt-0 last:pb-0 dark:border-neutral-700 dark:first:border-transparent">
+                        class="py-6 border-t border-gray-200 first:border-transparent first:pt-0 last:pb-0 dark:border-neutral-700 dark:first:border-transparent">
 
                         <div class="mt-2 space-y-3">
                             <div class="flex flex-col gap-3 sm:flex-row">
@@ -312,7 +314,7 @@
                     <!-- End Section -->
                 </form>
 
-                <div class="mt-5 flex justify-end gap-x-2">
+                <div class="flex justify-end mt-5 gap-x-2">
                     <button type="button"
                         class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 sm:py-2 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
                         Cancel

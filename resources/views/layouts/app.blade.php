@@ -89,9 +89,9 @@
             </button>
             <!-- End Navigation Toggle -->
 
-            <!-- Breadcrumb -->
-            @include('components.breadcrumb')
-            <!-- End Breadcrumb -->
+            <!-- Page Title -->
+            @include('components.page-title')
+            <!-- End Page Title -->
         </div>
     </div>
     <!-- End Breadcrumb -->
