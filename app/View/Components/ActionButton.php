@@ -55,10 +55,11 @@ class ActionButton extends Component
 
         // Variant classes
         $variants = [
+            'share' => 'bg-teal-600 hover:bg-teal-700 focus:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 dark:focus:bg-teal-600',
             'edit' => 'bg-yellow-500 hover:bg-yellow-600 focus:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:bg-yellow-700',
             'delete' => 'bg-red-600 hover:bg-red-700 focus:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:bg-red-600',
-            'add' => 'bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:bg-blue-600',
-            'view' => 'bg-green-600 hover:bg-green-700 focus:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:bg-green-600'
+            'send' => 'bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:bg-blue-600',
+            'download' => 'bg-green-600 hover:bg-green-700 focus:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:bg-green-600'
         ];
 
         return implode(' ', [
@@ -74,11 +75,12 @@ class ActionButton extends Component
     public function iconSvg()
     {
         $icons = [
+            'share' => '<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line>',
             'edit' => '<path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>',
             'delete' => '<path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>',
-            'add' => '<path d="M5 12h14"></path><path d="M12 5v14"></path>',
-            'view' => '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle>'
-        ];
+            'send' => '<path d="M22 2 11 13"></path><path d="M22 2 15 22 11 13 2 9 22 2Z"></path>',
+            'download' => '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line>'
+        ];  
 
         return $icons[$this->variant] ?? $icons['edit'];
     }
