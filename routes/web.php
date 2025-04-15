@@ -14,5 +14,33 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.dashboard');
+});
+
+Route::get('/manage-user', function () {
+    return view('pages.manage-user');
+});
+
+Route::get('/manage-guest', function () {
+    return view('pages.manage-guest');
+});
+
+Route::get('/guest-arrival', function () {
+    return view('pages.guest-arrival');
+});
+
+Route::get('/souvenir-desk', function () {
+    return view('pages.souvenir-desk');
+});
+
+Route::get('/gift-handling', function () {
+    return view('pages.gift-handling');
+});
+
+Route::get('/settings', function () {
+    return view('pages.settings');
+});
+
+Route::get('/event', function () {
+    return view('pages.event');
 });
