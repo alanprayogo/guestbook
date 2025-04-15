@@ -1,16 +1,18 @@
-@props(['href' => '#', 'type' => 'primary', 'icon' => null, 'disabled' => false])
+@props(['href' => '#', 'variant' => 'primary', 'icon' => null, 'disabled' => false, 'size' => 'medium'])
 
-<div class="inline-flex gap-x-2">
-    <a 
-        {{ $attributes->merge([
-            'class' => $colorClasses(),
-            'href' => $href,
-            'disabled' => $disabled
-        ]) }}
-    >
-        @if($icon)
-            {!! $icon !!}
+@if ($href)
+    <a href="{{ $href }}" class="{{ $buttonClasses() }}"
+        @if ($disabled) aria-disabled="true" @endif>
+        @if ($icon ?? $defaultIcons())
+            {!! $icon ?? $defaultIcons() !!}
         @endif
         {{ $slot }}
     </a>
-</div>
+@else
+    <button type="button" class="{{ $buttonClasses() }}" @if ($disabled) disabled @endif>
+        @if ($icon ?? $defaultIcons())
+            {!! $icon ?? $defaultIcons() !!}
+        @endif
+        {{ $slot }}
+    </button>
+@endif
