@@ -98,15 +98,6 @@
                                             <div class="flex items-center gap-x-2">
                                                 <span
                                                     class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
-                                                    Relation
-                                                </span>
-                                            </div>
-                                        </th>
-
-                                        <th scope="col" class="px-6 py-3 text-start">
-                                            <div class="flex items-center gap-x-2">
-                                                <span
-                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                                     Status
                                                 </span>
                                             </div>
@@ -150,12 +141,6 @@
                                             <div class="px-6 py-3">
                                                 <span
                                                     class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">2</span>
-                                            </div>
-                                        </td>
-                                        <td class="h-px w-[16.7%] whitespace-nowrap">
-                                            <div class="px-6 py-3">
-                                                <span
-                                                    class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Family</span>
                                             </div>
                                         </td>
                                         <td class="h-px w-[16.7%] whitespace-nowrap">
