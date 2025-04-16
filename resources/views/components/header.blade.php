@@ -1,8 +1,8 @@
  <!-- ========== HEADER ========== -->
  <header
-     class="z-48 lg:ps-65 sticky inset-x-0 top-0 flex w-full flex-wrap border-b border-gray-200 bg-white py-2.5 text-sm md:flex-nowrap md:justify-start dark:border-neutral-700 dark:bg-neutral-800">
+     class="z-48 sticky inset-x-0 top-0 flex w-full flex-wrap border-b border-gray-200 bg-white py-2.5 text-sm md:flex-nowrap md:justify-start dark:border-neutral-700 dark:bg-neutral-800">
      <nav class="flex items-center w-full px-4 mx-auto basis-full sm:px-6">
-         <div class="flex items-center me-5 lg:me-0 lg:hidden">
+         <div class="flex items-center me-5 lg:me-0 justify-normal">
              <!-- Logo -->
              <a class="flex-none inline-block text-xl font-semibold rounded-md focus:outline-hidden focus:opacity-80"
                  href="#" aria-label="Preline">
@@ -28,7 +28,9 @@
 
              <div class="hidden md:block">
                  <div class="hidden lg:block">
-                     @include('components.page-title')
+                     @if (!request()->is('login') && !request()->is('forgot-password'))
+                         @include('components.page-title')
+                     @endif
                  </div>
              </div>
 
@@ -67,20 +69,22 @@
                      </span>
                  </button>
 
-                 <button type="button"
-                     class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-gray-800 transition-colors duration-200 border border-transparent rounded-full gap-x-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
-                     <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round">
-                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                         <polyline points="16 17 21 12 16 7" />
-                         <line x1="21" y1="12" x2="9" y2="12" />
-                     </svg>
-                     Logout
-                     <span class="sr-only">Logout</span>
-                 </button>
+                 @if (!request()->is('login') && !request()->is('forgot-password'))
+                     <button type="button"
+                         class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-gray-800 transition-colors duration-200 border border-transparent rounded-full gap-x-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+                         <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                             <polyline points="16 17 21 12 16 7" />
+                             <line x1="21" y1="12" x2="9" y2="12" />
+                         </svg>
+                         Logout
+                         <span class="sr-only">Logout</span>
+                     </button>
+                 @endif
              </div>
-             
+
          </div>
      </nav>
  </header>
