@@ -28,7 +28,7 @@
     <meta property="og:image" content="https://preline.co/assets/img/og-image.png">
 
     <!-- Title -->
-    <title>Tailwind CSS Admin Template | Preline UI, crafted with Tailwind CSS</title>
+    <title>{{ config('app.name') }} | @yield('page-title')</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="../../favicon.ico">

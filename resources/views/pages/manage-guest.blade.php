@@ -3,25 +3,14 @@
 @section('page-title', 'Guess Management')
 
 @section('content')
-    <nav class="relative z-0 flex overflow-hidden border border-gray-200 rounded-xl dark:border-neutral-700" aria-label="Tabs"
-        role="tablist" aria-orientation="horizontal">
-        <button type="button"
-            class="relative flex-1 min-w-0 px-4 py-4 overflow-hidden text-sm font-medium text-center text-gray-500 bg-white border-b-2 border-gray-200 focus:outline-hidden active border-s first:border-s-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 focus:text-blue-600 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:border-b-blue-600 hs-tab-active:text-gray-900 dark:border-b-neutral-700 dark:border-l-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-400 dark:hs-tab-active:border-b-blue-600 dark:hs-tab-active:text-white"
-            id="bar-with-underline-item-1" aria-selected="true" data-hs-tab="#bar-with-underline-1"
-            aria-controls="bar-with-underline-1" role="tab">
-            Guest Book
-        </button>
-        <button type="button"
-            class="relative flex-1 min-w-0 px-4 py-4 overflow-hidden text-sm font-medium text-center text-gray-500 bg-white border-b-2 border-gray-200 focus:outline-hidden border-s first:border-s-0 hover:bg-gray-50 hover:text-gray-700 focus:z-10 focus:text-blue-600 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:border-b-blue-600 hs-tab-active:text-gray-900 dark:border-b-neutral-700 dark:border-l-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-400 dark:hs-tab-active:border-b-blue-600 dark:hs-tab-active:text-white"
-            id="bar-with-underline-item-2" aria-selected="false" data-hs-tab="#bar-with-underline-2"
-            aria-controls="bar-with-underline-2" role="tab">
-            Broadcast
-        </button>
-    </nav>
+
+    <x-tabs.container>
+        <x-tabs.tab-button tab="guessbook" active="true">Guess Book</x-tabs.tab-button>
+        <x-tabs.tab-button tab="broadcast">Broadcast</x-tabs.tab-button>
+    </x-tabs.container>
 
     <div class="mt-3">
-        <div id="bar-with-underline-1" role="tabpanel" aria-labelledby="bar-with-underline-item-1">
-
+        <x-tabs.tab-panel tab="guessbook" active="true">
             <!-- Card -->
             <div class="flex flex-col">
                 <div class="-m-1.5 overflow-x-auto">
@@ -187,10 +176,9 @@
                                     <div class="inline-flex gap-x-2">
                                         <button type="button"
                                             class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
+                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="m15 18-6-6 6-6" />
                                             </svg>
                                             Prev
@@ -199,10 +187,9 @@
                                         <button type="button"
                                             class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
                                             Next
-                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
+                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="m9 18 6-6-6-6" />
                                             </svg>
                                         </button>
@@ -215,10 +202,9 @@
                 </div>
             </div>
             <!-- End Card -->
+        </x-tabs.tab-panel>
 
-        </div>
-        <div id="bar-with-underline-2" class="hidden" role="tabpanel" aria-labelledby="bar-with-underline-item-2">
-
+        <x-tabs.tab-panel tab="broadcast">
             <!-- Card -->
             <div class="p-4 bg-white shadow-xs rounded-xl sm:p-7 dark:bg-neutral-900">
                 <div class="mb-8 text-center">
@@ -311,7 +297,6 @@
                 </div>
             </div>
             <!-- End Card -->
-
-        </div>
+        </x-tabs.tab-panel>
     </div>
 @endsection
