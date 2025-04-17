@@ -225,56 +225,63 @@
                         <div class="mt-2 space-y-3">
                             <div class="flex flex-col gap-3 sm:flex-row">
                                 <div class="w-full">
-                                    <label for="expiration-date" class="block text-sm font-medium dark:text-white">
-                                        Expiration Date
+                                    <label for="yang-mengundang" class="block text-sm font-medium dark:text-white">
+                                        Yang Mengundang
                                     </label>
-                                    <input type="text" id="expiration-date"
+                                    <input type="text" id="yang-mengundang"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                        placeholder="MM/YY">
+                                        placeholder="Aku & Kamu">
                                 </div>
                                 <div class="w-full">
-                                    <label for="city-select-1" class="block text-sm font-medium dark:text-white">
-                                        City
+                                    <label for="sesi" class="block text-sm font-medium dark:text-white">
+                                        Sesi (Nomor Kursi)
                                     </label>
-                                    <select id="city-select-1"
+                                    <select id="sesi"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                        <option selected>Select a city</option>
-                                        <option>City 1</option>
-                                        <option>City 2</option>
-                                        <option>City 3</option>
+                                        <option selected disabled>Silahkan Pilih Kursi</option>
+                                        <option>Kursi 1</option>
+                                        <option>Kursi 2</option>
+                                        <option>Kursi 3</option>
+                                        <option>Kursi 4</option>
+                                        <option>Kursi 5</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="flex flex-col gap-3 sm:flex-row">
                                 <div class="w-full">
-                                    <label for="city-select-2" class="block text-sm font-medium dark:text-white">
-                                        City
+                                    <label for="category" class="block text-sm font-medium dark:text-white">
+                                        Category
                                     </label>
-                                    <select id="city-select-2"
+                                    <select id="category"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                        <option selected>Select a city</option>
+                                        <option selected disabled>Pilih Kategori Tamu</option>
                                         <option>City 1</option>
                                         <option>City 2</option>
                                         <option>City 3</option>
                                     </select>
                                 </div>
                                 <div class="w-full">
-                                    <label for="state-select" class="block text-sm font-medium dark:text-white">
-                                        State
+                                    <label for="limit-tamu" class="block text-sm font-medium dark:text-white">
+                                        Limit Tamu
                                     </label>
-                                    <select id="state-select"
+                                    <select id="limit-tamu"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                        <option selected>Select a state</option>
-                                        <option>State 1</option>
-                                        <option>State 2</option>
-                                        <option>State 3</option>
+                                        <option selected>1 Orang</option>
+                                        <option>2 Orang</option>
+                                        <option>3 Orang</option>
+                                        <option>4 Orang</option>
+                                        <option>5 Orang</option>
+                                        <option>6 Orang</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="space-y-2">
                                 <label for="af-submit-app-description" class="block text-sm font-medium dark:text-white">
-                                    Description
+                                    List Nama Undangan
                                 </label>
+                                <p class="text-primary" style="font-size: 14px;">
+                                    * <strong>Gunakan baris baru (↵)</strong> untuk memisahkan nama yang akan diundang.
+                                </p>
                                 <textarea id="af-submit-app-description"
                                     class="block w-full rounded-lg border-gray-200 px-3 py-1.5 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                     rows="6"
