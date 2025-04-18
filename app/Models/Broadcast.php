@@ -11,14 +11,19 @@ class Broadcast extends Model
 
     protected $fillable = [
         'category_id',
-        'guest_name',
         'guest_whatsapp',
         'session',
         'guest_limit',
+        'kata_pengantar',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function broadcastList()
+    {
+        return $this->hasMany(BroadcastList::class);
     }
 }

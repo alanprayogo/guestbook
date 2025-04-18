@@ -216,12 +216,11 @@
                     </p>
                 </div>
 
-                <form>
-
+                <form action="{{ route('manage-guest.store') }}" method="POST">
+                    @csrf
                     <!-- Section -->
                     <div
                         class="border-t border-gray-200 py-6 first:border-transparent first:pt-0 last:pb-0 dark:border-neutral-700 dark:first:border-transparent">
-
                         <div class="mt-2 space-y-3">
                             <div class="flex flex-col gap-3 sm:flex-row">
                                 <div class="w-full">
@@ -236,7 +235,7 @@
                                     <label for="sesi" class="block text-sm font-medium dark:text-white">
                                         Sesi (Nomor Kursi)
                                     </label>
-                                    <select id="sesi"
+                                    <select id="sesi" name="session"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                         <option selected disabled>Silahkan Pilih Kursi</option>
                                         <option>Kursi 1</option>
@@ -252,19 +251,19 @@
                                     <label for="category" class="block text-sm font-medium dark:text-white">
                                         Category
                                     </label>
-                                    <select id="category"
+                                    <select id="category" name="category_id"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                         <option selected disabled>Pilih Kategori Tamu</option>
-                                        <option>City 1</option>
-                                        <option>City 2</option>
-                                        <option>City 3</option>
+                                        @foreach ($category as $data)
+                                            <option value="{{ $data->id }}">{{ $data->category_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="w-full">
                                     <label for="limit-tamu" class="block text-sm font-medium dark:text-white">
                                         Limit Tamu
                                     </label>
-                                    <select id="limit-tamu"
+                                    <select id="limit-tamu" name="guest_limit"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                         <option selected>1 Orang</option>
                                         <option>2 Orang</option>
@@ -282,7 +281,7 @@
                                 <p class="block text-sm font-medium dark:text-white">
                                     * <strong>Gunakan baris baru (↵)</strong> untuk memisahkan nama yang akan diundang.
                                 </p>
-                                <textarea id="af-submit-app-description"
+                                <textarea id="af-submit-app-description" name="guest_name"
                                     class="block w-full rounded-lg border-gray-200 px-3 py-1.5 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                     rows="6"
                                     placeholder="A detailed summary will better explain your products to the audiences. Our users will see this in your dedicated product page."></textarea>
@@ -331,7 +330,7 @@
 
                                 <span class="block text-sm font-medium dark:text-white">Isi Kata Pengantar</span>
                                 <div class="mt-3">
-                                    <textarea id="text-pengantar" rows="5"
+                                    <textarea id="text-pengantar" rows="5" name="kata_pengantar"
                                         class="w-full rounded-lg border border-gray-300 p-3 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-white"></textarea>
                                 </div>
                             </div>
@@ -339,17 +338,17 @@
                         </div>
                     </div>
                     <!-- End Section -->
-                </form>
 
-                <div class="mt-5 flex justify-end gap-x-2">
-                    <button type="button"
-                        class="focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 focus:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 sm:py-2">
-                        Save changes
-                    </button>
-                </div>
+                    <div class="mt-5 flex justify-end gap-x-2">
+                        <button type="submit"
+                            class="focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 focus:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 sm:py-2">
+                            Save changes
+                        </button>
+                </form>
             </div>
-            <!-- End Card -->
-        </x-tabs.tab-panel>
+    </div>
+    <!-- End Card -->
+    </x-tabs.tab-panel>
     </div>
 
     <script>

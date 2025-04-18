@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,9 +38,8 @@ Route::get('/manage-user', function () {
     return view('pages.manage-user');
 });
 
-Route::get('/manage-guest', function () {
-    return view('pages.manage-guest');
-});
+Route::get('/manage-guest',[GuestController::class, 'showGuest'])->name('manage-guest');
+Route::post('/manage-guest', [GuestController::class, 'storeGuest'])->name('manage-guest.store');
 
 Route::get('/guest-arrival', function () {
     return view('pages.guest-arrival');

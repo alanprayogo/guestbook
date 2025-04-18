@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('broadcasts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
-            $table->text('guest_name');
-            $table->string('guest_whatsapp');
             $table->enum('session', ['Kursi 1', 'Kursi 2', 'Kursi 3', 'Kursi 4', 'Kursi 5']);
             $table->enum('guest_limit', ['1 Orang', '2 Orang', '3 Orang', '4 Orang', '5 Orang', '6 Orang']);
+            $table->text('kata_pengantar');
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
