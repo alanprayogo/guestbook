@@ -16,10 +16,10 @@
                 <div class="-m-1.5 overflow-x-auto">
                     <div class="inline-block min-w-full p-1.5 align-middle">
                         <div
-                            class="overflow-hidden bg-white border border-gray-200 shadow-2xs rounded-xl dark:border-neutral-700 dark:bg-neutral-800">
+                            class="shadow-2xs overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800">
                             <!-- Header -->
                             <div
-                                class="grid gap-3 px-6 py-4 border-b border-gray-200 md:flex md:items-center md:justify-between dark:border-neutral-700">
+                                class="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
                                 <!-- Input -->
                                 <x-search-input id="hs-as-table-product-review-search" name="product-review-search"
                                     label="Search Produk" placeholder="Search" class="sm:col-span-1" />
@@ -41,7 +41,7 @@
                                         <th scope="col" class="py-3 ps-6 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                     No
                                                 </span>
                                             </div>
@@ -50,7 +50,7 @@
                                         <th scope="col" class="py-3 pe-6 ps-6 text-start lg:ps-3 xl:ps-0">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                     Name
                                                 </span>
                                             </div>
@@ -59,7 +59,7 @@
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                     Category
                                                 </span>
                                             </div>
@@ -68,7 +68,7 @@
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                     Session
                                                 </span>
                                             </div>
@@ -77,7 +77,7 @@
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                     Limit
                                                 </span>
                                             </div>
@@ -86,7 +86,7 @@
                                         <th scope="col" class="px-6 py-3 text-start">
                                             <div class="flex items-center gap-x-2">
                                                 <span
-                                                    class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                    class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                     Status
                                                 </span>
                                             </div>
@@ -104,7 +104,7 @@
                                                     class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">1</span>
                                             </div>
                                         </td>
-                                        <td class="w-1/4 h-px whitespace-nowrap">
+                                        <td class="h-px w-1/4 whitespace-nowrap">
                                             <div class="py-3 pe-6 ps-6 lg:ps-3 xl:ps-0">
                                                 <div class="grow">
                                                     <span
@@ -157,11 +157,11 @@
 
                             <!-- Footer -->
                             <div
-                                class="grid gap-3 px-6 py-4 border-t border-gray-200 md:flex md:items-center md:justify-between dark:border-neutral-700">
+                                class="grid gap-3 border-t border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
                                 <div class="max-w-sm space-y-3">
                                     <span class="font-semibold text-gray-800 dark:text-neutral-200">Show</span>
                                     <select
-                                        class="inline px-3 py-2 text-sm border-gray-200 rounded-lg pe-9 focus:border-blue-500 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
+                                        class="inline rounded-lg border-gray-200 px-3 py-2 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -206,7 +206,7 @@
 
         <x-tabs.tab-panel tab="broadcast">
             <!-- Card -->
-            <div class="p-4 bg-white shadow-xs rounded-xl sm:p-7 dark:bg-neutral-900">
+            <div class="shadow-xs rounded-xl bg-white p-4 sm:p-7 dark:bg-neutral-900">
                 <div class="mb-8 text-center">
                     <h2 class="text-2xl font-bold text-gray-800 md:text-3xl dark:text-neutral-200">
                         Send Attarivitation Kit
@@ -220,7 +220,7 @@
 
                     <!-- Section -->
                     <div
-                        class="py-6 border-t border-gray-200 first:border-transparent first:pt-0 last:pb-0 dark:border-neutral-700 dark:first:border-transparent">
+                        class="border-t border-gray-200 py-6 first:border-transparent first:pt-0 last:pb-0 dark:border-neutral-700 dark:first:border-transparent">
 
                         <div class="mt-2 space-y-3">
                             <div class="flex flex-col gap-3 sm:flex-row">
@@ -279,7 +279,7 @@
                                 <label for="af-submit-app-description" class="block text-sm font-medium dark:text-white">
                                     List Nama Undangan
                                 </label>
-                                <p class="text-primary" style="font-size: 14px;">
+                                <p class="block text-sm font-medium dark:text-white">
                                     * <strong>Gunakan baris baru (↵)</strong> untuk memisahkan nama yang akan diundang.
                                 </p>
                                 <textarea id="af-submit-app-description"
@@ -287,16 +287,61 @@
                                     rows="6"
                                     placeholder="A detailed summary will better explain your products to the audiences. Our users will see this in your dedicated product page."></textarea>
                             </div>
+                            <div class="space-y-2">
+                                <span class="block text-sm font-medium dark:text-white">Teks Pengantar</span>
+                                <nav class="flex gap-x-1" aria-label="Tabs" role="tablist"
+                                    aria-orientation="horizontal">
+                                    <button type="button"
+                                        class="inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300 hs-tab-active:dark:text-white"
+                                        data-hs-tab="#tab-formal" role="tab"
+                                        data-template="Dengan hormat, kami mengundang Anda ke acara kami.">
+                                        Formal
+                                    </button>
+
+                                    <button type="button"
+                                        class="focus:outline-hidden inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300"
+                                        data-hs-tab="#tab-muslim"
+                                        data-template="Assalamu'alaikum warahmatullahi wabarakatuh. Terima kasih atas kehadiran Anda."
+                                        role="tab">Muslim</button>
+
+                                    <button type="button"
+                                        class="focus:outline-hidden inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300"
+                                        data-hs-tab="#tab-nasrani"
+                                        data-template="Tuhan memberkati Anda yang telah hadir dan mendoakan kebahagiaan kami."
+                                        role="tab">Nasrani</button>
+
+                                    <button type="button"
+                                        class="focus:outline-hidden inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300"
+                                        data-hs-tab="#tab-hindu"
+                                        data-template="Om Swastyastu. Terima kasih telah menghadiri acara kami."
+                                        role="tab">Hindu</button>
+
+                                    <button type="button"
+                                        class="focus:outline-hidden inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300"
+                                        data-hs-tab="#tab-birthday"
+                                        data-template="Selamat ulang tahun! Semoga selalu diberi kesehatan dan kebahagiaan."
+                                        role="tab">Birthday</button>
+
+                                    <button type="button"
+                                        class="focus:outline-hidden inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300"
+                                        data-hs-tab="#tab-english"
+                                        data-template="Thank you for joining our special occasion. We are deeply honored."
+                                        role="tab">English</button>
+                                </nav>
+
+                                <span class="block text-sm font-medium dark:text-white">Isi Kata Pengantar</span>
+                                <div class="mt-3">
+                                    <textarea id="text-pengantar" rows="5"
+                                        class="w-full rounded-lg border border-gray-300 p-3 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-white"></textarea>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <!-- End Section -->
                 </form>
 
-                <div class="flex justify-end mt-5 gap-x-2">
-                    <button type="button"
-                        class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 sm:py-2 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
-                        Cancel
-                    </button>
+                <div class="mt-5 flex justify-end gap-x-2">
                     <button type="button"
                         class="focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 focus:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 sm:py-2">
                         Save changes
@@ -306,4 +351,27 @@
             <!-- End Card -->
         </x-tabs.tab-panel>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('[data-template]');
+            const textarea = document.getElementById('text-pengantar');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const text = this.getAttribute('data-template');
+                    textarea.value = text;
+                });
+            });
+
+            // Trigger klik setelah preline selesai inisialisasi
+            window.HSStaticMethods.autoInit(); // Inisialisasi ulang komponen preline
+
+            const defaultButton = document.querySelector('[data-hs-tab="#tab-formal"]');
+            if (defaultButton) {
+                defaultButton.click(); // Klik tombol formal setelah HS tab aktif
+            }
+        });
+    </script>
+
 @endsection
