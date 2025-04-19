@@ -120,4 +120,12 @@ class GuestController extends Controller
         return redirect()->back()->with('updated', 'Data tamu berhasil diperbarui.');
 
     }
+
+    public function deleteGuest($id)
+    {
+        $guest = BroadcastList::findOrFail($id);
+        $guest->delete();
+
+        return redirect()->back()->with('deleted', 'Data tamu berhasil dihapus.');
+    }
 }

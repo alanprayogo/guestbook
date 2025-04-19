@@ -41,6 +41,7 @@ Route::get('/manage-user', function () {
 Route::get('/manage-guest',[GuestController::class, 'showGuest'])->name('manage-guest');
 Route::post('/manage-guest', [GuestController::class, 'storeGuest'])->name('manage-guest.store');
 Route::put('/manage-guest', [GuestController::class, 'updateGuest'])->name('manage-guest.update');
+Route::delete('/manage-guest/{id}', [GuestController::class, 'deleteGuest'])->name('manage-guest.destroy');
 
 Route::get('/guest-arrival', function () {
     return view('pages.guest-arrival');

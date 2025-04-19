@@ -148,7 +148,10 @@
                                                             data-id="{{ $data->id }}"
                                                             data-name="{{ $data->guest_name }}"
                                                             data-phone="{{ $data->guest_phone }}" />
-                                                        <x-action-button variant="delete"  />
+                                                        <x-action-button variant="delete" aria-haspopup="dialog"
+                                                            data-hs-overlay="#delete-confirm-modal" class="btn-delete"
+                                                            data-id="{{ $data->id }}"
+                                                            data-name="{{ $data->guest_name }}" />
                                                         <x-action-button variant="send" />
                                                         <x-action-button variant="download" />
 
@@ -409,6 +412,53 @@
 
     <!-- End Modal Edit -->
 
+    <!-- Modal Konfirmasi Delete -->
+
+    <div id="delete-confirm-modal"
+        class="hs-overlay z-100 fixed left-0 top-0 hidden h-full w-full overflow-y-auto overflow-x-hidden">
+        <div class="flex min-h-screen items-center justify-center px-4">
+            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800">
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Konfirmasi Hapus</h2>
+                <p class="mt-2 text-sm text-gray-600 dark:text-neutral-300">
+                    Apakah Anda yakin ingin menghapus tamu <span id="deleteGuestName"
+                        class="font-semibold text-red-600"></span>?
+                </p>
+                <form method="POST" id="deleteForm" class="mt-4">
+                    @csrf
+                    @method('DELETE')
+                    <div class="flex justify-end space-x-2">
+                        <button type="button"
+                            class="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-neutral-700 dark:text-white"
+                            data-hs-overlay="#delete-confirm-modal">
+                            Batal
+                        </button>
+                        <button type="submit"
+                            class="rounded bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700">
+                            Hapus
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Konfirmasi Delete -->
+
+    @if (session('deleted'))
+        <div id="toast-success"
+            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
+            role="alert">
+            <div class="flex items-center">
+                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414L8.414 15l-4.121-4.121a1 1 0 111.414-1.414L8.414 12.586l7.879-7.879a1 1 0 011.414 0z"
+                        clip-rule="evenodd">
+                    </path>
+                </svg>
+                <span>{{ session('deleted') }}</span>
+            </div>
+        </div>
+    @endif
+
     @if (session('updated'))
         <div id="toast-success"
             class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
@@ -513,6 +563,23 @@
                     if (form) {
                         form.action = `/manage-guest`;
                     }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.btn-delete').forEach(button => {
+                button.addEventListener('click', () => {
+                    const guestId = button.dataset.id;
+                    const guestName = button.dataset.name;
+
+                    const form = document.getElementById('deleteForm');
+                    const nameSpan = document.getElementById('deleteGuestName');
+
+                    form.action = `/manage-guest/${guestId}`;
+                    nameSpan.textContent = guestName;
                 });
             });
         });
