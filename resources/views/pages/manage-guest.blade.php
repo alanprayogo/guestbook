@@ -35,7 +35,7 @@
                             <!-- End Header -->
 
                             <!-- Table -->
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                            <table id="guestsTable" class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
                                 <thead class="bg-gray-50 dark:bg-neutral-800">
                                     <tr>
                                         <th scope="col" class="py-3 ps-6 text-start">
@@ -97,60 +97,61 @@
                                 </thead>
 
                                 <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                    <tr>
-                                        <td class="h-px w-[8.3%] whitespace-nowrap">
-                                            <div class="py-3 ps-6">
-                                                <span
-                                                    class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">1</span>
-                                            </div>
-                                        </td>
-                                        <td class="h-px w-1/4 whitespace-nowrap">
-                                            <div class="py-3 pe-6 ps-6 lg:ps-3 xl:ps-0">
-                                                <div class="grow">
+                                    @foreach ($listGuest as $data)
+                                        <tr>
+                                            <td class="h-px w-[8.3%] whitespace-nowrap">
+                                                <div class="py-3 ps-6">
                                                     <span
-                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Jessica
-                                                        Williams</span>
+                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $loop->iteration }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="h-px w-1/4 whitespace-nowrap">
+                                                <div class="py-3 pe-6 ps-6 lg:ps-3 xl:ps-0">
+                                                    <div class="grow">
+                                                        <span
+                                                            class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->guest_name }}</span>
+                                                        <span
+                                                            class="block text-sm text-gray-500 dark:text-neutral-500">{{ $data->guest_phone }}</span>
+                                                    </div>
+                                            </td>
+                                            <td class="h-px w-[16.7%] whitespace-nowrap">
+                                                <div class="px-6 py-3">
                                                     <span
-                                                        class="block text-sm text-gray-500 dark:text-neutral-500">myhairisred@site.com</span>
+                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->broadcast->category->category_name }}</span>
                                                 </div>
-                                        </td>
-                                        <td class="h-px w-[16.7%] whitespace-nowrap">
-                                            <div class="px-6 py-3">
-                                                <span
-                                                    class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">VIP</span>
-                                            </div>
-                                        </td>
-                                        <td class="h-px w-[16.7%] whitespace-nowrap">
-                                            <div class="px-6 py-3">
-                                                <span
-                                                    class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">1</span>
-                                            </div>
-                                        </td>
-                                        <td class="h-px w-[16.7%] whitespace-nowrap">
-                                            <div class="px-6 py-3">
-                                                <span
-                                                    class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">2</span>
-                                            </div>
-                                        </td>
-                                        <td class="h-px w-[16.7%] whitespace-nowrap">
-                                            <div class="px-6 py-3">
-                                                <x-status-badge status="accepted" />
-                                            </div>
-                                        </td>
-                                        <td class="size-px whitespace-nowrap">
-                                            <div class="px-6 py-1.5">
-                                                <div class="flex items-center gap-x-3">
-
-                                                    <x-action-button variant="share" />
-                                                    <x-action-button variant="edit" />
-                                                    <x-action-button variant="delete" />
-                                                    <x-action-button variant="send" />
-                                                    <x-action-button variant="download" />
-
+                                            </td>
+                                            <td class="h-px w-[16.7%] whitespace-nowrap">
+                                                <div class="px-6 py-3">
+                                                    <span
+                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->broadcast->session }}</span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td class="h-px w-[16.7%] whitespace-nowrap">
+                                                <div class="px-6 py-3">
+                                                    <span
+                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->broadcast->guest_limit }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="h-px w-[16.7%] whitespace-nowrap">
+                                                <div class="px-6 py-3">
+                                                    <x-status-badge status="accepted" />
+                                                </div>
+                                            </td>
+                                            <td class="size-px whitespace-nowrap">
+                                                <div class="px-6 py-1.5">
+                                                    <div class="flex items-center gap-x-3">
+
+                                                        <x-action-button variant="share" />
+                                                        <x-action-button variant="edit" />
+                                                        <x-action-button variant="delete" />
+                                                        <x-action-button variant="send" />
+                                                        <x-action-button variant="download" />
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <!-- End Table -->
@@ -176,9 +177,10 @@
                                     <div class="inline-flex gap-x-2">
                                         <button type="button"
                                             class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
                                                 <path d="m15 18-6-6 6-6" />
                                             </svg>
                                             Prev
@@ -187,9 +189,10 @@
                                         <button type="button"
                                             class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
                                             Next
-                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
                                                 <path d="m9 18 6-6-6-6" />
                                             </svg>
                                         </button>
@@ -351,6 +354,39 @@
     </x-tabs.tab-panel>
     </div>
 
+    @if (session('success'))
+        <div id="toast-success"
+            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
+            role="alert">
+            <div class="flex items-center">
+                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414L8.414 15l-4.121-4.121a1 1 0 111.414-1.414L8.414 12.586l7.879-7.879a1 1 0 011.414 0z"
+                        clip-rule="evenodd">
+                    </path>
+                </svg>
+                <span>{{ session('success') }}</span>
+            </div>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div id="toast-error"
+            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-red-100 p-4 text-red-800 shadow-lg dark:bg-red-800 dark:text-red-200"
+            role="alert">
+            <div class="flex items-center">
+                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11V7a1 1 0 10-2 0v4a1 1 0 102 0zm-1 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                        clip-rule="evenodd">
+                    </path>
+                </svg>
+                <span>{{ session('error') }}</span>
+            </div>
+        </div>
+    @endif
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const buttons = document.querySelectorAll('[data-template]');
@@ -372,5 +408,23 @@
             }
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toastSuccess = document.getElementById("toast-success");
+            const toastError = document.getElementById("toast-error");
+
+            if (toastSuccess) {
+                toastSuccess.classList.remove("hidden");
+                setTimeout(() => toastSuccess.classList.add("hidden"), 4000);
+            }
+
+            if (toastError) {
+                toastError.classList.remove("hidden");
+                setTimeout(() => toastError.classList.add("hidden"), 4000);
+            }
+        });
+    </script>
+
 
 @endsection

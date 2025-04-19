@@ -14,7 +14,10 @@ class GuestController extends Controller
     public function showGuest()
     {
         $category = Category::all();
-        return view('pages.manage-guest', compact('category'));
+        $listGuest = BroadcastList::with(['broadcast.category'])
+            ->orderBy('created_at', 'asc')
+            ->get();
+        return view('pages.manage-guest', compact('category', 'listGuest'));
     }
 
     public function storeGuest(Request $request)
