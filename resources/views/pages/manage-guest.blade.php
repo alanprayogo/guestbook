@@ -142,8 +142,13 @@
                                                     <div class="flex items-center gap-x-3">
 
                                                         <x-action-button variant="share" />
-                                                        <x-action-button variant="edit" />
-                                                        <x-action-button variant="delete" />
+                                                        <x-action-button variant="edit" aria-haspopup="dialog"
+                                                            aria-expanded="false" aria-controls="hs-static-backdrop-modal"
+                                                            data-hs-overlay="#hs-static-backdrop-modal" class="btn-edit"
+                                                            data-id="{{ $data->id }}"
+                                                            data-name="{{ $data->guest_name }}"
+                                                            data-phone="{{ $data->guest_phone }}" />
+                                                        <x-action-button variant="delete"  />
                                                         <x-action-button variant="send" />
                                                         <x-action-button variant="download" />
 
@@ -177,10 +182,9 @@
                                     <div class="inline-flex gap-x-2">
                                         <button type="button"
                                             class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
+                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="m15 18-6-6 6-6" />
                                             </svg>
                                             Prev
@@ -354,6 +358,73 @@
     </x-tabs.tab-panel>
     </div>
 
+    <!-- Modal Edit -->
+
+    <div id="hs-static-backdrop-modal"
+        class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden [--overlay-backdrop:static]"
+        role="dialog" tabindex="-1" aria-labelledby="hs-static-backdrop-modal-label" data-hs-overlay-keyboard="false">
+        <div
+            class="m-3 mt-0 opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
+            <div
+                class="shadow-2xs pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
+                <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-neutral-700">
+                    <h3 id="hs-static-backdrop-modal-label" class="font-bold text-gray-800 dark:text-white">
+                        Edit Tamu
+                    </h3>
+                    <button type="button"
+                        class="focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+                        aria-label="Close" data-hs-overlay="#hs-static-backdrop-modal">
+                        <span class="sr-only">Close</span>
+                        <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="overflow-y-auto p-4">
+                    <form method="POST" id="editGuestForm" action="">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="id" id="editGuestId">
+                        <div class="p-4">
+                            <label for="editGuestName" class="block text-sm font-medium text-gray-700">Nama Tamu</label>
+                            <input type="text" name="guest_name" id="editGuestName"
+                                class="mt-1 w-full rounded border px-2 py-1" />
+                            <label for="editGuestPhone" class="mt-3 block text-sm font-medium text-gray-700">No.
+                                HP</label>
+                            <input type="text" name="guest_phone" id="editGuestPhone"
+                                class="mt-1 w-full rounded border px-2 py-1" />
+                        </div>
+                        <div class="flex justify-end border-t p-4">
+                            <button type="submit" class="rounded bg-blue-600 px-4 py-2 text-white">Simpan</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Modal Edit -->
+
+    @if (session('updated'))
+        <div id="toast-success"
+            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
+            role="alert">
+            <div class="flex items-center">
+                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414L8.414 15l-4.121-4.121a1 1 0 111.414-1.414L8.414 12.586l7.879-7.879a1 1 0 011.414 0z"
+                        clip-rule="evenodd">
+                    </path>
+                </svg>
+                <span>{{ session('updated') }}</span>
+            </div>
+        </div>
+    @endif
+
     @if (session('success'))
         <div id="toast-success"
             class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
@@ -404,7 +475,7 @@
 
             const defaultButton = document.querySelector('[data-hs-tab="#tab-formal"]');
             if (defaultButton) {
-                defaultButton.click(); // Klik tombol formal setelah HS tab aktif
+                defaultButton.click();
             }
         });
     </script>
@@ -426,5 +497,25 @@
         });
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.btn-edit').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const name = this.dataset.name;
+                    const phone = this.dataset.phone;
+
+                    document.querySelector('#editGuestId').value = id;
+                    document.querySelector('#editGuestName').value = name;
+                    document.querySelector('#editGuestPhone').value = phone;
+
+                    const form = document.querySelector('#editGuestForm');
+                    if (form) {
+                        form.action = `/manage-guest`;
+                    }
+                });
+            });
+        });
+    </script>
 
 @endsection

@@ -103,4 +103,21 @@ class GuestController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data tamu.');
         }
     }
+
+    public function updateGuest(Request $request)
+    {
+        $request->validate([
+            'guest_name' => 'required|string|max:255',
+            'guest_phone' => 'required|string|max:20',
+        ]);
+
+        $guest = BroadcastList::findOrFail($request->id); // id dari input hidden
+
+        $guest->guest_name = $request->guest_name;
+        $guest->guest_phone = $request->guest_phone;
+        $guest->save();
+
+        return redirect()->back()->with('updated', 'Data tamu berhasil diperbarui.');
+
+    }
 }
