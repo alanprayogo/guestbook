@@ -134,7 +134,10 @@
                                             </td>
                                             <td class="h-px w-[16.7%] whitespace-nowrap">
                                                 <div class="px-6 py-3">
-                                                    <x-status-badge status="accepted" />
+                                                    <x-status-badge status="pending" class="cursor-pointer btn-arrival" aria-haspopup="dialog"
+                                                    data-hs-overlay="#arrival-confirm-modal"
+                                                    data-id="{{ $data->id }}"
+                                                    data-name="{{ $data->guest_name }}" />
                                                 </div>
                                             </td>
                                             <td class="size-px whitespace-nowrap">
@@ -153,7 +156,7 @@
                                                             data-id="{{ $data->id }}"
                                                             data-name="{{ $data->guest_name }}" />
                                                         <x-action-button variant="send" />
-                                                        <x-action-button variant="download" />
+                                                        <x-action-button variant="download" href="https://attarivitation.com/demo-undangan-buku-tamu/?to={{ $data->guest_name}}" target="_blank" />
 
                                                     </div>
                                                 </div>
@@ -413,7 +416,6 @@
     <!-- End Modal Edit -->
 
     <!-- Modal Konfirmasi Delete -->
-
     <div id="delete-confirm-modal"
         class="hs-overlay z-100 fixed left-0 top-0 hidden h-full w-full overflow-y-auto overflow-x-hidden">
         <div class="flex min-h-screen items-center justify-center px-4">
@@ -442,6 +444,35 @@
         </div>
     </div>
     <!-- End Modal Konfirmasi Delete -->
+
+    <!-- Modal Konfirmasi Kehadiran -->
+    <div id="arrival-confirm-modal"
+        class="hs-overlay z-100 fixed left-0 top-0 hidden h-full w-full overflow-y-auto overflow-x-hidden">
+        <div class="flex min-h-screen items-center justify-center px-4">
+            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800">
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Konfirmasi Kehadiran</h2>
+                <p class="mt-2 text-sm text-gray-600 dark:text-neutral-300">
+                    Apakah anda yakin tamu dengan atas nama <span id="arrivalGuestName"
+                        class="font-semibold text-black"></span> telah hadir?
+                </p>
+                <form method="POST" id="arrivalForm" class="mt-4">
+                    @csrf
+                    <div class="flex justify-end space-x-2">
+                        <button type="button"
+                            class="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-neutral-700 dark:text-white"
+                            data-hs-overlay="#arrival-confirm-modal">
+                            Tidak
+                        </button>
+                        <button type="submit"
+                            class="rounded bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700">
+                            Ya
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Konfirmasi Kehadiran -->
 
     @if (session('success'))
         <div id="toast-success"
@@ -547,6 +578,23 @@
                     const nameSpan = document.getElementById('deleteGuestName');
 
                     form.action = `/manage-guest/${guestId}`;
+                    nameSpan.textContent = guestName;
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.btn-arrival').forEach(button => {
+                button.addEventListener('click', () => {
+                    const guestId = button.dataset.id;
+                    const guestName = button.dataset.name;
+
+                    const form = document.getElementById('arrivalForm');
+                    const nameSpan = document.getElementById('arrivalGuestName');
+
+                    // form.action = `/manage-guest/${guestId}`;
                     nameSpan.textContent = guestName;
                 });
             });

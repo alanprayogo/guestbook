@@ -25,6 +25,6 @@
     $label = $labelMap[strtolower($status)] ?? ucfirst($status);
 @endphp
 
-<span class="{{ $class }} inline-flex items-center gap-x-1.5 rounded-full px-3 py-1.5 text-xs font-medium">
+<span {{ $attributes->merge(['class' => "$class inline-flex items-center gap-x-1.5 rounded-full px-3 py-1.5 text-xs font-medium"]) }}>
     {{ $label }}
 </span>
