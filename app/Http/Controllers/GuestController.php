@@ -111,20 +111,30 @@ class GuestController extends Controller
             'guest_phone' => 'required|string|max:20',
         ]);
 
-        $guest = BroadcastList::findOrFail($request->id); // id dari input hidden
+        $guest = BroadcastList::findOrFail($request->id);
 
         $guest->guest_name = $request->guest_name;
         $guest->guest_phone = $request->guest_phone;
         $guest->save();
 
         return redirect()->back()->with('success', 'Data tamu berhasil diperbarui.');
-
     }
 
     public function deleteGuest($id)
     {
         $guest = BroadcastList::findOrFail($id);
+        $broadcastId = $guest->broadcast_id;
+
         $guest->delete();
+
+        $remaining = BroadcastList::where('broadcast_id', $broadcastId)->count();
+
+        if ($remaining === 0) {
+            $broadcast = Broadcast::find($broadcastId);
+            if ($broadcast) {
+                $broadcast->delete();
+            }
+        }
 
         return redirect()->back()->with('success', 'Data tamu berhasil dihapus.');
     }
