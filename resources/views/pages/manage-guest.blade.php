@@ -443,38 +443,6 @@
     </div>
     <!-- End Modal Konfirmasi Delete -->
 
-    @if (session('deleted'))
-        <div id="toast-success"
-            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
-            role="alert">
-            <div class="flex items-center">
-                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414L8.414 15l-4.121-4.121a1 1 0 111.414-1.414L8.414 12.586l7.879-7.879a1 1 0 011.414 0z"
-                        clip-rule="evenodd">
-                    </path>
-                </svg>
-                <span>{{ session('deleted') }}</span>
-            </div>
-        </div>
-    @endif
-
-    @if (session('updated'))
-        <div id="toast-success"
-            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
-            role="alert">
-            <div class="flex items-center">
-                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414L8.414 15l-4.121-4.121a1 1 0 111.414-1.414L8.414 12.586l7.879-7.879a1 1 0 011.414 0z"
-                        clip-rule="evenodd">
-                    </path>
-                </svg>
-                <span>{{ session('updated') }}</span>
-            </div>
-        </div>
-    @endif
-
     @if (session('success'))
         <div id="toast-success"
             class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"

@@ -117,7 +117,7 @@ class GuestController extends Controller
         $guest->guest_phone = $request->guest_phone;
         $guest->save();
 
-        return redirect()->back()->with('updated', 'Data tamu berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Data tamu berhasil diperbarui.');
 
     }
 
@@ -126,6 +126,6 @@ class GuestController extends Controller
         $guest = BroadcastList::findOrFail($id);
         $guest->delete();
 
-        return redirect()->back()->with('deleted', 'Data tamu berhasil dihapus.');
+        return redirect()->back()->with('success', 'Data tamu berhasil dihapus.');
     }
 }
