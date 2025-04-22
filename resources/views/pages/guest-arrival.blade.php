@@ -270,7 +270,6 @@
     <!-- End Modal Add Guess -->
 
     <!-- Modal Add Manual -->
-
     <div id="modal-add-manual"
         class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden [--overlay-backdrop:static]"
         role="dialog" tabindex="-1" aria-labelledby="hs-static-backdrop-modal-label" data-hs-overlay-keyboard="false">
@@ -344,8 +343,22 @@
             </div>
         </div>
     </div>
-
     <!-- End Modal Add Manual -->
+
+    <!-- Modal Konfirmasi -->
+    <!-- Modal Konfirmasi -->
+    <div id="custom-confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
+        <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+            <h2 class="mb-4 text-lg font-semibold text-gray-800">Konfirmasi</h2>
+            <p class="mb-6 text-sm text-gray-600" id="custom-confirm-message">Apakah Anda yakin?</p>
+            <div class="flex justify-end gap-2">
+                <button id="cancel-btn" class="rounded bg-gray-300 px-4 py-2 text-black hover:bg-gray-400">Batal</button>
+                <button id="confirm-btn" class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Ya</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Modal Konfirmasi -->
 
     @if (session('success'))
         <div id="toast-success"
@@ -395,4 +408,40 @@
             }
         });
     </script>
+
+    <script>
+        function customConfirm(message) {
+            return new Promise((resolve) => {
+                const modal = document.getElementById('custom-confirm-modal');
+                const confirmBtn = document.getElementById('confirm-btn');
+                const cancelBtn = document.getElementById('cancel-btn');
+                const msgText = document.getElementById('custom-confirm-message');
+
+                msgText.textContent = message;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+
+                const cleanup = () => {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                    confirmBtn.removeEventListener('click', onConfirm);
+                    cancelBtn.removeEventListener('click', onCancel);
+                };
+
+                const onConfirm = () => {
+                    cleanup();
+                    resolve(true);
+                };
+
+                const onCancel = () => {
+                    cleanup();
+                    resolve(false);
+                };
+
+                confirmBtn.addEventListener('click', onConfirm);
+                cancelBtn.addEventListener('click', onCancel);
+            });
+        }
+    </script>
+
 @endsection

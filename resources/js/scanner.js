@@ -53,7 +53,7 @@ function stopScanner() {
 function showGuestForm(qrResult) {
     const formModal = document.getElementById('guest-form-modal');
     const nameInput = document.getElementById('guest-name');
-    const categorySelect = document.getElementById('category'); // <- disesuaikan dengan HTML
+    const categorySelect = document.getElementById('category');
 
     if (!formModal || !nameInput || !categorySelect) return;
 
@@ -61,22 +61,32 @@ function showGuestForm(qrResult) {
 
     fetch(`/guest-category?guest_name=${encodeURIComponent(qrResult)}`)
         .then(res => res.json())
-        .then(data => {
+        .then(async data => {
+            const alreadyExists = data.already_exists;
             const guest = data.guest;
 
-            if (guest && guest.id) {
-                categorySelect.value = guest.id.toString();
-            } else {
-                categorySelect.selectedIndex = 0;
+            // Kondisi (a): Sudah ada di tabel guests
+            if (alreadyExists) {
+                const confirm = await customConfirm("Tamu ini sudah pernah diinput. Apakah Anda yakin ingin memasukkan lagi?");
+                if (!confirm) return;
             }
 
+            // Kondisi (b): Tidak ditemukan di broadcast_list
+            if (!guest) {
+                const confirm = await customConfirm("Nama tidak ada dalam daftar undangan. Apakah Anda yakin ingin memasukkan nama ini?");
+                if (!confirm) return;
+                categorySelect.selectedIndex = 0;
+            } else {
+                categorySelect.value = guest.id.toString();
+            }
+
+            // Tampilkan modal form
+            formModal.classList.remove('hidden');
+            formModal.classList.add('flex');
         })
         .catch(err => {
-            console.error("Gagal ambil kategori:", err);
+            console.error("Gagal ambil data tamu:", err);
         });
-
-    formModal.classList.remove('hidden');
-    formModal.classList.add('flex');
 }
 
 
@@ -98,13 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const modal = document.getElementById('guest-form-modal');
         modal?.classList.add('hidden');
 
-        // Optional: Reset input jumlah tamu dan kategori
         const guestCount = document.getElementById('guest-count');
         if (guestCount) guestCount.value = '';
         const category = document.getElementById('category');
         if (category) category.selectedIndex = 0;
 
-        // Optional: Stop scanner kalau modal scan masih aktif
         stopScanner();
     });
 });

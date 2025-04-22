@@ -150,16 +150,26 @@ class GuestController extends Controller
     public function getGuestCategory(Request $request)
     {
         $guestName = $request->query('guest_name');
-        $guest = BroadcastList::where('guest_name', $guestName)->first();
 
-        if (!$guest) {
-            return response()->json(['category_id' => null]);
+        $guestBroadcast = BroadcastList::where('guest_name', $guestName)->first();
+        $alreadyExists = Guest::where('guest_name', $guestName)->exists();
+
+        if (!$guestBroadcast) {
+            return response()->json([
+                'guest' => null,
+                'already_exists' => $alreadyExists,
+                'not_in_list' => true
+            ]);
         }
 
         return response()->json([
-            'guest' => $guest->broadcast->category,
+            'guest' => $guestBroadcast->broadcast->category,
+            'already_exists' => $alreadyExists,
+            'not_in_list' => false
         ]);
     }
+
+
 
     public function storeGuestArrive(Request $request)
     {
