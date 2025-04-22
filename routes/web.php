@@ -43,9 +43,9 @@ Route::post('/manage-guest', [GuestController::class, 'storeGuest'])->name('mana
 Route::put('/manage-guest', [GuestController::class, 'updateGuest'])->name('manage-guest.update');
 Route::delete('/manage-guest/{id}', [GuestController::class, 'deleteGuest'])->name('manage-guest.destroy');
 
-Route::get('/guest-arrival', function () {
-    return view('pages.guest-arrival');
-});
+Route::get('/guest-arrival',[GuestController::class, 'showGuestArrive'])->name('guest-arrival');
+Route::get('/guest-category', [GuestController::class, 'getGuestCategory']);
+Route::post('/guest-arrival', [GuestController::class, 'storeGuestArrive'])->name('guest-arrival.store');
 
 Route::get('/souvenir-desk', function () {
     return view('pages.souvenir-desk');

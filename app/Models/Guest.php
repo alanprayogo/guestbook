@@ -14,6 +14,7 @@ class Guest extends Model
         'guest_name',
         'arrival_date',
         'arrival_time',
+        'guest_count',
         'whatsapp',
     ];
 

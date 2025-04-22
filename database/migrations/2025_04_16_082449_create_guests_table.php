@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('guest_name');
             $table->date('arrival_date');
             $table->time('arrival_time');
+            $table->string('guest_count');
             $table->string('whatsapp')->nullable();
             $table->timestamps();
 

@@ -3,6 +3,7 @@
 
 <head>
     <!-- Required Meta Tags Always Come First -->
+    @vite(['resources/js/scanner.js'])
     <meta charset="utf-8">
     <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="https://preline.co/">

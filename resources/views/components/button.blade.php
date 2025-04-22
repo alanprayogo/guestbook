@@ -1,15 +1,28 @@
-@props(['href' => '#', 'variant' => 'primary', 'icon' => null, 'disabled' => false, 'size' => 'medium'])
+@props([
+    'href' => '#',
+    'variant' => 'primary',
+    'icon' => null,
+    'disabled' => false,
+    'size' => 'medium',
+])
+
+@php
+    $attributes = $attributes
+        ->merge([
+            'class' => $buttonClasses(),
+        ])
+        ->when($disabled, fn($attr) => $attr->merge(['disabled' => true]));
+@endphp
 
 @if ($href)
-    <a href="{{ $href }}" class="{{ $buttonClasses() }}"
-        @if ($disabled) aria-disabled="true" @endif>
+    <a href="{{ $href }}" {{ $attributes }}>
         @if ($icon ?? $defaultIcons())
             {!! $icon ?? $defaultIcons() !!}
         @endif
         {{ $slot }}
     </a>
 @else
-    <button type="button" class="{{ $buttonClasses() }}" @if ($disabled) disabled @endif>
+    <button type="button" {{ $attributes }}>
         @if ($icon ?? $defaultIcons())
             {!! $icon ?? $defaultIcons() !!}
         @endif

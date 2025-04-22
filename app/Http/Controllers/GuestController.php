@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Broadcast;
 use App\Models\BroadcastList;
 use App\Models\Category;
+use App\Models\Guest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -137,5 +138,52 @@ class GuestController extends Controller
         }
 
         return redirect()->back()->with('success', 'Data tamu berhasil dihapus.');
+    }
+
+    public function showGuestArrive()
+    {
+        $category = Category::all();
+        $guest = Guest::all();
+        return view('pages.guest-arrival', compact('category', 'guest'));
+    }
+
+    public function getGuestCategory(Request $request)
+    {
+        $guestName = $request->query('guest_name');
+        $guest = BroadcastList::where('guest_name', $guestName)->first();
+
+        if (!$guest) {
+            return response()->json(['category_id' => null]);
+        }
+
+        return response()->json([
+            'guest' => $guest->broadcast->category,
+        ]);
+    }
+
+    public function storeGuestArrive(Request $request)
+    {
+        try {
+            $request->validate([
+                'guest_name' => 'required|string|max:255',
+                'category_id' => 'required|exists:categories,id',
+                'guest_count' => 'required|integer|min:1',
+            ]);
+
+            $guest = BroadcastList::where('guest_name', $request->guest_name)->first();
+
+            Guest::create([
+                'category_id' => $request->category_id,
+                'guest_name' => $request->guest_name,
+                'arrival_date' => now()->toDateString(),
+                'arrival_time' => now()->toTimeString(),
+                'guest_count' => $request->guest_count,
+                'whatsapp' => $guest->guest_phone,
+            ]);
+
+            return redirect()->back()->with('success', 'Data tamu berhasil disimpan!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data tamu: ' . $e->getMessage());
+        }
     }
 }
