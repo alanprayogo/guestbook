@@ -18,7 +18,9 @@
                         <!-- End Input -->
 
                         <div>
-                            <x-button variant="add">Add Guess</x-button>
+                            <x-button variant="add" aria-haspopup="dialog" aria-expanded="false"
+                                aria-controls="hs-static-backdrop-modal" data-hs-overlay="#modal-add-manual">Add
+                                Guess</x-button>
                             <x-button id="btn-scan-qr" variant="scan-qr" aria-haspopup="dialog" aria-expanded="false"
                                 aria-controls="hs-static-backdrop-modal" data-hs-overlay="#hs-static-backdrop-modal">
                                 Scan QR
@@ -267,6 +269,84 @@
     </div>
     <!-- End Modal Add Guess -->
 
+    <!-- Modal Add Manual -->
+
+    <div id="modal-add-manual"
+        class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden [--overlay-backdrop:static]"
+        role="dialog" tabindex="-1" aria-labelledby="hs-static-backdrop-modal-label" data-hs-overlay-keyboard="false">
+        <div
+            class="m-3 mt-0 opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
+            <div
+                class="shadow-2xs pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
+                <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-neutral-700">
+                    <h3 id="hs-static-backdrop-modal-label" class="font-bold text-gray-800 dark:text-white">
+                        Modal title
+                    </h3>
+                    <button type="button"
+                        class="focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+                        aria-label="Close" data-hs-overlay="#hs-static-backdrop-modal">
+                        <span class="sr-only">Close</span>
+                        <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="overflow-y-auto p-4">
+                    <form action="{{ route('guest-arrival.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="guest-name" class="block text-sm font-medium">Nama</label>
+                            <input type="text" id="guest-name" name="guest_name" class="w-full rounded border p-2"
+                                required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="whatsapp" class="block text-sm font-medium">WhatsApp</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="08xxxxxxxxxx"
+                                maxlength="13" class="w-full rounded border p-2" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="guest-count" class="block text-sm font-medium">Jumlah Tamu</label>
+                            <input type="number" id="guest-count" min="1" name="guest_count"
+                                class="w-full rounded border p-2" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="category" class="block text-sm font-medium">Kategori</label>
+                            <select id="category" name="category_id"
+                                class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                <option selected disabled>Pilih Kategori Tamu</option>
+                                @foreach ($category as $data)
+                                    <option value="{{ $data->id }}">{{ $data->category_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div
+                            class="flex items-center justify-end gap-x-2 border-t border-gray-200 px-4 py-3 dark:border-neutral-700">
+                            <button type="button"
+                                class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                                data-hs-overlay="#modal-add-manual">
+                                Close
+                            </button>
+                            <button type="submit"
+                                class="focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:bg-blue-700 disabled:pointer-events-none disabled:opacity-50">
+                                Save changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- End Modal Add Manual -->
+
     @if (session('success'))
         <div id="toast-success"
             class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
@@ -298,4 +378,21 @@
             </div>
         </div>
     @endif
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toastSuccess = document.getElementById("toast-success");
+            const toastError = document.getElementById("toast-error");
+
+            if (toastSuccess) {
+                toastSuccess.classList.remove("hidden");
+                setTimeout(() => toastSuccess.classList.add("hidden"), 4000);
+            }
+
+            if (toastError) {
+                toastError.classList.remove("hidden");
+                setTimeout(() => toastError.classList.add("hidden"), 4000);
+            }
+        });
+    </script>
 @endsection

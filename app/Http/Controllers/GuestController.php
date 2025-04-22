@@ -168,9 +168,16 @@ class GuestController extends Controller
                 'guest_name' => 'required|string|max:255',
                 'category_id' => 'required|exists:categories,id',
                 'guest_count' => 'required|integer|min:1',
+                'whatsapp' => 'string|max:13',
             ]);
 
             $guest = BroadcastList::where('guest_name', $request->guest_name)->first();
+
+            if ($guest) {
+                $noHP = $guest->guest_phone;
+            } else {
+                $noHP = $request->whatsapp;
+            }
 
             Guest::create([
                 'category_id' => $request->category_id,
@@ -178,7 +185,7 @@ class GuestController extends Controller
                 'arrival_date' => now()->toDateString(),
                 'arrival_time' => now()->toTimeString(),
                 'guest_count' => $request->guest_count,
-                'whatsapp' => $guest->guest_phone,
+                'whatsapp' => $noHP,
             ]);
 
             return redirect()->back()->with('success', 'Data tamu berhasil disimpan!');
