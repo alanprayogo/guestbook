@@ -9,6 +9,8 @@ use App\Models\Guest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class GuestController extends Controller
 {
@@ -202,5 +204,49 @@ class GuestController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data tamu: ' . $e->getMessage());
         }
+    }
+
+    public function uploadPhoto(Request $request)
+    {
+
+        $request->validate([
+            'image' => 'required|string',
+            'guest_name' => 'required|string',
+        ]);
+
+        $image = $request->input('image');
+        $guestName = Str::slug($request->input('guest_name'));
+
+        preg_match("/^data:image\/(png|jpeg);base64,/", $image, $match);
+        $image = preg_replace("/^data:image\/(png|jpeg);base64,/", '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageData = base64_decode($image);
+
+        $extension = $match[1] ?? 'png';
+        $fileName = $guestName . '-' . now()->format('Ymd_His') . '.' . $extension;
+        $filePath = 'guest_photos/' . $fileName;
+
+        $guest = Guest::where('guest_name', $request->input('guest_name'))->first();
+
+        if ($guest) {
+            if ($guest->photo_guest && Storage::disk('public')->exists($guest->photo_guest)) {
+                Storage::disk('public')->delete($guest->photo_guest);
+            }
+        }
+
+        Storage::disk('public')->put($filePath, $imageData);
+
+        if ($guest) {
+            $guest->photo_guest = $filePath;
+            $guest->save();
+        }
+
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Foto berhasil disimpan',
+            'path' => $filePath,
+        ]);
     }
 }

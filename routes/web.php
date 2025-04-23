@@ -46,6 +46,7 @@ Route::delete('/manage-guest/{id}', [GuestController::class, 'deleteGuest'])->na
 Route::get('/guest-arrival',[GuestController::class, 'showGuestArrive'])->name('guest-arrival');
 Route::get('/guest-category', [GuestController::class, 'getGuestCategory']);
 Route::post('/guest-arrival', [GuestController::class, 'storeGuestArrive'])->name('guest-arrival.store');
+Route::post('/guests/upload-photo', [GuestController::class, 'uploadPhoto'])->name('guests.upload-photo');
 
 Route::get('/souvenir-desk', function () {
     return view('pages.souvenir-desk');

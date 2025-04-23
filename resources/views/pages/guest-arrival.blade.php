@@ -83,6 +83,14 @@
                                     </div>
                                 </th>
 
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                            Foto
+                                        </span>
+                                    </div>
+                                </th>
+
                                 <th scope="col" class="px-6 py-3 text-end"></th>
                             </tr>
                         </thead>
@@ -128,12 +136,29 @@
                                             <x-status-badge status="accepted" />
                                         </div>
                                     </td>
+                                    <td class="h-px w-[16.7%] whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            @if ($data->photo_guest)
+                                                <img src="{{ asset('storage/' . $data->photo_guest) }}"
+                                                    alt="Foto {{ $data->guest_name }}"
+                                                    class="cursor-pointer rounded object-cover" width="80"
+                                                    onclick="showPhotoModal('{{ asset('storage/' . $data->photo_guest) }}', '{{ $data->guest_name }}')">
+                                            @else
+                                                <span class="italic text-gray-400">Belum ada foto</span>
+                                            @endif
+                                        </div>
+                                    </td>
                                     <td class="size-px whitespace-nowrap">
                                         <div class="px-6 py-1.5">
                                             <div class="flex items-center gap-x-3">
 
                                                 <x-action-button variant="qr-code" />
                                                 <x-action-button variant="edit" />
+                                                <button onclick="openCameraModal(this)"
+                                                    data-guest-name="{{ $data->guest_name }}"
+                                                    class="rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700">
+                                                    Buka Kamera
+                                                </button>
 
                                             </div>
                                         </div>
@@ -283,7 +308,7 @@
                     </h3>
                     <button type="button"
                         class="focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
-                        aria-label="Close" data-hs-overlay="#hs-static-backdrop-modal">
+                        aria-label="Close" data-hs-overlay="#modal-add-manual">
                         <span class="sr-only">Close</span>
                         <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -346,7 +371,6 @@
     <!-- End Modal Add Manual -->
 
     <!-- Modal Konfirmasi -->
-    <!-- Modal Konfirmasi -->
     <div id="custom-confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Konfirmasi</h2>
@@ -357,8 +381,41 @@
             </div>
         </div>
     </div>
-
     <!-- End Modal Konfirmasi -->
+
+    <!-- Modal Camera -->
+    <div id="camera-modal" class="fixed inset-0 z-50 hidden items-center justify-center">
+        <div class="relative w-full max-w-md rounded-lg bg-white p-6">
+            <button id="close-camera-modal" class="absolute right-2 top-2 text-gray-500 hover:text-gray-800">
+                &times;
+            </button>
+            <h2 class="mb-2 text-lg font-semibold">
+                Ambil Foto Kehadiran untuk: <span id="modal-user-name" class="font-bold text-blue-600"></span>
+            </h2>
+
+            <!-- Hidden input untuk dikirim ke backend -->
+            <input type="hidden" id="guest-name-input" name="guest_name">
+
+            <video id="webcam-video" autoplay class="w-full rounded"></video>
+            <button id="capture-btn" class="mt-4 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+                Ambil Foto
+            </button>
+            <canvas id="canvas" class="hidden"></canvas>
+        </div>
+    </div>
+    <!-- End Modal Camera -->
+
+    <!-- Modal tampilan foto -->
+    <div id="photo-modal" class="fixed h-full inset-0 z-100 hidden items-center justify-center" style="background-color: rgba(0, 0, 0, 0.5)">
+        <div class="relative w-full max-w-lg rounded-lg bg-white p-4">
+            <button onclick="closePhotoModal()" class="absolute right-2 top-2 text-2xl text-gray-500 hover:text-gray-800">
+                &times;
+            </button>
+            <h2 class="mb-2 text-center text-lg font-semibold" id="photo-modal-name"></h2>
+            <img id="photo-modal-image" src="" class="h-auto w-full rounded shadow">
+        </div>
+    </div>
+    <!-- End Modal tampilan foto -->
 
     @if (session('success'))
         <div id="toast-success"
@@ -441,6 +498,100 @@
                 confirmBtn.addEventListener('click', onConfirm);
                 cancelBtn.addEventListener('click', onCancel);
             });
+        }
+    </script>
+
+    <script>
+        let stream;
+
+        function openCameraModal(button) {
+            const userName = button.getAttribute('data-guest-name');
+            const modal = document.getElementById('camera-modal');
+            const video = document.getElementById('webcam-video');
+
+            // Set nama ke span dan hidden input
+            document.getElementById('modal-user-name').textContent = userName;
+            document.getElementById('guest-name-input').value = userName;
+
+            navigator.mediaDevices.getUserMedia({
+                    video: true
+                })
+                .then(mediaStream => {
+                    stream = mediaStream;
+                    video.srcObject = stream;
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                })
+                .catch(err => {
+                    alert('Tidak bisa mengakses kamera: ' + err.message);
+                });
+        }
+
+        function closeCameraModal() {
+            const modal = document.getElementById('camera-modal');
+            modal.classList.add('hidden');
+
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+        }
+
+        document.getElementById('capture-btn').addEventListener('click', () => {
+            const video = document.getElementById('webcam-video');
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const base64Image = canvas.toDataURL('image/png');
+            const guestName = document.getElementById('guest-name-input').value;
+
+            // Kirim ke backend pakai fetch
+            fetch('/guests/upload-photo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content')
+                    },
+                    body: JSON.stringify({
+                        image: base64Image,
+                        guest_name: guestName
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Foto berhasil disimpan untuk ' + guestName);
+                        closeCameraModal();
+                        location.reload();
+                    } else {
+                        alert('Gagal menyimpan foto.');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Terjadi kesalahan saat mengirim foto.');
+                });
+        });
+
+        document.getElementById('close-camera-modal').addEventListener('click', closeCameraModal);
+    </script>
+
+    <script>
+        function showPhotoModal(imageUrl, guestName) {
+            document.getElementById('photo-modal-image').src = imageUrl;
+            document.getElementById('photo-modal-name').innerText = guestName;
+            document.getElementById('photo-modal').classList.remove('hidden');
+            document.getElementById('photo-modal').classList.add('flex');
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photo-modal').classList.add('hidden');
+            document.getElementById('photo-modal-image').src = '';
+            document.getElementById('photo-modal-name').innerText = '';
         }
     </script>
 

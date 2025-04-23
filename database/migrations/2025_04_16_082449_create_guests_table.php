@@ -19,6 +19,7 @@ return new class extends Migration
             $table->time('arrival_time');
             $table->string('guest_count');
             $table->string('whatsapp')->nullable();
+            $table->string('photo_guest')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
