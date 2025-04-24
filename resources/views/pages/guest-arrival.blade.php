@@ -256,7 +256,7 @@
     <!-- End Modal QR Code-->
 
     <!-- Modal Add Guess -->
-    <div id="guest-form-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
+    <div id="guest-form-modal" class="fixed inset-0 z-100 h-full hidden items-center justify-center" style="background-color: rgba(0, 0, 0, 0.5)">
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <h2 class="mb-4 text-xl font-semibold">Input Tamu</h2>
             <form action="{{ route('guest-arrival.store') }}" method="POST">
@@ -371,7 +371,7 @@
     <!-- End Modal Add Manual -->
 
     <!-- Modal Konfirmasi -->
-    <div id="custom-confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
+    <div id="custom-confirm-modal" class="fixed inset-0 z-100 h-full hidden items-center justify-center" style="background-color: rgba(0, 0, 0, 0.5)">
         <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Konfirmasi</h2>
             <p class="mb-6 text-sm text-gray-600" id="custom-confirm-message">Apakah Anda yakin?</p>
@@ -384,7 +384,7 @@
     <!-- End Modal Konfirmasi -->
 
     <!-- Modal Camera -->
-    <div id="camera-modal" class="fixed inset-0 z-50 hidden items-center justify-center">
+    <div id="camera-modal" class="fixed inset-0 z-100 h-full hidden items-center justify-center" style="background-color: rgba(0, 0, 0, 0.5)">
         <div class="relative w-full max-w-md rounded-lg bg-white p-6">
             <button id="close-camera-modal" class="absolute right-2 top-2 text-gray-500 hover:text-gray-800">
                 &times;
