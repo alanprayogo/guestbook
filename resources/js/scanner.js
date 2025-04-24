@@ -38,17 +38,29 @@ function startScanner() {
     });
 }
 
+let isStopping = false;
+
 function stopScanner() {
-    if (html5QrCodeInstance && scannerActive) {
-        html5QrCodeInstance.stop().then(() => {
-            html5QrCodeInstance.clear();
-            scannerActive = false;
-            console.log("Scanner berhenti");
-        }).catch(err => {
-            console.error("Gagal menghentikan scanner:", err);
-        });
+    if (html5QrCodeInstance && scannerActive && !isStopping) {
+        isStopping = true;
+
+        html5QrCodeInstance.stop()
+            .then(() => {
+                html5QrCodeInstance.clear();
+                scannerActive = false;
+                html5QrCodeInstance = null;
+                isStopping = false;
+                console.log("Scanner berhenti");
+            })
+            .catch(err => {
+                console.warn("Scanner tidak bisa dihentikan (mungkin sudah stop):", err);
+                isStopping = false;
+            });
+    } else {
+        console.log("Scanner tidak aktif / instance null / sedang menghentikan");
     }
 }
+
 
 function showGuestForm(qrResult) {
     const formModal = document.getElementById('guest-form-modal');
@@ -65,13 +77,11 @@ function showGuestForm(qrResult) {
             const alreadyExists = data.already_exists;
             const guest = data.guest;
 
-            // Kondisi (a): Sudah ada di tabel guests
             if (alreadyExists) {
                 const confirm = await customConfirm("Tamu ini sudah pernah diinput. Apakah Anda yakin ingin memasukkan lagi?");
                 if (!confirm) return;
             }
 
-            // Kondisi (b): Tidak ditemukan di broadcast_list
             if (!guest) {
                 const confirm = await customConfirm("Nama tidak ada dalam daftar undangan. Apakah Anda yakin ingin memasukkan nama ini?");
                 if (!confirm) return;
@@ -80,7 +90,6 @@ function showGuestForm(qrResult) {
                 categorySelect.value = guest.id.toString();
             }
 
-            // Tampilkan modal form
             formModal.classList.remove('hidden');
             formModal.classList.add('flex');
         })
@@ -89,20 +98,18 @@ function showGuestForm(qrResult) {
         });
 }
 
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Tombol scan ditekan
     const scanBtn = document.getElementById('btn-scan-qr');
     scanBtn?.addEventListener('click', () => {
+        if (scannerActive) return;
+
         console.log("Tombol scan diklik");
         setTimeout(() => {
             startScanner();
         }, 300);
     });
 
-    // Tombol tutup form ditekan
+
     const closeBtn = document.getElementById('close-guest-form');
     closeBtn?.addEventListener('click', () => {
         const modal = document.getElementById('guest-form-modal');
@@ -115,4 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         stopScanner();
     });
+
+    const observer = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const modal = mutation.target;
+                if (modal.classList.contains('hidden')) {
+                    console.log('Modal scanner ditutup (via observer)');
+                    stopScanner();
+                }
+            }
+        }
+    });
+
+    const scannerModal = document.getElementById('hs-static-backdrop-modal');
+    if (scannerModal) {
+        observer.observe(scannerModal, { attributes: true });
+    }
+
 });
+
