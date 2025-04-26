@@ -23,4 +23,9 @@ class Guest extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function souvenirs()
+    {
+        return $this->hasMany(Souvenir::class);
+    }
 }

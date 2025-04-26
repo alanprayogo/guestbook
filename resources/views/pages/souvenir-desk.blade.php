@@ -18,7 +18,8 @@
                         <!-- End Input -->
 
                         <div>
-                            <x-button variant="add">Add Guess</x-button>
+                            <x-button variant="add" data-open-manual-modal>Add
+                                Guess</x-button>
                             <x-button variant="scan-qr">Scan QR</x-button>
                             <x-button variant="export-excel">Export Excel</x-button>
                             <x-button variant="export-pdf">Export PDF</x-button>
@@ -83,57 +84,64 @@
                         </thead>
 
                         <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                            <tr>
-                                <td class="h-px w-[8.3%] whitespace-nowrap">
-                                    <div class="py-3 ps-6">
-                                        <span
-                                            class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">1</span>
-                                    </div>
-                                </td>
-                                <td class="h-px w-1/4 whitespace-nowrap">
-                                    <div class="py-3 pe-6 ps-6 lg:ps-3 xl:ps-0">
-                                        <div class="grow">
+                            @forelse ($souvenir as $data)
+                                <tr>
+                                    <td class="h-px w-[8.3%] whitespace-nowrap">
+                                        <div class="py-3 ps-6">
                                             <span
-                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Jessica
-                                                Williams</span>
+                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $loop->iteration }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-1/4 whitespace-nowrap">
+                                        <div class="py-3 pe-6 ps-6 lg:ps-3 xl:ps-0">
+                                            <div class="grow">
+                                                <span
+                                                    class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->guest_name }}</span>
+                                                <span
+                                                    class="block text-sm text-gray-500 dark:text-neutral-500">myhairisred@site.com</span>
+                                            </div>
+                                    </td>
+                                    <td class="h-px w-[16.7%] whitespace-nowrap">
+                                        <div class="px-6 py-3">
                                             <span
-                                                class="block text-sm text-gray-500 dark:text-neutral-500">myhairisred@site.com</span>
+                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">VIP</span>
                                         </div>
-                                </td>
-                                <td class="h-px w-[16.7%] whitespace-nowrap">
-                                    <div class="px-6 py-3">
-                                        <span
-                                            class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">VIP</span>
-                                    </div>
-                                </td>
-                                <td class="h-px w-[16.7%] whitespace-nowrap">
-                                    <div class="px-6 py-3">
-                                        <span
-                                            class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">1</span>
-                                    </div>
-                                </td>
-                                <td class="h-px w-[16.7%] whitespace-nowrap">
-                                    <div class="px-6 py-3">
-                                        <span
-                                            class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">2</span>
-                                    </div>
-                                </td>
-                                <td class="h-px w-[16.7%] whitespace-nowrap">
-                                    <div class="px-6 py-3">
-                                        <x-status-badge status="accepted" />
-                                    </div>
-                                </td>
-                                <td class="size-px whitespace-nowrap">
-                                    <div class="px-6 py-1.5">
-                                        <div class="flex items-center gap-x-3">
-
-                                            <x-action-button variant="qr-code" />
-                                            <x-action-button variant="edit" />
-
+                                    </td>
+                                    <td class="h-px w-[16.7%] whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span
+                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">1</span>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="h-px w-[16.7%] whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span
+                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">2</span>
+                                        </div>
+                                    </td>
+                                    <td class="h-px w-[16.7%] whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <x-status-badge status="accepted" />
+                                        </div>
+                                    </td>
+                                    <td class="size-px whitespace-nowrap">
+                                        <div class="px-6 py-1.5">
+                                            <div class="flex items-center gap-x-3">
+
+                                                <x-action-button variant="qr-code" />
+                                                <x-action-button variant="edit" />
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="py-4 text-center">
+                                        <span class="text-sm text-gray-500 dark:text-neutral-500">No data available</span>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                     <!-- End Table -->
@@ -185,4 +193,171 @@
         </div>
     </div>
     <!-- End Card -->
+
+    <!-- Modal Add Manual -->
+    <div id="modal-add-manual"
+        class="z-100 fixed inset-0 hidden h-full items-center justify-center opacity-0 transition-opacity duration-300"
+        role="dialog" aria-hidden="true" style="background: rgba(0, 0, 0, 0.5)">
+
+        <div class="w-full max-w-lg overflow-hidden rounded-xl bg-white shadow-xl dark:bg-neutral-800">
+            <!-- Header -->
+            <div class="flex items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-neutral-700">
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+                    Masukkan Nama Tamu
+                </h3>
+                <button type="button" data-close-manual-modal
+                    class="text-gray-500 hover:text-gray-700 dark:text-neutral-400 dark:hover:text-white">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="p-6">
+                <form id="souvenir-form">
+                    <div class="mb-4">
+                        <label for="guest-name" class="block text-sm font-medium text-gray-700 dark:text-white">
+                            Nama
+                        </label>
+                        <input type="text" id="guest-name" name="guest_name"
+                            class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"
+                            required>
+                    </div>
+
+                    <div class="flex justify-end gap-2 border-t border-gray-200 pt-4 dark:border-neutral-700">
+                        <button type="button" data-close-manual-modal
+                            class="rounded border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-100 dark:border-neutral-600 dark:text-white dark:hover:bg-neutral-700">
+                            Batal
+                        </button>
+                        <button type="submit"
+                            class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Add Manual -->
+
+    <!-- Modal Konfirmasi -->
+    <div id="modal-confirm" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
+        <div class="w-full max-w-sm rounded bg-white p-6 shadow-xl">
+            <p id="confirm-message" class="mb-4 text-sm text-gray-800"></p>
+            <div class="flex justify-end gap-2">
+                <button id="cancel-confirm" class="rounded bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300">
+                    Batal
+                </button>
+                <button id="ok-confirm" class="rounded bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700">
+                    Lanjutkan
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Konfirmasi -->
+
+    <script>
+        const modalEl = document.getElementById('modal-add-manual');
+        const form = document.getElementById('souvenir-form');
+        const openButtons = document.querySelectorAll('[data-open-manual-modal]');
+        const closeButtons = modalEl.querySelectorAll('[data-close-manual-modal]');
+
+        const confirmModal = document.getElementById('modal-confirm');
+        const confirmMsg = document.getElementById('confirm-message');
+        const cancelBtn = document.getElementById('cancel-confirm');
+        const okBtn = document.getElementById('ok-confirm');
+
+        const openModal = () => {
+            modalEl.classList.remove('hidden');
+            modalEl.classList.add('flex');
+            setTimeout(() => {
+                modalEl.classList.remove('opacity-0');
+                modalEl.classList.add('opacity-100');
+            }, 10);
+            modalEl.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('overflow-hidden');
+            document.getElementById('guest-name').focus();
+        };
+
+        const closeModal = () => {
+            document.activeElement.blur();
+            modalEl.classList.remove('opacity-100');
+            modalEl.classList.add('opacity-0');
+            modalEl.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('overflow-hidden');
+
+            setTimeout(() => {
+                modalEl.classList.add('hidden');
+                form.reset();
+            }, 300);
+        };
+
+        const showConfirmModal = (message, onConfirm) => {
+            closeModal();c
+
+            confirmMsg.innerText = message;
+            confirmModal.classList.remove('hidden');
+            confirmModal.classList.add('flex');
+
+            okBtn.onclick = () => {
+                confirmModal.classList.add('hidden');
+                onConfirm();
+            };
+
+            cancelBtn.onclick = () => {
+                confirmModal.classList.add('hidden');
+            };
+        };
+
+
+        openButtons.forEach(btn => {
+            btn.addEventListener('click', openModal);
+        });
+
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', closeModal);
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const guestName = document.getElementById('guest-name').value;
+
+            const submitSouvenir = (force = false) => {
+                fetch('/souvenir-desk', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        },
+                        body: JSON.stringify({
+                            guest_name: guestName,
+                            force: force,
+                        }),
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            closeModal();
+                            alert('Data berhasil disimpan');
+                        } else if (data.status === 'exists' || data.status === 'not_found_in_guests') {
+                            showConfirmModal(data.message, () => submitSouvenir(true));
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Fetch error:', error);
+                        alert('Terjadi kesalahan. Coba lagi nanti.');
+                    });
+            };
+
+            submitSouvenir();
+        });
+    </script>
+
+
+
 @endsection

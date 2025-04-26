@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\SouvenirController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,9 +49,8 @@ Route::get('/guest-category', [GuestController::class, 'getGuestCategory']);
 Route::post('/guest-arrival', [GuestController::class, 'storeGuestArrive'])->name('guest-arrival.store');
 Route::post('/guests/upload-photo', [GuestController::class, 'uploadPhoto'])->name('guests.upload-photo');
 
-Route::get('/souvenir-desk', function () {
-    return view('pages.souvenir-desk');
-});
+Route::get('/souvenir-desk', [SouvenirController::class, 'showSouvenirs'])->name('souvenir-desk');
+Route::post('/souvenir-desk', [SouvenirController::class, 'storeSouvenirs'])->name('souvenir-desk.store');
 
 Route::get('/gift-handling', function () {
     return view('pages.gift-handling');
