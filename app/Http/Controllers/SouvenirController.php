@@ -43,12 +43,13 @@ class SouvenirController extends Controller
 
             if (!$guestId) {
                 $foundInGuests = Guest::where('guest_name', $guestName)->first();
-                $guestId = $foundInGuests->id;
                 if (!$foundInGuests) {
                     return response()->json([
                         'status' => 'not_found_in_guests',
                         'message' => 'Nama ini tidak ada di daftar kedatangan tamu. Apakah Anda yakin ingin memasukkan nama ini?',
                     ]);
+                } else {
+                    $guestId = $foundInGuests->id;
                 }
             }
         }

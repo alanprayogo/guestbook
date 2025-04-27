@@ -243,7 +243,7 @@
     <!-- End Modal Add Manual -->
 
     <!-- Modal Konfirmasi -->
-    <div id="modal-confirm" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
+    <div id="modal-confirm" class="fixed inset-0 z-100 h-full hidden items-center justify-center" style="background: rgba(0, 0, 0, 0.5)">
         <div class="w-full max-w-sm rounded bg-white p-6 shadow-xl">
             <p id="confirm-message" class="mb-4 text-sm text-gray-800"></p>
             <div class="flex justify-end gap-2">
@@ -257,6 +257,37 @@
         </div>
     </div>
     <!-- End Modal Konfirmasi -->
+
+    <!-- Toast Success -->
+    <div id="toast-success"
+        class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
+        role="alert">
+        <div class="flex items-center">
+            <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414L8.414 15l-4.121-4.121a1 1 0 111.414-1.414L8.414 12.586l7.879-7.879a1 1 0 011.414 0z"
+                    clip-rule="evenodd">
+                </path>
+            </svg>
+            <span id="toast-success-message">Data berhasil disimpan</span>
+        </div>
+    </div>
+
+    <!-- Toast Error -->
+    <div id="toast-error"
+        class="fixed right-5 top-20 z-50 hidden w-full max-w-xs rounded-lg bg-red-100 p-4 text-red-800 shadow-lg dark:bg-red-800 dark:text-red-200"
+        role="alert">
+        <div class="flex items-center">
+            <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M18 10c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8zm-9-4h2v5h-2V6zm0 6h2v2h-2v-2z"
+                    clip-rule="evenodd">
+                </path>
+            </svg>
+            <span id="toast-error-message">Terjadi kesalahan</span>
+        </div>
+    </div>
+
 
     <script>
         const modalEl = document.getElementById('modal-add-manual');
@@ -294,8 +325,29 @@
             }, 300);
         };
 
+        const showToastSuccess = (message) => {
+            const toast = document.getElementById('toast-success');
+            const messageEl = document.getElementById('toast-success-message');
+            messageEl.innerText = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        };
+
+        const showToastError = (message) => {
+            const toast = document.getElementById('toast-error');
+            const messageEl = document.getElementById('toast-error-message');
+            messageEl.innerText = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        };
+
+
         const showConfirmModal = (message, onConfirm) => {
-            closeModal();c
+            closeModal();
 
             confirmMsg.innerText = message;
             confirmModal.classList.remove('hidden');
@@ -341,11 +393,12 @@
                     .then(data => {
                         if (data.status === 'success') {
                             closeModal();
-                            alert('Data berhasil disimpan');
+                            showToastSuccess('Data berhasil disimpan');
+                            location.reload();
                         } else if (data.status === 'exists' || data.status === 'not_found_in_guests') {
                             showConfirmModal(data.message, () => submitSouvenir(true));
                         } else {
-                            alert(data.message);
+                            showToastError(data.message);
                         }
                     })
                     .catch(error => {
