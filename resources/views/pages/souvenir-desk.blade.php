@@ -20,7 +20,10 @@
                         <div>
                             <x-button variant="add" data-open-manual-modal>Add
                                 Guess</x-button>
-                            <x-button variant="scan-qr">Scan QR</x-button>
+                            <x-button id="btn-scan-qr" variant="scan-qr" aria-haspopup="dialog" aria-expanded="false"
+                                aria-controls="hs-static-backdrop-modal" data-hs-overlay="#hs-static-backdrop-modal">
+                                Scan QR
+                            </x-button>
                             <x-button variant="export-excel">Export Excel</x-button>
                             <x-button variant="export-pdf">Export PDF</x-button>
                         </div>
@@ -194,6 +197,44 @@
     </div>
     <!-- End Card -->
 
+    <!-- Modal QR Code -->
+    <div id="hs-static-backdrop-modal"
+        class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden [--overlay-backdrop:static]"
+        role="dialog" tabindex="-1" aria-labelledby="hs-static-backdrop-modal-label" data-hs-overlay-keyboard="false">
+        <div
+            class="m-3 mt-0 opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
+            <div
+                class="shadow-2xs pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
+                <div class="flex items-center justify-end border-b border-gray-200 px-4 py-3 dark:border-neutral-700">
+                    <button type="button"
+                        class="focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+                        aria-label="Close" data-hs-overlay="#hs-static-backdrop-modal">
+                        <span class="sr-only">Close</span>
+                        <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="overflow-y-auto p-4">
+                    <div id="reader" class="h-full w-full rounded border border-gray-300"></div>
+                </div>
+
+                <div
+                    class="flex items-center justify-end gap-x-2 border-t border-gray-200 px-4 py-3 dark:border-neutral-700">
+                    <button type="button"
+                        class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                        data-hs-overlay="#hs-static-backdrop-modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal QR Code-->
+
     <!-- Modal Add Manual -->
     <div id="modal-add-manual"
         class="z-100 fixed inset-0 hidden h-full items-center justify-center opacity-0 transition-opacity duration-300"
@@ -243,7 +284,8 @@
     <!-- End Modal Add Manual -->
 
     <!-- Modal Konfirmasi -->
-    <div id="modal-confirm" class="fixed inset-0 z-100 h-full hidden items-center justify-center" style="background: rgba(0, 0, 0, 0.5)">
+    <div id="modal-confirm" class="z-100 fixed inset-0 hidden h-full items-center justify-center"
+        style="background: rgba(0, 0, 0, 0.5)">
         <div class="w-full max-w-sm rounded bg-white p-6 shadow-xl">
             <p id="confirm-message" class="mb-4 text-sm text-gray-800"></p>
             <div class="flex justify-end gap-2">
