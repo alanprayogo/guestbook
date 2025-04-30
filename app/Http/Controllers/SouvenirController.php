@@ -35,6 +35,10 @@ class SouvenirController extends Controller
             })->first();
 
             if ($existingSouvenir) {
+                $foundInGuests = Guest::where('guest_name', $guestName)->first();
+                if ($foundInGuests) {
+                    $guestId = $foundInGuests->id;
+                }
                 return response()->json([
                     'status' => 'exists',
                     'message' => 'Nama ini sudah pernah ambil souvenir. Apakah Anda yakin ingin memasukkan lagi?',

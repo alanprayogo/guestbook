@@ -2,6 +2,10 @@
 
 @section('page-title', 'Souvenir Desk')
 
+@push('head')
+    @vite('resources/js/souvenir.js');
+@endpush
+
 @section('content')
     <!-- Card -->
     <div class="flex flex-col">
@@ -284,15 +288,15 @@
     <!-- End Modal Add Manual -->
 
     <!-- Modal Konfirmasi -->
-    <div id="modal-confirm" class="z-100 fixed inset-0 hidden h-full items-center justify-center"
+    <div id="confirm-modal" class="z-100 fixed inset-0 hidden h-full items-center justify-center"
         style="background: rgba(0, 0, 0, 0.5)">
         <div class="w-full max-w-sm rounded bg-white p-6 shadow-xl">
             <p id="confirm-message" class="mb-4 text-sm text-gray-800"></p>
             <div class="flex justify-end gap-2">
-                <button id="cancel-confirm" class="rounded bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300">
+                <button id="cancel-button" class="rounded bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300">
                     Batal
                 </button>
-                <button id="ok-confirm" class="rounded bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700">
+                <button id="confirm-button" class="rounded bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700">
                     Lanjutkan
                 </button>
             </div>
@@ -329,130 +333,5 @@
             <span id="toast-error-message">Terjadi kesalahan</span>
         </div>
     </div>
-
-
-    <script>
-        const modalEl = document.getElementById('modal-add-manual');
-        const form = document.getElementById('souvenir-form');
-        const openButtons = document.querySelectorAll('[data-open-manual-modal]');
-        const closeButtons = modalEl.querySelectorAll('[data-close-manual-modal]');
-
-        const confirmModal = document.getElementById('modal-confirm');
-        const confirmMsg = document.getElementById('confirm-message');
-        const cancelBtn = document.getElementById('cancel-confirm');
-        const okBtn = document.getElementById('ok-confirm');
-
-        const openModal = () => {
-            modalEl.classList.remove('hidden');
-            modalEl.classList.add('flex');
-            setTimeout(() => {
-                modalEl.classList.remove('opacity-0');
-                modalEl.classList.add('opacity-100');
-            }, 10);
-            modalEl.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('overflow-hidden');
-            document.getElementById('guest-name').focus();
-        };
-
-        const closeModal = () => {
-            document.activeElement.blur();
-            modalEl.classList.remove('opacity-100');
-            modalEl.classList.add('opacity-0');
-            modalEl.setAttribute('aria-hidden', 'true');
-            document.body.classList.remove('overflow-hidden');
-
-            setTimeout(() => {
-                modalEl.classList.add('hidden');
-                form.reset();
-            }, 300);
-        };
-
-        const showToastSuccess = (message) => {
-            const toast = document.getElementById('toast-success');
-            const messageEl = document.getElementById('toast-success-message');
-            messageEl.innerText = message;
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 4000);
-        };
-
-        const showToastError = (message) => {
-            const toast = document.getElementById('toast-error');
-            const messageEl = document.getElementById('toast-error-message');
-            messageEl.innerText = message;
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 4000);
-        };
-
-
-        const showConfirmModal = (message, onConfirm) => {
-            closeModal();
-
-            confirmMsg.innerText = message;
-            confirmModal.classList.remove('hidden');
-            confirmModal.classList.add('flex');
-
-            okBtn.onclick = () => {
-                confirmModal.classList.add('hidden');
-                onConfirm();
-            };
-
-            cancelBtn.onclick = () => {
-                confirmModal.classList.add('hidden');
-            };
-        };
-
-
-        openButtons.forEach(btn => {
-            btn.addEventListener('click', openModal);
-        });
-
-        closeButtons.forEach(btn => {
-            btn.addEventListener('click', closeModal);
-        });
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const guestName = document.getElementById('guest-name').value;
-
-            const submitSouvenir = (force = false) => {
-                fetch('/souvenir-desk', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        },
-                        body: JSON.stringify({
-                            guest_name: guestName,
-                            force: force,
-                        }),
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.status === 'success') {
-                            closeModal();
-                            showToastSuccess('Data berhasil disimpan');
-                            location.reload();
-                        } else if (data.status === 'exists' || data.status === 'not_found_in_guests') {
-                            showConfirmModal(data.message, () => submitSouvenir(true));
-                        } else {
-                            showToastError(data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Fetch error:', error);
-                        alert('Terjadi kesalahan. Coba lagi nanti.');
-                    });
-            };
-
-            submitSouvenir();
-        });
-    </script>
-
-
 
 @endsection
