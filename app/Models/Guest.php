@@ -28,4 +28,9 @@ class Guest extends Model
     {
         return $this->hasMany(Souvenir::class);
     }
+
+    public function giftDeposits()
+    {
+        return $this->hasMany(GiftDeposit::class);
+    }
 }
