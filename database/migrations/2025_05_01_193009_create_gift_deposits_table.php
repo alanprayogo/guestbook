@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('gift_deposits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('guest_id');
+            $table->unsignedBigInteger('guest_id')->nullable();
             $table->string('guest_name');
             $table->enum('status', ['Sedang Dititipkan', 'Sudah Diambil'])->default('Sedang Dititipkan');
             $table->timestamps();

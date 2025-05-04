@@ -2,10 +2,10 @@ import { setupManualHandler } from './manual-handler';
 
 setupManualHandler({
     modalId: 'modal-add-manual',
-    formId: 'souvenir-form',
+    formId: 'gift-form',
     guestNameInputId: 'guest-name',
     openButtonAttr: 'data-open-manual-modal',
     closeButtonAttr: 'data-close-manual-modal',
-    submitUrl: '/souvenir-desk',
+    submitUrl: '/gift-handling',
     scannerButtonId: 'btn-scan-qr',
 });
