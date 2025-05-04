@@ -134,10 +134,9 @@
                                             </td>
                                             <td class="h-px w-[16.7%] whitespace-nowrap">
                                                 <div class="px-6 py-3">
-                                                    <x-status-badge status="pending" class="cursor-pointer btn-arrival" aria-haspopup="dialog"
-                                                    data-hs-overlay="#arrival-confirm-modal"
-                                                    data-id="{{ $data->id }}"
-                                                    data-name="{{ $data->guest_name }}" />
+                                                    <x-status-badge status="pending" class="btn-arrival cursor-pointer"
+                                                        aria-haspopup="dialog" data-hs-overlay="#arrival-confirm-modal"
+                                                        data-id="{{ $data->id }}" data-name="{{ $data->guest_name }}" />
                                                 </div>
                                             </td>
                                             <td class="size-px whitespace-nowrap">
@@ -156,7 +155,9 @@
                                                             data-id="{{ $data->id }}"
                                                             data-name="{{ $data->guest_name }}" />
                                                         <x-action-button variant="send" />
-                                                        <x-action-button variant="download" href="https://attarivitation.com/demo-undangan-buku-tamu/?to={{ $data->guest_name}}" target="_blank" />
+                                                        <x-action-button variant="download"
+                                                            href="https://attarivitation.com/demo-undangan-buku-tamu/?to={{ $data->guest_name }}"
+                                                            target="_blank" />
 
                                                     </div>
                                                 </div>
@@ -188,9 +189,10 @@
                                     <div class="inline-flex gap-x-2">
                                         <button type="button"
                                             class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
                                                 <path d="m15 18-6-6 6-6" />
                                             </svg>
                                             Prev
@@ -242,20 +244,47 @@
                                     </label>
                                     <input type="text" id="yang-mengundang"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                        placeholder="Aku & Kamu">
+                                        value="Aku & Kamu" readonly>
                                 </div>
                                 <div class="w-full">
                                     <label for="sesi" class="block text-sm font-medium dark:text-white">
-                                        Sesi (Nomor Kursi)
+                                        Sesi
                                     </label>
                                     <select id="sesi" name="session"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                        <option selected disabled>Silahkan Pilih Kursi</option>
-                                        <option>Kursi 1</option>
-                                        <option>Kursi 2</option>
-                                        <option>Kursi 3</option>
-                                        <option>Kursi 4</option>
-                                        <option>Kursi 5</option>
+                                        <option selected disabled>Silahkan Pilih Sesi</option>
+                                        <option>Sesi 1</option>
+                                        <option>Sesi 2</option>
+                                        <option>Sesi 3</option>
+                                        <option>Sesi 4</option>
+                                        <option>Sesi 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-3 sm:flex-row">
+                                <div class="w-full">
+                                    <label for="url" class="block text-sm font-medium dark:text-white">
+                                        Alamat URL
+                                    </label>
+                                    <select id="url" name="url"
+                                        class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <option selected disabled>Pilih URL</option>
+                                        <option value="">By Attari</option>
+                                        <option value="">Attarivation</option>
+                                    </select>
+                                </div>
+                                <div class="w-full">
+                                    <label for="nomor-meha" class="block text-sm font-medium dark:text-white">
+                                        Nomor Meja
+                                    </label>
+                                    <select id="nomor-meha" name="no_meja"
+                                        class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <option selected disabled>Pilih Nomor Meja</option>
+                                        <option>Meja 1</option>
+                                        <option>Meja 2</option>
+                                        <option>Meja 3</option>
+                                        <option>Meja 4</option>
+                                        <option>Meja 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -306,44 +335,167 @@
                                     <button type="button"
                                         class="inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300 hs-tab-active:dark:text-white"
                                         data-hs-tab="#tab-formal" role="tab"
-                                        data-template="Dengan hormat, kami mengundang Anda ke acara kami.">
+                                        data-template="Yth. [nama]
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami :
+
+*[mempelai]*
+
+Berikut link undangan kami, untuk info lengkap dari acara bisa kunjungi :
+
+[link-undangan]
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
+
+Mohon maaf perihal undangan hanya di bagikan melalui pesan ini.
+
+*Note :*
+_Jika link tidak bisa dibuka, silahkan copy link kemudian paste di Chrome atau Browser lainnya._
+_Untuk tampilan terbaik, silahkan akses melalui Browser Chrome / Safari dan non-aktifkan Dark Mode / Mode Gelap._
+
+Terima kasih banyak atas perhatiannya.
+">
                                         Formal
                                     </button>
 
                                     <button type="button"
                                         class="focus:outline-hidden inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300"
                                         data-hs-tab="#tab-muslim"
-                                        data-template="Assalamu'alaikum warahmatullahi wabarakatuh. Terima kasih atas kehadiran Anda."
+                                        data-template="Yth. [nama]
+
+Assalamualaikum Warahmatullahi Wabarakatuh
+
+Dengan memohon Rahmat dan Ridho Allah SWT, dan tanpa mengurangi rasa hormat melalui pesan ini kami mengundang Bapak/Ibu/Saudara/I untuk menghadiri acara pernikahan kami :
+
+*[mempelai]*
+
+Berikut link undangan kami, untuk info lengkap dari acara bisa kunjungi :
+
+[link-undangan]
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
+
+Mohon maaf perihal undangan hanya di bagikan melalui pesan ini.
+
+*Note :*
+_Jika link tidak bisa dibuka, silahkan copy link kemudian paste di Chrome atau Browser lainnya._
+_Untuk tampilan terbaik, silahkan akses melalui Browser Chrome / Safari dan non-aktifkan Dark Mode / Mode Gelap._
+
+Terima kasih banyak atas perhatiannya.
+
+Wassalamualaikum Warahmatullahi Wabarakatuh
+"
                                         role="tab">Muslim</button>
 
                                     <button type="button"
                                         class="focus:outline-hidden inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300"
                                         data-hs-tab="#tab-nasrani"
-                                        data-template="Tuhan memberkati Anda yang telah hadir dan mendoakan kebahagiaan kami."
+                                        data-template="Yth. [nama]
+
+Salam Sejahtera Bagi Kita Semua. Tuhan membuat segala sesuatu indah pada waktunya dan mempersatukan kami dalam suatu ikatan pernikahan kudus, semoga Tuhan memberkati dalam mengiringi pernikahan kami.
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami :
+
+*[mempelai]*
+
+Klik link undangan berikut, untuk info acara selengkapnya :
+
+[link-undangan]
+
+Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
+
+Mohon maaf perihal undangan hanya di bagikan melalui pesan ini.
+
+*Note :*
+_Jika link tidak bisa dibuka, silahkan copy link kemudian paste di Chrome atau Browser lainnya._
+_Untuk tampilan terbaik, silahkan akses melalui Browser Chrome / Safari dan non-aktifkan Dark Mode / Mode Gelap._
+
+Terima kasih.
+"
                                         role="tab">Nasrani</button>
 
                                     <button type="button"
                                         class="focus:outline-hidden inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300"
                                         data-hs-tab="#tab-hindu"
-                                        data-template="Om Swastyastu. Terima kasih telah menghadiri acara kami."
+                                        data-template="Yth. [nama]
+
+Om Swastiastu
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan kami :
+
+*[mempelai]*
+
+Berikut link undangan kami, untuk info lengkap dari acara bisa kunjungi :
+
+[link-undangan]
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
+
+Mohon maaf perihal undangan hanya di bagikan melalui pesan ini.
+
+*Note :*
+_Jika link tidak bisa dibuka, silahkan copy link kemudian paste di Chrome atau Browser lainnya._
+_Untuk tampilan terbaik, silahkan akses melalui Browser Chrome / Safari dan non-aktifkan Dark Mode / Mode Gelap._
+
+Terima kasih banyak atas perhatiannya.
+
+Om Shanti, Shanti, Shanti, Om.
+"
                                         role="tab">Hindu</button>
 
                                     <button type="button"
                                         class="focus:outline-hidden inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300"
                                         data-hs-tab="#tab-birthday"
-                                        data-template="Selamat ulang tahun! Semoga selalu diberi kesehatan dan kebahagiaan."
+                                        data-template="Dear, *[nama]*
+
+Assalamu'alaikum Wr. Wb.
+
+Tanpa mengurangi rasa hormat perkenankan kami bermaksud mengundang teman-teman untuk menghadiri acara Ulang Tahun :
+
+*[mempelai]*
+
+Berikut link undangannya, untuk info lengkap dari acara bisa kunjungi :
+
+[link-undangan]
+
+Merupakan suatu kebahagiaan apabila teman-teman berkenan hadir di acara ulang tahun ini.
+
+Mohon maaf perihal undangan hanya di bagikan melalui pesan ini.
+
+Note :
+_Jika link tidak bisa dibuka, silahkan copy link kemudian paste di Chrome atau Browser lainnya._
+_Untuk tampilan terbaik, silahkan akses melalui Browser Chrome / Safari dan non-aktifkan Dark Mode / Mode Gelap._
+
+Terima kasih banyak atas perhatiannya.
+"
                                         role="tab">Birthday</button>
 
                                     <button type="button"
                                         class="focus:outline-hidden inline-flex flex-auto items-center justify-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-center text-sm font-medium text-gray-500 hover:text-blue-600 focus:text-blue-600 hs-tab-active:bg-blue-600 hs-tab-active:text-white dark:text-neutral-400 dark:hover:text-neutral-300"
                                         data-hs-tab="#tab-english"
-                                        data-template="Thank you for joining our special occasion. We are deeply honored."
+                                        data-template="Dear.
+Mr/Ms/Brother/Sister
+*[nama]*
+
+Without reducing our respect, please allow us to invite you, to attend our wedding.
+
+*Following is our invitation link*, for complete information on the event, please visit:
+
+[link-undangan]
+
+It is a pleasure for us if you are willing to attend and give your blessing.
+
+Thank You
+
+Best regards,
+[mempelai]
+"
                                         role="tab">English</button>
                                 </nav>
 
                                 <span class="block text-sm font-medium dark:text-white">Isi Kata Pengantar</span>
                                 <div class="mt-3">
-                                    <textarea id="text-pengantar" rows="5" name="kata_pengantar"
+                                    <textarea id="text-pengantar" rows="15" name="kata_pengantar"
                                         class="w-full rounded-lg border border-gray-300 p-3 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-white"></textarea>
                                 </div>
                             </div>
