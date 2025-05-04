@@ -117,19 +117,19 @@
                                             <td class="h-px w-[16.7%] whitespace-nowrap">
                                                 <div class="px-6 py-3">
                                                     <span
-                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->broadcast->category->category_name }}</span>
+                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->category->category_name }}</span>
                                                 </div>
                                             </td>
                                             <td class="h-px w-[16.7%] whitespace-nowrap">
                                                 <div class="px-6 py-3">
                                                     <span
-                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->broadcast->session }}</span>
+                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->session }}</span>
                                                 </div>
                                             </td>
                                             <td class="h-px w-[16.7%] whitespace-nowrap">
                                                 <div class="px-6 py-3">
                                                     <span
-                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->broadcast->guest_limit }}</span>
+                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->guest_limit }}</span>
                                                 </div>
                                             </td>
                                             <td class="h-px w-[16.7%] whitespace-nowrap">
@@ -253,11 +253,11 @@
                                     <select id="sesi" name="session"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                         <option selected disabled>Silahkan Pilih Sesi</option>
-                                        <option>Sesi 1</option>
-                                        <option>Sesi 2</option>
-                                        <option>Sesi 3</option>
-                                        <option>Sesi 4</option>
-                                        <option>Sesi 5</option>
+                                        <option value="Sesi 1">Sesi 1</option>
+                                        <option value="Sesi 2">Sesi 2</option>
+                                        <option value="Sesi 3">Sesi 3</option>
+                                        <option value="Sesi 4">Sesi 4</option>
+                                        <option value="Sesi 5">Sesi 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -269,22 +269,22 @@
                                     <select id="url" name="url"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                         <option selected disabled>Pilih URL</option>
-                                        <option value="">By Attari</option>
-                                        <option value="">Attarivation</option>
+                                        <option value="byattari">By Attari</option>
+                                        <option value="attarivation">Attarivation</option>
                                     </select>
                                 </div>
                                 <div class="w-full">
                                     <label for="nomor-meha" class="block text-sm font-medium dark:text-white">
                                         Nomor Meja
                                     </label>
-                                    <select id="nomor-meha" name="no_meja"
+                                    <select id="nomor-meha" name="no_table"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                         <option selected disabled>Pilih Nomor Meja</option>
-                                        <option>Meja 1</option>
-                                        <option>Meja 2</option>
-                                        <option>Meja 3</option>
-                                        <option>Meja 4</option>
-                                        <option>Meja 5</option>
+                                        <option value="Meja 1">Meja 1</option>
+                                        <option value="Meja 2">Meja 2</option>
+                                        <option value="Meja 3">Meja 3</option>
+                                        <option value="Meja 4">Meja 4</option>
+                                        <option value="Meja 5">Meja 5</option>
                                     </select>
                                 </div>
                             </div>

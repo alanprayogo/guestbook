@@ -11,8 +11,11 @@ class Broadcast extends Model
 
     protected $fillable = [
         'category_id',
-        'guest_whatsapp',
+        'guest_name',
+        'guest_phone',
+        'url',
         'session',
+        'no_table',
         'guest_limit',
         'kata_pengantar',
     ];
@@ -20,10 +23,5 @@ class Broadcast extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function broadcastList()
-    {
-        return $this->hasMany(BroadcastList::class);
     }
 }
