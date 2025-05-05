@@ -152,7 +152,7 @@
                                                             data-hs-overlay="#delete-confirm-modal" class="btn-delete"
                                                             data-id="{{ $data->id }}"
                                                             data-name="{{ $data->guest_name }}" />
-                                                        <x-action-button variant="send" />
+                                                        <x-action-button variant="send" href="https://wa.me/{{ $data->guest_phone }}?text={{ urlencode($data->kata_pengantar) }}" target="_blank" />
                                                         <x-action-button variant="download"
                                                             href="https://attarivitation.com/demo-undangan-buku-tamu/?to={{ $data->guest_name }}"
                                                             target="_blank" />

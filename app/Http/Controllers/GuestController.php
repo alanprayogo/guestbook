@@ -21,6 +21,20 @@ class GuestController extends Controller
         return view('pages.manage-guest', compact('category', 'listGuest'));
     }
 
+
+    private function normalizePhoneNumber($phone)
+    {
+        $phone = preg_replace('/[^0-9]/', '', $phone);
+
+        if (str_starts_with($phone, '62')) {
+            return $phone;
+        }
+        if (str_starts_with($phone, '0')) {
+            return '62' . substr($phone, 1);
+        }
+        return $phone;
+    }
+
     public function storeGuest(Request $request)
     {
         try {
@@ -61,6 +75,7 @@ class GuestController extends Controller
                 }
 
                 [$name, $phone] = array_map('trim', explode('-', $line, 2));
+                $phone = $this->normalizePhoneNumber($phone);
 
                 if ($name && $phone) {
                     Broadcast::create([
@@ -122,7 +137,7 @@ class GuestController extends Controller
             $guest = Broadcast::findOrFail($request->id);
             $guest->category_id = $request->category_id;
             $guest->guest_name = $request->guest_name;
-            $guest->guest_phone = $request->guest_phone;
+            $guest->guest_phone = $this->normalizePhoneNumber($request->guest_phone);
             $guest->url = $request->url;
             $guest->no_table = $request->no_table;
             $guest->session = $request->session;
