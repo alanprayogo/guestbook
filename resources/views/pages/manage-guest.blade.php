@@ -147,9 +147,7 @@
                                                         <x-action-button variant="edit" aria-haspopup="dialog"
                                                             aria-expanded="false" aria-controls="hs-static-backdrop-modal"
                                                             data-hs-overlay="#hs-static-backdrop-modal" class="btn-edit"
-                                                            data-id="{{ $data->id }}"
-                                                            data-name="{{ $data->guest_name }}"
-                                                            data-phone="{{ $data->guest_phone }}" />
+                                                            data-id="{{ $data->id }}" />
                                                         <x-action-button variant="delete" aria-haspopup="dialog"
                                                             data-hs-overlay="#delete-confirm-modal" class="btn-delete"
                                                             data-id="{{ $data->id }}"
@@ -307,12 +305,11 @@
                                     </label>
                                     <select id="limit-tamu" name="guest_limit"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                        <option selected>1 Orang</option>
-                                        <option>2 Orang</option>
-                                        <option>3 Orang</option>
-                                        <option>4 Orang</option>
-                                        <option>5 Orang</option>
-                                        <option>6 Orang</option>
+                                        <option value="1 Orang" selected>1 Orang</option>
+                                        <option value="2 Orang">2 Orang</option>
+                                        <option value="3 Orang">3 Orang</option>
+                                        <option value="4 Orang">4 Orang</option>
+                                        <option value="5 Orang">5 Orang</option>
                                     </select>
                                 </div>
                             </div>
@@ -517,23 +514,23 @@ Best regards,
     </div>
 
     <!-- Modal Edit -->
-
     <div id="hs-static-backdrop-modal"
         class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden [--overlay-backdrop:static]"
         role="dialog" tabindex="-1" aria-labelledby="hs-static-backdrop-modal-label" data-hs-overlay-keyboard="false">
         <div
             class="m-3 mt-0 opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
             <div
-                class="shadow-2xs pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
+                class="pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white shadow-lg dark:border-neutral-700 dark:bg-neutral-800">
+                <!-- Header -->
                 <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-neutral-700">
-                    <h3 id="hs-static-backdrop-modal-label" class="font-bold text-gray-800 dark:text-white">
+                    <h3 id="hs-static-backdrop-modal-label" class="text-lg font-bold text-gray-800 dark:text-white">
                         Edit Tamu
                     </h3>
                     <button type="button"
-                        class="focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+                        class="inline-flex size-8 items-center justify-center rounded-full border border-transparent bg-gray-100 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600"
                         aria-label="Close" data-hs-overlay="#hs-static-backdrop-modal">
                         <span class="sr-only">Close</span>
-                        <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 6 6 18"></path>
@@ -541,30 +538,132 @@ Best regards,
                         </svg>
                     </button>
                 </div>
+
+                <!-- Form Content -->
                 <div class="overflow-y-auto p-4">
-                    <form method="POST" id="editGuestForm" action="">
+                    <form method="POST" id="editGuestForm">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="id" id="editGuestId">
-                        <div class="p-4">
-                            <label for="editGuestName" class="block text-sm font-medium text-gray-700">Nama Tamu</label>
-                            <input type="text" name="guest_name" id="editGuestName"
-                                class="mt-1 w-full rounded border px-2 py-1" />
-                            <label for="editGuestPhone" class="mt-3 block text-sm font-medium text-gray-700">No.
-                                HP</label>
-                            <input type="text" name="guest_phone" id="editGuestPhone"
-                                class="mt-1 w-full rounded border px-2 py-1" />
+
+                        <div class="space-y-4 p-2">
+                            <!-- Nama Tamu -->
+                            <div>
+                                <label for="editGuestName"
+                                    class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Nama Tamu
+                                </label>
+                                <input type="text" name="guest_name" id="editGuestName" required
+                                    class="w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white"
+                                    placeholder="Masukkan nama tamu" />
+                            </div>
+
+                            <!-- No. HP -->
+                            <div>
+                                <label for="editGuestPhone"
+                                    class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    No. HP
+                                </label>
+                                <input type="text" name="guest_phone" id="editGuestPhone" required
+                                    class="w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white"
+                                    placeholder="Contoh: 08123456789" />
+                            </div>
+
+                            <!-- Kategori Tamu -->
+                            <div>
+                                <label for="editGuestCategory"
+                                    class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Kategori Tamu
+                                </label>
+                                <select id="editGuestCategory" name="category_id"
+                                    class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+                                    <option value="" disabled selected>Pilih Kategori</option>
+                                    @foreach ($category as $data)
+                                        <option value="{{ $data->id }}">{{ $data->category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Nomor Meja -->
+                            <div>
+                                <label for="editGuestUrl"
+                                    class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    URL
+                                </label>
+                                <select id="editGuestUrl" name="url" required
+                                    class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+                                    <option selected disabled>Pilih URL</option>
+                                    <option value="byattari">By Attari</option>
+                                    <option value="attarivation">Attarivation</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="editGuestTable"
+                                    class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Nomor Meja
+                                </label>
+                                <select id="editGuestTable" name="no_table" required
+                                    class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+                                    <option value="" disabled selected>Pilih Nomor Meja</option>
+                                    <option value="Meja 1">Meja 1</option>
+                                    <option value="Meja 2">Meja 2</option>
+                                    <option value="Meja 3">Meja 3</option>
+                                    <option value="Meja 4">Meja 4</option>
+                                    <option value="Meja 5">Meja 5</option>
+                                </select>
+                            </div>
+
+                            <!-- Status Kehadiran -->
+                            <div>
+                                <label for="editGuestSession"
+                                    class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Session
+                                </label>
+                                <select id="editGuestSession" name="session"
+                                    class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+                                    <option selected disabled>Silahkan Pilih Sesi</option>
+                                    <option value="Sesi 1">Sesi 1</option>
+                                    <option value="Sesi 2">Sesi 2</option>
+                                    <option value="Sesi 3">Sesi 3</option>
+                                    <option value="Sesi 4">Sesi 4</option>
+                                    <option value="Sesi 5">Sesi 5</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="editGuestLimit"
+                                    class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Limit Tamu
+                                </label>
+                                <select id="editGuestLimit" name="guest_limit"
+                                    class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
+                                    <option value="1 Orang" selected>1 Orang</option>
+                                    <option value="2 Orang">2 Orang</option>
+                                    <option value="3 Orang">3 Orang</option>
+                                    <option value="4 Orang">4 Orang</option>
+                                    <option value="5 Orang">5 Orang</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="flex justify-end border-t p-4">
-                            <button type="submit" class="rounded bg-blue-600 px-4 py-2 text-white">Simpan</button>
+
+                        <!-- Button Section -->
+                        <div
+                            class="mt-6 flex items-center justify-end space-x-3 border-t border-gray-200 pt-4 dark:border-neutral-700">
+                            <button type="button" data-hs-overlay="#hs-static-backdrop-modal"
+                                class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600">
+                                Batal
+                            </button>
+                            <button type="submit"
+                                class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-blue-700 dark:hover:bg-blue-800">
+                                Simpan Perubahan
+                            </button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
-
     <!-- End Modal Edit -->
 
     <!-- Modal Konfirmasi Delete -->
@@ -658,6 +757,11 @@ Best regards,
         </div>
     @endif
 
+    <script>
+        const guestDataMap = @json($listGuest->keyBy('id'));
+    </script>
+
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -703,21 +807,30 @@ Best regards,
             document.querySelectorAll('.btn-edit').forEach(button => {
                 button.addEventListener('click', function() {
                     const id = this.dataset.id;
-                    const name = this.dataset.name;
-                    const phone = this.dataset.phone;
+                    const guest = guestDataMap[id];
 
-                    document.querySelector('#editGuestId').value = id;
-                    document.querySelector('#editGuestName').value = name;
-                    document.querySelector('#editGuestPhone').value = phone;
+                    if (guest) {
+                        document.querySelector('#editGuestId').value = guest.id;
+                        document.querySelector('#editGuestName').value = guest.guest_name || '';
+                        document.querySelector('#editGuestPhone').value = guest.guest_phone || '';
+                        document.querySelector('#editGuestCategory').value = guest.category_id ||'';
+                        document.querySelector('#editGuestUrl').value = guest.url ||'';
+                        document.querySelector('#editGuestTable').value = guest.no_table || '';
+                        document.querySelector('#editGuestSession').value = guest.session || '';
+                        document.querySelector('#editGuestLimit').value = guest.guest_limit || '';
 
-                    const form = document.querySelector('#editGuestForm');
-                    if (form) {
-                        form.action = `/manage-guest`;
+                        const form = document.querySelector('#editGuestForm');
+                        if (form) {
+                            form.action = `/manage-guest`;
+                        }
+                    } else {
+                        alert("Data tamu tidak ditemukan.");
                     }
                 });
             });
         });
     </script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

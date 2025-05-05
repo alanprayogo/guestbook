@@ -49,38 +49,38 @@ class GuestController extends Controller
                 'kata_pengantar.string'   => 'Kata pengantar harus berupa teks.',
             ]);
 
-                $lines = preg_split('/\r\n|\r|\n/', $validated['guest_name']);
+            $lines = preg_split('/\r\n|\r|\n/', $validated['guest_name']);
 
-                foreach ($lines as $index => $line) {
-                    $line = trim($line);
-                    if ($line === '') continue;
+            foreach ($lines as $index => $line) {
+                $line = trim($line);
+                if ($line === '') continue;
 
-                    if (strpos($line, '-') === false) {
-                        Log::warning("Baris tamu ke-" . ($index + 1) . " tidak valid: '$line'");
-                        continue;
-                    }
-
-                    [$name, $phone] = array_map('trim', explode('-', $line, 2));
-
-                    if ($name && $phone) {
-                        Broadcast::create([
-                            'category_id'   => $validated['category_id'],
-                            'guest_name'   => $name,
-                            'guest_phone'  => $phone,
-                            'url'          => $validated['url'],
-                            'no_table'     => $validated['no_table'],
-                            'session'      => $validated['session'],
-                            'guest_limit'  => $validated['guest_limit'],
-                            'kata_pengantar' => $validated['kata_pengantar'],
-                        ]);
-                    } else {
-                        Log::warning("Data kosong di baris ke-" . ($index + 1) . ": '$line'");
-                    }
+                if (strpos($line, '-') === false) {
+                    Log::warning("Baris tamu ke-" . ($index + 1) . " tidak valid: '$line'");
+                    continue;
                 }
 
-                Log::info('Broadcast dan tamu berhasil disimpan', [
-                    'total_tamu'   => count($lines),
-                ]);
+                [$name, $phone] = array_map('trim', explode('-', $line, 2));
+
+                if ($name && $phone) {
+                    Broadcast::create([
+                        'category_id'   => $validated['category_id'],
+                        'guest_name'   => $name,
+                        'guest_phone'  => $phone,
+                        'url'          => $validated['url'],
+                        'no_table'     => $validated['no_table'],
+                        'session'      => $validated['session'],
+                        'guest_limit'  => $validated['guest_limit'],
+                        'kata_pengantar' => $validated['kata_pengantar'],
+                    ]);
+                } else {
+                    Log::warning("Data kosong di baris ke-" . ($index + 1) . ": '$line'");
+                }
+            }
+
+            Log::info('Broadcast dan tamu berhasil disimpan', [
+                'total_tamu'   => count($lines),
+            ]);
 
             return redirect()->back()->with('success', 'Data tamu berhasil disimpan!');
         } catch (\Illuminate\Validation\ValidationException $exception) {
@@ -108,18 +108,46 @@ class GuestController extends Controller
 
     public function updateGuest(Request $request)
     {
-        $request->validate([
-            'guest_name' => 'required|string|max:255',
-            'guest_phone' => 'required|string|max:20',
-        ]);
+        try {
+            $request->validate([
+                'guest_name' => 'required|string|max:255',
+                'guest_phone' => 'required|string|max:20',
+                'category_id' => 'required|exists:categories,id',
+                'url' => 'required|in:byattari,attarivation',
+                'no_table' => 'required|in:Meja 1,Meja 2,Meja 3,Meja 4,Meja 5',
+                'session' => 'required|in:Sesi 1,Sesi 2,Sesi 3,Sesi 4,Sesi 5',
+                'guest_limit' => 'required|in:1 Orang,2 Orang,3 Orang,4 Orang,5 Orang,6 Orang',
+            ]);
 
-        $guest = Broadcast::findOrFail($request->id);
+            $guest = Broadcast::findOrFail($request->id);
+            $guest->category_id = $request->category_id;
+            $guest->guest_name = $request->guest_name;
+            $guest->guest_phone = $request->guest_phone;
+            $guest->url = $request->url;
+            $guest->no_table = $request->no_table;
+            $guest->session = $request->session;
+            $guest->guest_limit = $request->guest_limit;
+            $guest->save();
 
-        $guest->guest_name = $request->guest_name;
-        $guest->guest_phone = $request->guest_phone;
-        $guest->save();
-
-        return redirect()->back()->with('success', 'Data tamu berhasil diperbarui.');
+            return redirect()->back()->with('success', 'Data tamu berhasil diperbarui.');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::error('Guest not found during update: ' . $e->getMessage(), ['id' => $request->id]);
+            return redirect()->back()->with('error', 'Data tamu tidak ditemukan.');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation failed during guest update', [
+                'errors' => $e->errors(),
+                'input' => $request->all(),
+            ]);
+            return redirect()->back()
+                ->withErrors($e->validator)
+                ->withInput();
+        } catch (\Exception $e) {
+            Log::error('Unexpected error during guest update: ' . $e->getMessage(), [
+                'stack' => $e->getTraceAsString(),
+                'input' => $request->all(),
+            ]);
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     public function deleteGuest($id)
