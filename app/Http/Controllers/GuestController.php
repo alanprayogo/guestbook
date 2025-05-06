@@ -9,16 +9,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Yajra\DataTables\DataTables;
 
 class GuestController extends Controller
 {
     public function showGuest()
     {
         $category = Category::all();
-        $listGuest = Broadcast::with(['category'])
+        $query = Broadcast::with(['category'])
             ->orderBy('created_at', 'asc')
             ->get();
-        return view('pages.manage-guest', compact('category', 'listGuest'));
+        if (!request()->ajax()) {
+            return view('pages.manage-guest', compact('category', 'query'));
+        }
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('category_name', fn($row) => $row->category->category_name)
+            ->addColumn('action', function ($row) {
+                return view('components.guest-action', compact('row'))->render();
+            })
+            ->rawColumns(['action']) // jika tombol mengandung HTML
+            ->make(true);
     }
 
 

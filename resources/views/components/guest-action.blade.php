@@ -1,0 +1,13 @@
+<div class="flex items-center gap-x-3">
+    <x-action-button variant="share" />
+    <x-action-button variant="edit" aria-haspopup="dialog" aria-expanded="false"
+        aria-controls="hs-static-backdrop-modal" data-hs-overlay="#hs-static-backdrop-modal"
+        class="btn-edit" data-id="{{ $row->id }}" />
+    <x-action-button variant="delete" aria-haspopup="dialog"
+        data-hs-overlay="#delete-confirm-modal" class="btn-delete"
+        data-id="{{ $row->id }}" data-name="{{ $row->guest_name }}" />
+    <x-action-button variant="send" href="https://wa.me/{{ $row->guest_phone }}?text={{ urlencode($row->kata_pengantar) }}"
+        target="_blank" />
+    <x-action-button variant="download" href="https://attarivitation.com/demo-undangan-buku-tamu/?to={{ $row->guest_name }}"
+        target="_blank" />
+</div>

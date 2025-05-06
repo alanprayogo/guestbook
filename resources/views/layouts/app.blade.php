@@ -114,6 +114,7 @@
     <!-- End Content -->
 
     <!-- JS Implementing Plugins -->
+    @stack('scripts')
 
     <!-- JS PLUGINS -->
     <!-- Required plugins -->

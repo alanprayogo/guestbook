@@ -2,6 +2,10 @@
 
 @section('page-title', 'Guess Management')
 
+@push('head')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+@endpush
+
 @section('content')
 
     <x-tabs.container>
@@ -20,11 +24,6 @@
                             <!-- Header -->
                             <div
                                 class="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
-                                <!-- Input -->
-                                <x-search-input id="hs-as-table-product-review-search" name="product-review-search"
-                                    label="Search Produk" placeholder="Search" class="sm:col-span-1" />
-                                <!-- End Input -->
-
                                 <div>
                                     <x-button variant="add">Add Guess</x-button>
                                     <x-button variant="export-excel">Export Excel</x-button>
@@ -96,120 +95,9 @@
                                     </tr>
                                 </thead>
 
-                                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                    @foreach ($listGuest as $data)
-                                        <tr>
-                                            <td class="h-px w-[8.3%] whitespace-nowrap">
-                                                <div class="py-3 ps-6">
-                                                    <span
-                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $loop->iteration }}</span>
-                                                </div>
-                                            </td>
-                                            <td class="h-px w-1/4 whitespace-nowrap">
-                                                <div class="py-3 pe-6 ps-6 lg:ps-3 xl:ps-0">
-                                                    <div class="grow">
-                                                        <span
-                                                            class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->guest_name }}</span>
-                                                        <span
-                                                            class="block text-sm text-gray-500 dark:text-neutral-500">{{ $data->guest_phone }}</span>
-                                                    </div>
-                                            </td>
-                                            <td class="h-px w-[16.7%] whitespace-nowrap">
-                                                <div class="px-6 py-3">
-                                                    <span
-                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->category->category_name }}</span>
-                                                </div>
-                                            </td>
-                                            <td class="h-px w-[16.7%] whitespace-nowrap">
-                                                <div class="px-6 py-3">
-                                                    <span
-                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->session }}</span>
-                                                </div>
-                                            </td>
-                                            <td class="h-px w-[16.7%] whitespace-nowrap">
-                                                <div class="px-6 py-3">
-                                                    <span
-                                                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->guest_limit }}</span>
-                                                </div>
-                                            </td>
-                                            <td class="h-px w-[16.7%] whitespace-nowrap">
-                                                <div class="px-6 py-3">
-                                                    <x-status-badge status="pending" class="btn-arrival cursor-pointer"
-                                                        aria-haspopup="dialog" data-hs-overlay="#arrival-confirm-modal"
-                                                        data-id="{{ $data->id }}" data-name="{{ $data->guest_name }}" />
-                                                </div>
-                                            </td>
-                                            <td class="size-px whitespace-nowrap">
-                                                <div class="px-6 py-1.5">
-                                                    <div class="flex items-center gap-x-3">
-
-                                                        <x-action-button variant="share" />
-                                                        <x-action-button variant="edit" aria-haspopup="dialog"
-                                                            aria-expanded="false" aria-controls="hs-static-backdrop-modal"
-                                                            data-hs-overlay="#hs-static-backdrop-modal" class="btn-edit"
-                                                            data-id="{{ $data->id }}" />
-                                                        <x-action-button variant="delete" aria-haspopup="dialog"
-                                                            data-hs-overlay="#delete-confirm-modal" class="btn-delete"
-                                                            data-id="{{ $data->id }}"
-                                                            data-name="{{ $data->guest_name }}" />
-                                                        <x-action-button variant="send" href="https://wa.me/{{ $data->guest_phone }}?text={{ urlencode($data->kata_pengantar) }}" target="_blank" />
-                                                        <x-action-button variant="download"
-                                                            href="https://attarivitation.com/demo-undangan-buku-tamu/?to={{ $data->guest_name }}"
-                                                            target="_blank" />
-
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                             <!-- End Table -->
-
-                            <!-- Footer -->
-                            <div
-                                class="grid gap-3 border-t border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
-                                <div class="max-w-sm space-y-3">
-                                    <span class="font-semibold text-gray-800 dark:text-neutral-200">Show</span>
-                                    <select
-                                        class="inline rounded-lg border-gray-200 px-3 py-2 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option selected>5</option>
-                                        <option>6</option>
-                                    </select>
-                                    <span class="font-semibold text-gray-800 dark:text-neutral-200">entries</span>
-                                </div>
-
-                                <div>
-                                    <div class="inline-flex gap-x-2">
-                                        <button type="button"
-                                            class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="m15 18-6-6 6-6" />
-                                            </svg>
-                                            Prev
-                                        </button>
-
-                                        <button type="button"
-                                            class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                            Next
-                                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="m9 18 6-6-6-6" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Footer -->
                         </div>
                     </div>
                 </div>
@@ -758,10 +646,8 @@ Best regards,
     @endif
 
     <script>
-        const guestDataMap = @json($listGuest->keyBy('id'));
+        const guestDataMap = @json($query->keyBy('id'));
     </script>
-
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -803,18 +689,19 @@ Best regards,
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll('.btn-edit').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.dataset.id;
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-edit')) {
+                    const button = e.target.closest('.btn-edit');
+                    const id = button.dataset.id;
                     const guest = guestDataMap[id];
 
                     if (guest) {
                         document.querySelector('#editGuestId').value = guest.id;
                         document.querySelector('#editGuestName').value = guest.guest_name || '';
                         document.querySelector('#editGuestPhone').value = guest.guest_phone || '';
-                        document.querySelector('#editGuestCategory').value = guest.category_id ||'';
-                        document.querySelector('#editGuestUrl').value = guest.url ||'';
+                        document.querySelector('#editGuestCategory').value = guest.category_id || '';
+                        document.querySelector('#editGuestUrl').value = guest.url || '';
                         document.querySelector('#editGuestTable').value = guest.no_table || '';
                         document.querySelector('#editGuestSession').value = guest.session || '';
                         document.querySelector('#editGuestLimit').value = guest.guest_limit || '';
@@ -823,19 +710,21 @@ Best regards,
                         if (form) {
                             form.action = `/manage-guest`;
                         }
+                        const modal = document.getElementById('hs-static-backdrop-modal');
+                        window.HSOverlay.open(modal);
                     } else {
                         alert("Data tamu tidak ditemukan.");
                     }
-                });
+                }
             });
         });
     </script>
 
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.btn-delete').forEach(button => {
-                button.addEventListener('click', () => {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-delete')) {
+                    const button = e.target.closest('.btn-delete');
                     const guestId = button.dataset.id;
                     const guestName = button.dataset.name;
 
@@ -844,10 +733,16 @@ Best regards,
 
                     form.action = `/manage-guest/${guestId}`;
                     nameSpan.textContent = guestName;
-                });
+
+                    const modal = document.getElementById('delete-confirm-modal');
+                    window.HSOverlay.open(modal);
+                }
             });
         });
     </script>
+
+
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -865,5 +760,60 @@ Best regards,
             });
         });
     </script>
+
+    @push('scripts')
+        <!-- Include jQuery dan DataTables -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(function() {
+                $('#guestsTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: '{{ route('manage-guest') }}',
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                        },
+                        {
+                            data: 'guest_name',
+                            name: 'guest_name',
+                            render: function(data, type, row) {
+                                return `<div><strong>${row.guest_name}</strong><br><small>${row.guest_phone}</small></div>`;
+                            }
+                        },
+                        {
+                            data: 'category_name',
+                            name: 'category.category_name'
+                        },
+                        {
+                            data: 'session',
+                            name: 'session'
+                        },
+                        {
+                            data: 'guest_limit',
+                            name: 'guest_limit'
+                        },
+                        {
+                            data: 'status',
+                            name: 'status',
+                            orderable: false,
+                            searchable: false,
+                            render: function(data, type, row) {
+                                return `<x-status-badge status="pending" class="btn-arrival" data-id="${row.id}" data-name="${row.guest_name}" />`;
+                            }
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        }
+                    ]
+                });
+            });
+        </script>
+    @endpush
+
 
 @endsection
