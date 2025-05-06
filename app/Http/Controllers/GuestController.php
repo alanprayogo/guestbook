@@ -25,10 +25,17 @@ class GuestController extends Controller
         return DataTables::of($query)
             ->addIndexColumn()
             ->addColumn('category_name', fn($row) => $row->category->category_name)
+            ->addColumn('status', function ($row) {
+                return view('components.status-badge', [
+                    'status' => $row->status ?? 'pending',
+                    'id' => $row->id,
+                    'name' => $row->guest_name
+                ])->render();
+            })
             ->addColumn('action', function ($row) {
                 return view('components.guest-action', compact('row'))->render();
             })
-            ->rawColumns(['action']) // jika tombol mengandung HTML
+            ->rawColumns(['status','action']) 
             ->make(true);
     }
 

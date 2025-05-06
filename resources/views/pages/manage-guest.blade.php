@@ -3,9 +3,30 @@
 @section('page-title', 'Guess Management')
 
 @push('head')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-@endpush
+    @vite(['resources/js/datatables-init.js'])
+    <style>
+        th.sorting::after {
+            content: '⇅';
+            margin-left: 0.5rem;
+            font-size: 1rem;
+            color: #123571;
+        }
 
+        th.sorting_asc::after {
+            content: '↑';
+            margin-left: 0.5rem;
+            font-size: 1rem;
+            color: #2563EB;
+        }
+
+        th.sorting_desc::after {
+            content: '↓';
+            margin-left: 0.5rem;
+            font-size: 1rem;
+            color: #2563EB;
+        }
+    </style>
+@endpush
 @section('content')
 
     <x-tabs.container>
@@ -766,21 +787,15 @@ Best regards,
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script>
-            $(function() {
-                $('#guestsTable').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: '{{ route('manage-guest') }}',
-                    columns: [{
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof initializeDataTable !== 'undefined') {
+                    const columns = [{
                             data: 'DT_RowIndex',
-                            name: 'DT_RowIndex',
+                            name: 'DT_RowIndex'
                         },
                         {
                             data: 'guest_name',
-                            name: 'guest_name',
-                            render: function(data, type, row) {
-                                return `<div><strong>${row.guest_name}</strong><br><small>${row.guest_phone}</small></div>`;
-                            }
+                            name: 'guest_name'
                         },
                         {
                             data: 'category_name',
@@ -798,10 +813,7 @@ Best regards,
                             data: 'status',
                             name: 'status',
                             orderable: false,
-                            searchable: false,
-                            render: function(data, type, row) {
-                                return `<x-status-badge status="pending" class="btn-arrival" data-id="${row.id}" data-name="${row.guest_name}" />`;
-                            }
+                            searchable: false
                         },
                         {
                             data: 'action',
@@ -809,8 +821,11 @@ Best regards,
                             orderable: false,
                             searchable: false
                         }
-                    ]
-                });
+                    ];
+                    initializeDataTable('#guestsTable', '{{ route('manage-guest') }}', columns);
+                } else {
+                    console.error('initializeDataTable is not defined');
+                }
             });
         </script>
     @endpush
