@@ -1,12 +1,14 @@
 window.initializeDataTable = function (selector,  ajaxUrl, columns) {
     $(function () {
+        const $table = $(selector);
         $(selector).DataTable({
             processing: true,
             serverSide: true,
             ajax: ajaxUrl,
             columns: columns,
             drawCallback: function () {
-                const $wrapper = $('#guestsTable_wrapper');
+                const tableId = $table.attr('id');
+                const $wrapper = $('#' + tableId + '_wrapper');
 
                 // Styling wrapper
                 $wrapper.addClass('p-6 bg-white dark:bg-neutral-800 shadow rounded-lg space-y-4');
@@ -29,9 +31,9 @@ window.initializeDataTable = function (selector,  ajaxUrl, columns) {
                 }
 
                 // Table Head & Body
-                $('#guestsTable thead').addClass('bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-white');
-                $('#guestsTable thead th').addClass('px-4 py-3 text-left text-sm font-medium tracking-wider');
-                $('#guestsTable tbody td').addClass('px-4 py-2 align-middle text-sm');
+                $('#'+ tableId + 'thead').addClass('bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-white');
+                $('#'+ tableId + 'thead th').addClass('px-4 py-3 text-left text-sm font-medium tracking-wider');
+                $('#'+ tableId + 'tbody td').addClass('px-4 py-2 align-middle text-sm');
 
                 // Info dan pagination
                 const $info = $wrapper.find('.dataTables_info');

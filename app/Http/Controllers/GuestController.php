@@ -35,7 +35,7 @@ class GuestController extends Controller
             ->addColumn('action', function ($row) {
                 return view('components.guest-action', compact('row'))->render();
             })
-            ->rawColumns(['status','action']) 
+            ->rawColumns(['status','action'])
             ->make(true);
     }
 
@@ -194,8 +194,26 @@ class GuestController extends Controller
     public function showGuestArrive()
     {
         $category = Category::all();
-        $guest = Guest::all();
-        return view('pages.guest-arrival', compact('category', 'guest'));
+        $query = Guest::with(['category'])
+        ->orderBy('created_at', 'asc')
+        ->get();
+        if (!request()->ajax()) {
+            return view('pages.guest-arrival', compact('category', 'query'));
+        }
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('category_name', fn($row) => $row->category->category_name)
+            ->addColumn('status', function ($row) {
+                return view('components.status-badge', [
+                    'status' => $row->status ?? 'accepted'
+                ])->render();
+            })
+            ->addColumn('action', function ($row) {
+                return view('components.action-btn-datatables.guest-arrival-action', compact('row'))->render();
+            })
+            ->rawColumns(['status','action'])
+            ->make(true);
+
     }
 
     public function getGuestCategory(Request $request)
@@ -214,7 +232,7 @@ class GuestController extends Controller
         }
 
         return response()->json([
-            'guest' => $guestBroadcast->broadcast->category,
+            'guest' => $guestBroadcast->category,
             'already_exists' => $alreadyExists,
             'not_in_list' => false
         ]);
