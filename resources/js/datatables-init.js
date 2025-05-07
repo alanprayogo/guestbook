@@ -10,6 +10,17 @@ window.initializeDataTable = function (selector,  ajaxUrl, columns) {
                 const tableId = $table.attr('id');
                 const $wrapper = $('#' + tableId + '_wrapper');
 
+                // Bungkus tabel agar responsif (hanya sekali)
+                if (!$table.parent().hasClass('overflow-x-auto')) {
+                    $table.wrap('<div class="overflow-x-auto w-full"></div>');
+                }
+
+                // Tambahkan lebar minimum dan whitespace agar rapi
+                $table.addClass('min-w-[1000px]');
+                $table.find('thead th').addClass('whitespace-nowrap');
+                $table.find('tbody td').addClass('whitespace-nowrap');
+                $table.wrap('<div class="overflow-x-auto w-full"><div class="inline-block min-w-full align-middle"></div></div>');
+
                 // Styling wrapper
                 $wrapper.addClass('p-6 bg-white dark:bg-neutral-800 shadow rounded-lg space-y-4');
 

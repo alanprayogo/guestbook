@@ -33,89 +33,98 @@
                     <!-- End Header -->
 
                     <!-- Table -->
-                    <table id="guestArrivalTable" class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                        <thead class="bg-gray-50 dark:bg-neutral-800">
-                            <tr>
-                                <th scope="col" class="py-3 ps-6 text-start">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                            No
-                                        </span>
-                                    </div>
-                                </th>
-
-                                <th scope="col" class="py-3 pe-6 ps-6 text-start lg:ps-3 xl:ps-0">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                            Name
-                                            <span class="sort-icon">
-                                                <span class="up">↑</span>
-                                                <span class="down">↓</span>
+                    <div class="overflow-x-auto">
+                        <table id="guestArrivalTable" class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                            <thead class="bg-gray-50 dark:bg-neutral-800">
+                                <tr>
+                                    <th scope="col" class="py-3 ps-6 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                No
                                             </span>
-                                        </span>
-                                    </div>
-                                </th>
+                                        </div>
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-start">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                            Tanggal
-                                            <span class="sort-icon">
-                                                <span class="up">↑</span>
-                                                <span class="down">↓</span>
+                                    <th scope="col" class="py-3 pe-6 ps-6 text-start lg:ps-3 xl:ps-0">
+                                        <div class="flex items-center gap-x-2">
+                                            <span
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                Name
+                                                <span class="sort-icon">
+                                                    <span class="up">↑</span>
+                                                    <span class="down">↓</span>
+                                                </span>
                                             </span>
-                                        </span>
-                                    </div>
-                                </th>
+                                        </div>
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-start">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                            Jam Kehadiran
-                                            <span class="sort-icon">
-                                                <span class="up">↑</span>
-                                                <span class="down">↓</span>
+                                    <th scope="col" class="px-6 py-3 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                Tanggal
+                                                <span class="sort-icon">
+                                                    <span class="up">↑</span>
+                                                    <span class="down">↓</span>
+                                                </span>
                                             </span>
-                                        </span>
-                                    </div>
-                                </th>
+                                        </div>
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-start">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                            Tamu
-                                            <span class="sort-icon">
-                                                <span class="up">↑</span>
-                                                <span class="down">↓</span>
+                                    <th scope="col" class="px-6 py-3 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                Jam Kehadiran
+                                                <span class="sort-icon">
+                                                    <span class="up">↑</span>
+                                                    <span class="down">↓</span>
+                                                </span>
                                             </span>
-                                        </span>
-                                    </div>
-                                </th>
+                                        </div>
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-start">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                            Status
-                                        </span>
-                                    </div>
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                Tamu
+                                                <span class="sort-icon">
+                                                    <span class="up">↑</span>
+                                                    <span class="down">↓</span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-start">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                            Foto
-                                        </span>
-                                    </div>
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                Status
+                                            </span>
+                                        </div>
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-end"></th>
-                            </tr>
-                        </thead>
+                                    <th scope="col" class="px-6 py-3 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                                Foto
+                                            </span>
+                                        </div>
+                                    </th>
 
-                        <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+                                    <th scope="col" class="px-6 py-3 text-end"></th>
+                                </tr>
+                            </thead>
 
-                        </tbody>
-                    </table>
+                            <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- End Table -->
                 </div>
             </div>
