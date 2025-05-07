@@ -111,7 +111,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody></tbody>
+                                <tbody class="divide-y divide-gray-200 dark:divide-neutral-700"></tbody>
                             </table>
                             <!-- End Table -->
                         </div>

@@ -22,3 +22,7 @@
     color: #2563EB;
     font-weight: bolder;
 }
+
+table.dataTable thead th {
+    white-space: nowrap;
+}

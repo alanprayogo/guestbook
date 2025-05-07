@@ -31,9 +31,9 @@ window.initializeDataTable = function (selector,  ajaxUrl, columns) {
                 }
 
                 // Table Head & Body
-                $('#'+ tableId + 'thead').addClass('bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-white');
-                $('#'+ tableId + 'thead th').addClass('px-4 py-3 text-left text-sm font-medium tracking-wider');
-                $('#'+ tableId + 'tbody td').addClass('px-4 py-2 align-middle text-sm');
+                $('#' + tableId + ' thead').addClass('bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-white');
+                $('#' + tableId + ' thead th').addClass('px-4 py-3 text-left text-sm font-medium tracking-wider');
+                $('#' + tableId + ' tbody td').addClass('px-4 py-3 align-middle text-sm'); // <-- ganti py-2 ke py-3
 
                 // Info dan pagination
                 const $info = $wrapper.find('.dataTables_info');
@@ -49,6 +49,7 @@ window.initializeDataTable = function (selector,  ajaxUrl, columns) {
                     $info.add($paginate).wrapAll('<div id="customTableBottom" class="flex justify-between items-center flex-wrap gap-4 mt-4"></div>');
                 }
             }
+
 
 
         });
