@@ -111,7 +111,7 @@
                                         <div class="flex items-center gap-x-2">
                                             <span
                                                 class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                                Foto
+                                                Foto Kehadiran
                                             </span>
                                         </div>
                                     </th>

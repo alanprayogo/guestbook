@@ -203,6 +203,14 @@ class GuestController extends Controller
         return DataTables::of($query)
             ->addIndexColumn()
             ->addColumn('category_name', fn($row) => $row->category->category_name)
+            ->editColumn('photo_guest', function ($row) {
+                if ($row->photo_guest) {
+                    $url = Storage::url($row->photo_guest);
+                    return '<img src="' . $url . '" alt="Photo" class="w-10 h-10 object-cover rounded cursor-pointer"
+                                onclick="showPhotoModal(\'' . $url . '\', \'' . e($row->guest_name) . '\')">';
+                }
+                return '<span class="text-gray-400 italic">Tidak ada foto</span>';
+            })
             ->addColumn('status', function ($row) {
                 return view('components.status-badge', [
                     'status' => $row->status ?? 'accepted'
@@ -211,7 +219,7 @@ class GuestController extends Controller
             ->addColumn('action', function ($row) {
                 return view('components.action-btn-datatables.guest-arrival-action', compact('row'))->render();
             })
-            ->rawColumns(['status','action'])
+            ->rawColumns(['status','action', 'photo_guest'])
             ->make(true);
 
     }
