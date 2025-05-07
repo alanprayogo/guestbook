@@ -5,13 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Guest;
 use App\Models\Souvenir;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class SouvenirController extends Controller
 {
     public function showSouvenirs()
     {
-        $souvenir = Souvenir::all();
-        return view('pages.souvenir-desk', compact('souvenir'));
+        $souvenir = Souvenir::with(['guest', 'guest.category'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+        if (!request()->ajax()) {
+            return view('pages.souvenir-desk', compact('souvenir'));
+        }
+        return DataTables::of($souvenir)
+            ->addIndexColumn()
+            ->addColumn('category_name', fn($row) => $row->guest->category->category_name)
+            ->make(true);
     }
 
     public function storeSouvenirs(Request $request)
