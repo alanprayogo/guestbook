@@ -4,6 +4,8 @@
 
 @push('head')
     @vite(['resources/js/gift-handling.js'])
+    @vite(['resources/js/datatables-init.js'])
+    <link rel="stylesheet" href="{{ asset('assets/css/sort-icon.css') }}">
 @endpush
 
 @section('content')
@@ -16,11 +18,6 @@
                     <!-- Header -->
                     <div
                         class="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
-                        <!-- Input -->
-                        <x-search-input id="hs-as-table-product-review-search" name="product-review-search"
-                            label="Search Produk" placeholder="Search" class="sm:col-span-1" />
-                        <!-- End Input -->
-
                         <div>
                             <x-button variant="add" data-open-manual-modal>Add
                                 Guess</x-button>
@@ -35,7 +32,7 @@
                     <!-- End Header -->
 
                     <!-- Table -->
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                    <table id="giftTables" class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
                         <thead class="bg-gray-50 dark:bg-neutral-800">
                             <tr>
                                 <th scope="col" class="py-3 ps-6 text-start">
@@ -50,6 +47,10 @@
                                     <div class="flex items-center gap-x-2">
                                         <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                             Name
+                                            <span class="sort-icon">
+                                                <span class="up">↑</span>
+                                                <span class="down">↓</span>
+                                            </span>
                                         </span>
                                     </div>
                                 </th>
@@ -58,22 +59,10 @@
                                     <div class="flex items-center gap-x-2">
                                         <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                             Category
-                                        </span>
-                                    </div>
-                                </th>
-
-                                <th scope="col" class="px-6 py-3 text-start">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                            Session
-                                        </span>
-                                    </div>
-                                </th>
-
-                                <th scope="col" class="px-6 py-3 text-start">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
-                                            Limit
+                                            <span class="sort-icon">
+                                                <span class="up">↑</span>
+                                                <span class="down">↓</span>
+                                            </span>
                                         </span>
                                     </div>
                                 </th>
@@ -85,118 +74,15 @@
                                         </span>
                                     </div>
                                 </th>
-
-                                <th scope="col" class="px-6 py-3 text-end"></th>
                             </tr>
                         </thead>
 
                         <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                            @forelse ($giftDeposits as $data)
-                                <tr>
-                                    <td class="h-px w-[8.3%] whitespace-nowrap">
-                                        <div class="py-3 ps-6">
-                                            <span
-                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $loop->iteration }}</span>
-                                        </div>
-                                    </td>
-                                    <td class="h-px w-1/4 whitespace-nowrap">
-                                        <div class="py-3 pe-6 ps-6 lg:ps-3 xl:ps-0">
-                                            <div class="grow">
-                                                <span
-                                                    class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $data->guest_name }}</span>
-                                                <span
-                                                    class="block text-sm text-gray-500 dark:text-neutral-500">myhairisred@site.com</span>
-                                            </div>
-                                    </td>
-                                    <td class="h-px w-[16.7%] whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span
-                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">VIP</span>
-                                        </div>
-                                    </td>
-                                    <td class="h-px w-[16.7%] whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span
-                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">1</span>
-                                        </div>
-                                    </td>
-                                    <td class="h-px w-[16.7%] whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <span
-                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">2</span>
-                                        </div>
-                                    </td>
-                                    <td class="h-px w-[16.7%] whitespace-nowrap">
-                                        <div class="px-6 py-3">
-                                            <x-status-badge status="accepted" />
-                                        </div>
-                                    </td>
-                                    <td class="size-px whitespace-nowrap">
-                                        <div class="px-6 py-1.5">
-                                            <div class="flex items-center gap-x-3">
 
-                                                <x-action-button variant="qr-code" />
-                                                <x-action-button variant="edit" />
-
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="text-center py-4">
-                                        <span
-                                            class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">No
-                                            data available</span>
-                                    </td>
-                                </tr>
-                            @endforelse
                         </tbody>
                     </table>
                     <!-- End Table -->
 
-                    <!-- Footer -->
-                    <div
-                        class="grid gap-3 border-t border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
-                        <div class="max-w-sm space-y-3">
-                            <span class="font-semibold text-gray-800 dark:text-neutral-200">Show</span>
-                            <select
-                                class="inline rounded-lg border-gray-200 px-3 py-2 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option selected>5</option>
-                                <option>6</option>
-                            </select>
-                            <span class="font-semibold text-gray-800 dark:text-neutral-200">entries</span>
-                        </div>
-
-                        <div>
-                            <div class="inline-flex gap-x-2">
-                                <button type="button"
-                                    class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                    <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m15 18-6-6 6-6" />
-                                    </svg>
-                                    Prev
-                                </button>
-
-                                <button type="button"
-                                    class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-transparent dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
-                                    Next
-                                    <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m9 18 6-6-6-6" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Footer -->
                 </div>
             </div>
         </div>
@@ -217,8 +103,8 @@
                         aria-label="Close" data-hs-overlay="#hs-static-backdrop-modal">
                         <span class="sr-only">Close</span>
                         <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <path d="M18 6 6 18"></path>
                             <path d="m6 6 12 12"></path>
                         </svg>
@@ -335,5 +221,40 @@
             <span id="toast-error-message">Terjadi kesalahan</span>
         </div>
     </div>
+
+    @push('scripts')
+        <!-- Include jQuery dan DataTables -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof initializeDataTable !== 'undefined') {
+                    const columns = [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                            orderable: false,
+                        },
+                        {
+                            data: 'guest_name',
+                            name: 'guest_name'
+                        },
+                        {
+                            data: 'category_name',
+                            name: 'guest.category.category_name',
+                        },
+                        {
+                            data: 'status',
+                            name: 'status',
+                            orderable: false,
+                            searchable: false
+                        }
+                    ];
+                    initializeDataTable('#giftTables', '{{ route('gift-handling') }}', columns);
+                } else {
+                    console.error('initializeDataTable is not defined');
+                }
+            });
+        </script>
+    @endpush
 
 @endsection

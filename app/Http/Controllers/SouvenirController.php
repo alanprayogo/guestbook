@@ -12,14 +12,14 @@ class SouvenirController extends Controller
     public function showSouvenirs()
     {
         $souvenir = Souvenir::with(['guest', 'guest.category'])
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->get();
         if (!request()->ajax()) {
             return view('pages.souvenir-desk', compact('souvenir'));
         }
         return DataTables::of($souvenir)
             ->addIndexColumn()
-            ->addColumn('category_name', fn($row) => $row->guest->category->category_name)
+            ->addColumn('category_name', fn($row) => $row->guest->category->category_name ?? '-')
             ->make(true);
     }
 

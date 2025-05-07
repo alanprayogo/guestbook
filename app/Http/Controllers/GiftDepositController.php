@@ -5,13 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\GiftDeposit;
 use App\Models\Guest;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class GiftDepositController extends Controller
 {
     public function showGiftDeposit()
     {
-        $giftDeposits = GiftDeposit::all();
-        return view('pages.gift-handling', compact('giftDeposits'));
+        $giftDeposits = GiftDeposit::with(['guest', 'guest.category'])
+        ->orderBy('created_at', 'asc')
+        ->get();
+        if (!request()->ajax()) {
+            return view('pages.gift-handling', compact('giftDeposits'));
+        }
+        return DataTables::of($giftDeposits)
+            ->addIndexColumn()
+            ->addColumn('category_name', fn($row) => $row->guest->category->category_name ?? '-')
+            ->addColumn('status', function ($row) {
+                return view('components.status-badge', [
+                    'status' => 'accepted'
+                ])->render();
+            })
+            ->rawColumns(['status'])
+            ->make(true);
+
     }
 
     public function storeGiftDeposit(Request $request)
