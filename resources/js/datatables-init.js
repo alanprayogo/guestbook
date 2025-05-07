@@ -17,7 +17,7 @@ window.initializeDataTable = function (selector,  ajaxUrl, columns) {
 
                 $length.addClass('flex items-center gap-2 text-sm');
                 $length.find('label').addClass('text-gray-700 dark:text-white');
-                $length.find('select').addClass('border rounded-lg px-2 py-1 text-sm dark:bg-neutral-700 dark:text-white');
+                $length.find('select').addClass('border rounded-lg px-4 py-1 text-sm dark:bg-neutral-700 dark:text-white');
 
                 $filter.addClass('flex items-center gap-2 text-sm');
                 $filter.find('label').addClass('text-gray-700 dark:text-white');

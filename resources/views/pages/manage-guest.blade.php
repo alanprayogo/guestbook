@@ -4,28 +4,7 @@
 
 @push('head')
     @vite(['resources/js/datatables-init.js'])
-    <style>
-        th.sorting::after {
-            content: '⇅';
-            margin-left: 0.5rem;
-            font-size: 1rem;
-            color: #123571;
-        }
-
-        th.sorting_asc::after {
-            content: '↑';
-            margin-left: 0.5rem;
-            font-size: 1rem;
-            color: #2563EB;
-        }
-
-        th.sorting_desc::after {
-            content: '↓';
-            margin-left: 0.5rem;
-            font-size: 1rem;
-            color: #2563EB;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/sort-icon.css') }}">
 @endpush
 @section('content')
 
@@ -72,6 +51,10 @@
                                                 <span
                                                     class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                     Name
+                                                    <span class="sort-icon">
+                                                        <span class="up">↑</span>
+                                                        <span class="down">↓</span>
+                                                    </span>
                                                 </span>
                                             </div>
                                         </th>
@@ -81,6 +64,10 @@
                                                 <span
                                                     class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                     Category
+                                                    <span class="sort-icon">
+                                                        <span class="up">↑</span>
+                                                        <span class="down">↓</span>
+                                                    </span>
                                                 </span>
                                             </div>
                                         </th>
@@ -90,6 +77,10 @@
                                                 <span
                                                     class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                     Session
+                                                    <span class="sort-icon">
+                                                        <span class="up">↑</span>
+                                                        <span class="down">↓</span>
+                                                    </span>
                                                 </span>
                                             </div>
                                         </th>
@@ -99,6 +90,10 @@
                                                 <span
                                                     class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                     Limit
+                                                    <span class="sort-icon">
+                                                        <span class="up">↑</span>
+                                                        <span class="down">↓</span>
+                                                    </span>
                                                 </span>
                                             </div>
                                         </th>
@@ -791,7 +786,8 @@ Best regards,
                 if (typeof initializeDataTable !== 'undefined') {
                     const columns = [{
                             data: 'DT_RowIndex',
-                            name: 'DT_RowIndex'
+                            name: 'DT_RowIndex',
+                            orderable: false,
                         },
                         {
                             data: 'guest_name',
