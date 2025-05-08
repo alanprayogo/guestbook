@@ -53,10 +53,23 @@ class GuestController extends Controller
         return $phone;
     }
 
+    private function updateKataPengantar($template, $mempelai, $nama)
+    {
+        $linkUndangan = 'https://attarivitation.com/demo-undangan-buku-tamu/?to='.urlencode($nama);
+        $kataPengantar = str_replace(
+            ['[nama]', '*[mempelai]*', '[link-undangan]'],
+            [$nama, $mempelai, $linkUndangan],
+            $template
+        );
+
+        return $kataPengantar;
+    }
+
     public function storeGuest(Request $request)
     {
         try {
             $validated = $request->validate([
+                'yang_mengundang' => 'required|string',
                 'category_id'    => 'required|exists:categories,id',
                 'guest_name'     => 'required|string',
                 'session'        => 'required|in:Sesi 1,Sesi 2,Sesi 3,Sesi 4,Sesi 5',
@@ -104,7 +117,7 @@ class GuestController extends Controller
                         'no_table'     => $validated['no_table'],
                         'session'      => $validated['session'],
                         'guest_limit'  => $validated['guest_limit'],
-                        'kata_pengantar' => $validated['kata_pengantar'],
+                        'kata_pengantar' => $this->updateKataPengantar($validated['kata_pengantar'], $validated['yang_mengundang'], $name),
                     ]);
                 } else {
                     Log::warning("Data kosong di baris ke-" . ($index + 1) . ": '$line'");
