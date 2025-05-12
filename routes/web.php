@@ -40,6 +40,10 @@ Route::get('/manage-user', function () {
     return view('pages.manage-user');
 });
 
+Route::get('/welcome', function () {
+    return view('pages.welcome');
+});
+
 Route::get('/manage-guest',[GuestController::class, 'showGuest'])->name('manage-guest');
 Route::post('/manage-guest', [GuestController::class, 'storeGuest'])->name('manage-guest.store');
 Route::put('/manage-guest', [GuestController::class, 'updateGuest'])->name('manage-guest.update');
