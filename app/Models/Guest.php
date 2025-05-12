@@ -17,6 +17,7 @@ class Guest extends Model
         'guest_count',
         'photo_guest',
         'whatsapp',
+        'is_displayed',
     ];
 
     public function category()

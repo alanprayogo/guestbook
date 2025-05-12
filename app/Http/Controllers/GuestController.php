@@ -286,6 +286,7 @@ class GuestController extends Controller
                 'arrival_time' => now()->toTimeString(),
                 'guest_count' => $request->guest_count,
                 'whatsapp' => $noHP,
+                'is_displayed' => false,
             ]);
 
             return redirect()->back()->with('success', 'Data tamu berhasil disimpan!');
