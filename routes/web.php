@@ -43,6 +43,7 @@ Route::get('/manage-user', function () {
 Route::get('/welcome', function () {
     return view('pages.welcome');
 });
+Route::get('/api/latest-guest', [GuestController::class, 'getUndisplayedGuest']);
 
 Route::get('/manage-guest',[GuestController::class, 'showGuest'])->name('manage-guest');
 Route::post('/manage-guest', [GuestController::class, 'storeGuest'])->name('manage-guest.store');

@@ -35,7 +35,7 @@ class GuestController extends Controller
             ->addColumn('action', function ($row) {
                 return view('components.guest-action', compact('row'))->render();
             })
-            ->rawColumns(['status','action'])
+            ->rawColumns(['status', 'action'])
             ->make(true);
     }
 
@@ -55,7 +55,7 @@ class GuestController extends Controller
 
     private function updateKataPengantar($template, $mempelai, $nama)
     {
-        $linkUndangan = 'https://attarivitation.com/demo-undangan-buku-tamu/?to='.urlencode($nama);
+        $linkUndangan = 'https://attarivitation.com/demo-undangan-buku-tamu/?to=' . urlencode($nama);
         $kataPengantar = str_replace(
             ['[nama]', '*[mempelai]*', '[link-undangan]'],
             [$nama, $mempelai, $linkUndangan],
@@ -208,8 +208,8 @@ class GuestController extends Controller
     {
         $category = Category::all();
         $query = Guest::with(['category'])
-        ->orderBy('created_at', 'asc')
-        ->get();
+            ->orderBy('created_at', 'asc')
+            ->get();
         if (!request()->ajax()) {
             return view('pages.guest-arrival', compact('category', 'query'));
         }
@@ -232,9 +232,8 @@ class GuestController extends Controller
             ->addColumn('action', function ($row) {
                 return view('components.action-btn-datatables.guest-arrival-action', compact('row'))->render();
             })
-            ->rawColumns(['status','action', 'photo_guest'])
+            ->rawColumns(['status', 'action', 'photo_guest'])
             ->make(true);
-
     }
 
     public function getGuestCategory(Request $request)
@@ -337,5 +336,25 @@ class GuestController extends Controller
             'message' => 'Foto berhasil disimpan',
             'path' => $filePath,
         ]);
+    }
+
+    public function getUndisplayedGuest()
+    {
+        $guest = Guest::where('is_displayed', false)
+            ->orderBy('created_at')
+            ->first();
+
+        if ($guest) {
+            // Tandai sudah ditampilkan
+            $guest->is_displayed = true;
+            $guest->save();
+
+            return response()->json([
+                'name' => $guest->guest_name,
+                'category' => $guest->category->category_name,
+            ]);
+        }
+
+        return response()->json(null);
     }
 }
