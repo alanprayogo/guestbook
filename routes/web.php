@@ -43,7 +43,12 @@ Route::get('/manage-user', function () {
 Route::get('/welcome', function () {
     return view('pages.welcome');
 });
+
+Route::get('/gather', function () {
+    return view('pages.gather');
+});
 Route::get('/api/latest-guest', [GuestController::class, 'getUndisplayedGuest']);
+Route::get('/api/arrival-guest', [GuestController::class, 'getGuestArrival']);
 
 Route::get('/manage-guest',[GuestController::class, 'showGuest'])->name('manage-guest');
 Route::post('/manage-guest', [GuestController::class, 'storeGuest'])->name('manage-guest.store');

@@ -282,7 +282,7 @@ class GuestController extends Controller
                 'category_id' => $request->category_id,
                 'guest_name' => $request->guest_name,
                 'arrival_date' => now()->toDateString(),
-                'arrival_time' => now()->toTimeString(),
+                'arrival_time' => now()->format('H:i'),
                 'guest_count' => $request->guest_count,
                 'whatsapp' => $noHP,
                 'is_displayed' => false,
@@ -356,5 +356,22 @@ class GuestController extends Controller
         }
 
         return response()->json(null);
+    }
+
+    public function getGuestArrival()
+    {
+        $guests = Guest::whereNotNull('arrival_time')
+            ->orderBy('arrival_time', 'asc')
+            ->get()
+            ->map(function ($guest) {
+                return [
+                    'id' => $guest->id,
+                    'guest_name' => $guest->guest_name,
+                    'category_name' => $guest->category->category_name ?? '-',
+                    'arrival_time' => $guest->arrival_time,
+                ];
+            });
+
+        return response()->json($guests);
     }
 }
