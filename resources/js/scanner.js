@@ -61,6 +61,23 @@ function stopScanner() {
     }
 }
 
+document.getElementById('form-add-manual').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+
+    const nameInput = document.getElementById('guest-name-manual');
+    const guestName = nameInput.value;
+
+    if (guestName) {
+        const scanModal = document.getElementById("modal-add-manual");
+        if (scanModal) {
+            document.getElementById("form-add-manual").reset();
+            window.HSOverlay.close(scanModal);
+        }
+        showGuestForm(guestName);
+    }
+});
+
 
 function showGuestForm(qrResult) {
     const formModal = document.getElementById('guest-form-modal');

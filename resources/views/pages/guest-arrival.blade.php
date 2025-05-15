@@ -220,7 +220,7 @@
                 class="shadow-2xs pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
                 <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-neutral-700">
                     <h3 id="hs-static-backdrop-modal-label" class="font-bold text-gray-800 dark:text-white">
-                        Modal title
+                        Masukkan Nama Tamu
                     </h3>
                     <button type="button"
                         class="focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
@@ -235,35 +235,11 @@
                     </button>
                 </div>
                 <div class="overflow-y-auto p-4">
-                    <form action="{{ route('guest-arrival.store') }}" method="POST">
-                        @csrf
+                    <form id="form-add-manual">
                         <div class="mb-4">
-                            <label for="guest-name" class="block text-sm font-medium">Nama</label>
-                            <input type="text" id="guest-name" name="guest_name" class="w-full rounded border p-2"
+                            <label for="guest-name-manual" class="block text-sm font-medium">Nama</label>
+                            <input type="text" id="guest-name-manual" name="guest_name" class="w-full rounded border p-2"
                                 required>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="whatsapp" class="block text-sm font-medium">WhatsApp</label>
-                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="08xxxxxxxxxx"
-                                maxlength="13" class="w-full rounded border p-2" required>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="guest-count" class="block text-sm font-medium">Jumlah Tamu</label>
-                            <input type="number" id="guest-count" min="1" name="guest_count"
-                                class="w-full rounded border p-2" required>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="category" class="block text-sm font-medium">Kategori</label>
-                            <select id="category" name="category_id"
-                                class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                <option selected disabled>Pilih Kategori Tamu</option>
-                                @foreach ($category as $data)
-                                    <option value="{{ $data->id }}">{{ $data->category_name }}</option>
-                                @endforeach
-                            </select>
                         </div>
 
                         <div
@@ -367,6 +343,11 @@
             </div>
         </div>
     @endif
+
+    <script>
+        
+    </script>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
