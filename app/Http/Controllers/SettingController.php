@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -19,6 +20,12 @@ class SettingController extends Controller
 
         foreach ($fields as $field) {
             if ($request->hasFile($field)) {
+                $existingSetting = Setting::where('key', $field)->first();
+
+                if ($existingSetting && $existingSetting->value && Storage::disk('public')->exists(str_replace('storage/', '', $existingSetting->value))) {
+                    Storage::disk('public')->delete(str_replace('storage/', '', $existingSetting->value));
+                }
+
                 $path = $request->file($field)->store('settings', 'public');
                 Setting::set($field, 'storage/' . $path);
             }
