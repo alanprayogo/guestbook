@@ -63,6 +63,10 @@
 
     <!-- CSS Preline -->
     <link rel="stylesheet" href="https://preline.co/assets/css/main.min.css">
+
+    <!-- CSS Custom -->
+    @stack('styles')
+
 </head>
 
 <body class="bg-gray-50 dark:bg-neutral-900">
@@ -73,11 +77,11 @@
 
     <!-- Breadcrumb -->
     <div
-        class="sticky inset-x-0 top-0 z-20 px-4 bg-white border-gray-200 border-y sm:px-6 lg:hidden lg:px-8 dark:border-neutral-700 dark:bg-neutral-800">
+        class="sticky inset-x-0 top-0 z-20 border-y border-gray-200 bg-white px-4 sm:px-6 lg:hidden lg:px-8 dark:border-neutral-700 dark:bg-neutral-800">
         <div class="flex items-center py-2">
             <!-- Navigation Toggle -->
             <button type="button"
-                class="flex items-center justify-center text-gray-800 border border-gray-200 rounded-lg focus:outline-hidden size-8 gap-x-2 hover:text-gray-500 focus:text-gray-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-500 dark:focus:text-neutral-500"
+                class="focus:outline-hidden flex size-8 items-center justify-center gap-x-2 rounded-lg border border-gray-200 text-gray-800 hover:text-gray-500 focus:text-gray-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-500 dark:focus:text-neutral-500"
                 aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-application-sidebar"
                 aria-label="Toggle navigation" data-hs-overlay="#hs-application-sidebar">
                 <span class="sr-only">Toggle Navigation</span>
@@ -105,7 +109,7 @@
 
     <!-- Content -->
     <div class="w-full lg:ps-64">
-        <div class="p-4 space-y-4 sm:space-y-6 sm:p-6">
+        <div class="space-y-4 p-4 sm:space-y-6 sm:p-6">
 
             @yield('content')
 

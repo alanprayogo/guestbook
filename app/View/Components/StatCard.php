@@ -13,14 +13,12 @@ class StatCard extends Component
      */
     public $title;
     public $value;
-    public $comparison;
     public $href;
 
-    public function __construct($title, $value, $comparison = null, $href = '#')
+    public function __construct($title, $value, $href = '#')
     {
         $this->title = $title;
         $this->value = $value;
-        $this->comparison = $comparison;
         $this->href = $href;
     }
 
