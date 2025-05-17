@@ -60,7 +60,9 @@ class ActionButton extends Component
             'delete' => 'bg-red-600 hover:bg-red-700 focus:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:bg-red-600',
             'send' => 'bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:bg-blue-600',
             'download' => 'bg-green-600 hover:bg-green-700 focus:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:bg-green-600',
-            'qr-code' => 'bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:bg-purple-600'
+            'qr-code' => 'bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:bg-purple-600',
+            'check' => 'bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 dark:focus:bg-emerald-600',
+            'plus' => 'bg-indigo-600 hover:bg-indigo-700 focus:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:bg-indigo-600',
         ];
 
         return implode(' ', [
@@ -81,8 +83,11 @@ class ActionButton extends Component
             'delete' => '<path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>',
             'send' => '<path d="M22 2 11 13"></path><path d="M22 2 15 22 11 13 2 9 22 2Z"></path>',
             'download' => '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line>',
-            'qr-code' => '<path d="M3 3h4v4H3V3Z"></path><path d="M17 3h4v4h-4V3Z"></path><path d="M17 17h4v4h-4v-4Z"></path><path d="M3 17h4v4H3v-4Z"></path><path d="M7 7h10v10H7V7Z"></path>'
-        ];  
+            'qr-code' => '<path d="M3 3h4v4H3V3Z"></path><path d="M17 3h4v4h-4V3Z"></path><path d="M17 17h4v4h-4v-4Z"></path><path d="M3 17h4v4H3v-4Z"></path><path d="M7 7h10v10H7V7Z"></path>',
+            'check' => '<path d="M5 13l4 4L19 7"></path>',
+            'plus' => '<line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>'
+
+        ];
 
         return $icons[$this->variant] ?? $icons['edit'];
     }
