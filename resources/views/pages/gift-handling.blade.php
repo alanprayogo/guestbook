@@ -6,6 +6,29 @@
     @vite(['resources/js/gift-handling.js'])
     @vite(['resources/js/datatables-init.js'])
     <link rel="stylesheet" href="{{ asset('assets/css/sort-icon.css') }}">
+    <style>
+        /* Styling khusus untuk DataTables dalam dark mode */
+        .dark .dataTables_wrapper {
+            color: #e5e7eb;
+        }
+
+        .dark .dataTables_wrapper .dataTables_filter input,
+        .dark .dataTables_wrapper .dataTables_length select {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            border-color: #374151;
+        }
+
+        .dark .dataTables_wrapper .dataTables_paginate .paginate_button {
+            color: #e5e7eb !important;
+        }
+
+        .dark .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background-color: #374151 !important;
+            border-color: #4b5563 !important;
+            color: #ffffff !important;
+        }
+    </style>
 @endpush
 
 @section('content')

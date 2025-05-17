@@ -6,9 +6,6 @@
     @vite(['resources/js/scanner.js'])
     @vite(['resources/js/datatables-init.js'])
     <link rel="stylesheet" href="{{ asset('assets/css/sort-icon.css') }}">
-@endpush
-
-@push('styles')
     <style>
         /* Styling khusus untuk DataTables dalam dark mode */
         .dark .dataTables_wrapper {

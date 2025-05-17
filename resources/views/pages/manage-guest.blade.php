@@ -5,6 +5,29 @@
 @push('head')
     @vite(['resources/js/datatables-init.js'])
     <link rel="stylesheet" href="{{ asset('assets/css/sort-icon.css') }}">
+    <style>
+        /* Styling khusus untuk DataTables dalam dark mode */
+        .dark .dataTables_wrapper {
+            color: #e5e7eb;
+        }
+
+        .dark .dataTables_wrapper .dataTables_filter input,
+        .dark .dataTables_wrapper .dataTables_length select {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            border-color: #374151;
+        }
+
+        .dark .dataTables_wrapper .dataTables_paginate .paginate_button {
+            color: #e5e7eb !important;
+        }
+
+        .dark .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background-color: #374151 !important;
+            border-color: #4b5563 !important;
+            color: #ffffff !important;
+        }
+    </style>
 @endpush
 @section('content')
 
@@ -147,7 +170,8 @@
                                         Yang Mengundang
                                     </label>
                                     <input type="text" id="yang-mengundang" name="yang_mengundang"
-                                        class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="Iki & Iku" readonly>
+                                        class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        value="Iki & Iku" readonly>
                                 </div>
                                 <div class="w-full">
                                     <label for="sesi" class="block text-sm font-medium dark:text-white">

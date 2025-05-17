@@ -64,8 +64,6 @@
     <!-- CSS Preline -->
     <link rel="stylesheet" href="https://preline.co/assets/css/main.min.css">
 
-    <!-- CSS Custom -->
-    @stack('styles')
 
 </head>
 
