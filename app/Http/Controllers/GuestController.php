@@ -33,7 +33,7 @@ class GuestController extends Controller
                 ])->render();
             })
             ->addColumn('action', function ($row) {
-                return view('components.guest-action', compact('row'))->render();
+                return view('components.action-btn-datatables.guest-action', compact('row'))->render();
             })
             ->rawColumns(['status', 'action'])
             ->make(true);
