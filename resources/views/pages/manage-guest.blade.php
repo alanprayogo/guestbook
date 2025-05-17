@@ -627,13 +627,13 @@ Best regards,
 
     <!-- Modal Konfirmasi Kehadiran -->
     <div id="arrival-confirm-modal"
-        class="hs-overlay z-100 fixed left-0 top-0 hidden h-full w-full overflow-y-auto overflow-x-hidden">
+        class="hs-overlay z-100 fixed left-0 top-0 hidden h-full w-full overflow-y-auto overflow-x-hidden bg-black/50 opacity-0 transition-all hs-overlay-open:scale-100 hs-overlay-open:opacity-100 hs-overlay-open:duration-500">
         <div class="flex min-h-screen items-center justify-center px-4">
-            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800">
+            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg transition-all dark:bg-neutral-800">
                 <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Konfirmasi Kehadiran</h2>
                 <p class="mt-2 text-sm text-gray-600 dark:text-neutral-300">
                     Apakah anda yakin tamu dengan atas nama <span id="arrivalGuestName"
-                        class="font-semibold text-black"></span> telah hadir?
+                        class="font-semibold text-black dark:text-white"></span> telah hadir?
                 </p>
                 <form method="POST" id="arrivalForm" class="mt-4">
                     @csrf
@@ -782,13 +782,11 @@ Best regards,
         });
     </script>
 
-
-
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.btn-arrival').forEach(button => {
-                button.addEventListener('click', () => {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-arrival')) {
+                    const button = e.target.closest('.btn-arrival');
                     const guestId = button.dataset.id;
                     const guestName = button.dataset.name;
 
@@ -797,7 +795,10 @@ Best regards,
 
                     // form.action = `/manage-guest/${guestId}`;
                     nameSpan.textContent = guestName;
-                });
+
+                    const modal = document.getElementById('arrival-confirm-modal');
+                    window.HSOverlay.open(modal);
+                }
             });
         });
     </script>
