@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Broadcast;
+use App\Models\Category;
 use App\Models\GiftDeposit;
 use App\Models\Guest;
 use App\Models\Setting;
@@ -52,5 +53,24 @@ class SettingController extends Controller
         }
 
         return back()->with('success', 'Pengaturan berhasil diperbarui.');
+    }
+
+    public function showCategories()
+    {
+        $categories = Category::all();
+        return view('pages.event', compact('categories'));
+    }
+
+    public function storeCategory(Request $request)
+    {
+        $request->validate([
+            'category_name' => 'required|string|max:255',
+        ]);
+
+        $category = new Category();
+        $category->category_name = $request->input('category_name');
+        $category->save();
+
+        return back()->with('success', 'Kategori berhasil ditambahkan.');
     }
 }

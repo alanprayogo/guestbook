@@ -68,6 +68,5 @@ Route::post('/gift-handling', [GiftDepositController::class, 'storeGiftDeposit']
 Route::get('/settings', [SettingController::class, 'showSettings'])->name('settings');
 Route::post('/settings', [SettingController::class, 'storeSettings'])->name('settings.store');
 
-Route::get('/event', function () {
-    return view('pages.event');
-});
+Route::get('/event', [SettingController::class, 'showCategories'])->name('event');
+Route::post('/event', [SettingController::class, 'storeCategory'])->name('event.store');
