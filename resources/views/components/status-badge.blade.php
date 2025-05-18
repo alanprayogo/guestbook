@@ -15,7 +15,7 @@
         'pending' => 'Pending',
         'sent' => 'Sent',
         'failed' => 'Failed',
-        'accepted' => 'Accepted',
+        'accepted' => 'Hadir',
         'declined' => 'Declined',
         'check-in' => 'Check-in',
         'absent' => 'Absent',

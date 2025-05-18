@@ -24,4 +24,9 @@ class Broadcast extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function arrival()
+    {
+        return $this->hasOne(Guest::class, 'guest_name', 'guest_name');
+    }
 }

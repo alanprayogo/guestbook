@@ -1,7 +1,9 @@
 <div class="flex items-center gap-x-3">
-    <x-action-button variant="plus" aria-haspopup="dialog"
-        data-hs-overlay="#arrival-confirm-modal" class="btn-arrival"
-        data-id="{{ $row->id }}" data-name="{{ $row->guest_name }}" />
+    @if (!$row->arrival) {{-- Tampilkan tombol jika belum hadir --}}
+        <x-action-button variant="plus" aria-haspopup="dialog"
+            data-hs-overlay="#arrival-confirm-modal" class="btn-arrival"
+            data-id="{{ $row->id }}" data-name="{{ $row->guest_name }}" />
+    @endif
     <x-action-button variant="edit" aria-haspopup="dialog" aria-expanded="false"
         aria-controls="hs-static-backdrop-modal" data-hs-overlay="#hs-static-backdrop-modal"
         class="btn-edit" data-id="{{ $row->id }}" />

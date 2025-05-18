@@ -16,7 +16,7 @@ class GuestController extends Controller
     public function showGuest()
     {
         $category = Category::all();
-        $query = Broadcast::with(['category'])
+        $query = Broadcast::with(['category', 'arrival'])
             ->orderBy('created_at', 'asc')
             ->get();
         if (!request()->ajax()) {
@@ -26,8 +26,11 @@ class GuestController extends Controller
             ->addIndexColumn()
             ->addColumn('category_name', fn($row) => $row->category->category_name)
             ->addColumn('status', function ($row) {
+                $hadir = Guest::where('guest_name', $row->guest_name)
+                    ->whereNotNull('arrival_time')
+                    ->exists();
                 return view('components.status-badge', [
-                    'status' => $row->status ?? 'pending',
+                    'status' => $hadir ? 'accepted' : 'pending',
                     'id' => $row->id,
                     'name' => $row->guest_name
                 ])->render();
