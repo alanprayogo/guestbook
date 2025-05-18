@@ -10,8 +10,8 @@
         <x-stat-card title="On-site" value="{{ $totalTamuHadir }}" href="#" />
         <x-stat-card title="Souvenir Received" value="{{ $totalSouvenir }}" href="#" />
         <x-stat-card title="Gift Collected" value="{{ $totalGiftDeposit }}" href="#" />
-        <x-stat-card title="Tamu Hadir" value="{{ $tamuHadir}}" href="#" />
-        <x-stat-card title="Tamu Belum Hadir" value="{{ $tamuTidakHadir }}" href="#" />
+        {{-- <x-stat-card title="Tamu Hadir" value="{{ $tamuHadir}}" href="#" /> --}}
+        {{-- <x-stat-card title="Tamu Belum Hadir" value="{{ $tamuTidakHadir }}" href="#" /> --}}
         {{-- <x-stat-card title="Checked-In" value="75,422" href="#" /> --}}
         {{-- <x-stat-card title="Absent / No Show" value="11,613" href="#" /> --}}
         {{-- stat-card --}}
