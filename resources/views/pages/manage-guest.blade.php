@@ -635,8 +635,7 @@ Best regards,
                     Apakah anda yakin tamu dengan atas nama <span id="arrivalGuestName"
                         class="font-semibold text-black dark:text-white"></span> telah hadir?
                 </p>
-                <form method="POST" id="arrivalForm" class="mt-4">
-                    @csrf
+                <form id="arrivalForm" class="mt-4">
                     <div class="flex justify-end space-x-2">
                         <button type="button"
                             class="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-neutral-700 dark:text-white"
@@ -653,6 +652,60 @@ Best regards,
         </div>
     </div>
     <!-- End Modal Konfirmasi Kehadiran -->
+
+    <!-- Modal Add Guest -->
+    <div id="guest-form-modal" class="z-100 fixed inset-0 hidden h-full items-center justify-center"
+        style="background-color: rgba(0, 0, 0, 0.5)">
+        <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+            <h2 class="mb-4 text-xl font-semibold">Input Tamu</h2>
+            <form action="{{ route('guest-arrival.store') }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="guest-name" class="block text-sm font-medium">Nama</label>
+                    <input type="text" id="guest-name" name="guest_name" class="w-full rounded border p-2" readonly>
+                </div>
+
+                <div class="mb-4">
+                    <label for="guest-count" class="block text-sm font-medium">Jumlah Tamu</label>
+                    <input type="number" id="guest-count" min="1" name="guest_count"
+                        class="w-full rounded border p-2" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="category_guest" class="block text-sm font-medium">Kategori</label>
+                    <select id="category_guest" name="category_id"
+                        class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                        <option selected disabled>Pilih Kategori Tamu</option>
+                        @foreach ($category as $data)
+                            <option value="{{ $data->id }}">{{ $data->category_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="flex justify-end gap-2">
+                    <button type="button" id="close-guest-form"
+                        class="rounded bg-gray-300 px-4 py-2 text-black hover:bg-gray-400">Batal</button>
+                    <button type="submit"
+                        class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Modal Add Guest -->
+
+    <!-- Modal Konfirmasi -->
+    <div id="custom-confirm-modal" class="z-100 fixed inset-0 hidden h-full items-center justify-center"
+        style="background-color: rgba(0, 0, 0, 0.5)">
+        <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+            <h2 class="mb-4 text-lg font-semibold text-gray-800">Konfirmasi</h2>
+            <p class="mb-6 text-sm text-gray-600" id="custom-confirm-message">Apakah Anda yakin?</p>
+            <div class="flex justify-end gap-2">
+                <button id="cancel-btn" class="rounded bg-gray-300 px-4 py-2 text-black hover:bg-gray-400">Batal</button>
+                <button id="confirm-btn" class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Ya</button>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Konfirmasi -->
 
     @if (session('success'))
         <div id="toast-success"
@@ -685,125 +738,132 @@ Best regards,
             </div>
         </div>
     @endif
+    @push('scripts')
+        <script>
+            const guestDataMap = @json($query->keyBy('id'));
+        </script>
 
-    <script>
-        const guestDataMap = @json($query->keyBy('id'));
-    </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const buttons = document.querySelectorAll('[data-template]');
+                const textarea = document.getElementById('text-pengantar');
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const buttons = document.querySelectorAll('[data-template]');
-            const textarea = document.getElementById('text-pengantar');
+                buttons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const text = this.getAttribute('data-template');
+                        textarea.value = text;
+                    });
+                });
 
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const text = this.getAttribute('data-template');
-                    textarea.value = text;
+                // Trigger klik setelah preline selesai inisialisasi
+                window.HSStaticMethods.autoInit(); // Inisialisasi ulang komponen preline
+
+                const defaultButton = document.querySelector('[data-hs-tab="#tab-formal"]');
+                if (defaultButton) {
+                    defaultButton.click();
+                }
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const toastSuccess = document.getElementById("toast-success");
+                const toastError = document.getElementById("toast-error");
+
+                if (toastSuccess) {
+                    toastSuccess.classList.remove("hidden");
+                    setTimeout(() => toastSuccess.classList.add("hidden"), 4000);
+                }
+
+                if (toastError) {
+                    toastError.classList.remove("hidden");
+                    setTimeout(() => toastError.classList.add("hidden"), 4000);
+                }
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.addEventListener('click', function(e) {
+                    if (e.target.closest('.btn-edit')) {
+                        const button = e.target.closest('.btn-edit');
+                        const id = button.dataset.id;
+                        const guest = guestDataMap[id];
+
+                        if (guest) {
+                            document.querySelector('#editGuestId').value = guest.id;
+                            document.querySelector('#editGuestName').value = guest.guest_name || '';
+                            document.querySelector('#editGuestPhone').value = guest.guest_phone || '';
+                            document.querySelector('#editGuestCategory').value = guest.category_id || '';
+                            document.querySelector('#editGuestUrl').value = guest.url || '';
+                            document.querySelector('#editGuestTable').value = guest.no_table || '';
+                            document.querySelector('#editGuestSession').value = guest.session || '';
+                            document.querySelector('#editGuestLimit').value = guest.guest_limit || '';
+
+                            const form = document.querySelector('#editGuestForm');
+                            if (form) {
+                                form.action = `/manage-guest`;
+                            }
+                            const modal = document.getElementById('hs-static-backdrop-modal');
+                            window.HSOverlay.open(modal);
+                        } else {
+                            alert("Data tamu tidak ditemukan.");
+                        }
+                    }
                 });
             });
+        </script>
 
-            // Trigger klik setelah preline selesai inisialisasi
-            window.HSStaticMethods.autoInit(); // Inisialisasi ulang komponen preline
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.addEventListener('click', function(e) {
+                    if (e.target.closest('.btn-delete')) {
+                        const button = e.target.closest('.btn-delete');
+                        const guestId = button.dataset.id;
+                        const guestName = button.dataset.name;
 
-            const defaultButton = document.querySelector('[data-hs-tab="#tab-formal"]');
-            if (defaultButton) {
-                defaultButton.click();
-            }
-        });
-    </script>
+                        const form = document.getElementById('deleteForm');
+                        const nameSpan = document.getElementById('deleteGuestName');
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const toastSuccess = document.getElementById("toast-success");
-            const toastError = document.getElementById("toast-error");
+                        form.action = `/manage-guest/${guestId}`;
+                        nameSpan.textContent = guestName;
 
-            if (toastSuccess) {
-                toastSuccess.classList.remove("hidden");
-                setTimeout(() => toastSuccess.classList.add("hidden"), 4000);
-            }
-
-            if (toastError) {
-                toastError.classList.remove("hidden");
-                setTimeout(() => toastError.classList.add("hidden"), 4000);
-            }
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.addEventListener('click', function(e) {
-                if (e.target.closest('.btn-edit')) {
-                    const button = e.target.closest('.btn-edit');
-                    const id = button.dataset.id;
-                    const guest = guestDataMap[id];
-
-                    if (guest) {
-                        document.querySelector('#editGuestId').value = guest.id;
-                        document.querySelector('#editGuestName').value = guest.guest_name || '';
-                        document.querySelector('#editGuestPhone').value = guest.guest_phone || '';
-                        document.querySelector('#editGuestCategory').value = guest.category_id || '';
-                        document.querySelector('#editGuestUrl').value = guest.url || '';
-                        document.querySelector('#editGuestTable').value = guest.no_table || '';
-                        document.querySelector('#editGuestSession').value = guest.session || '';
-                        document.querySelector('#editGuestLimit').value = guest.guest_limit || '';
-
-                        const form = document.querySelector('#editGuestForm');
-                        if (form) {
-                            form.action = `/manage-guest`;
-                        }
-                        const modal = document.getElementById('hs-static-backdrop-modal');
+                        const modal = document.getElementById('delete-confirm-modal');
                         window.HSOverlay.open(modal);
-                    } else {
-                        alert("Data tamu tidak ditemukan.");
                     }
-                }
+                });
             });
-        });
-    </script>
+        </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.addEventListener('click', function(e) {
-                if (e.target.closest('.btn-delete')) {
-                    const button = e.target.closest('.btn-delete');
-                    const guestId = button.dataset.id;
-                    const guestName = button.dataset.name;
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.addEventListener('click', function(e) {
+                    if (e.target.closest('.btn-arrival')) {
+                        const button = e.target.closest('.btn-arrival');
+                        const guestId = button.dataset.id;
+                        const guestName = button.dataset.name;
 
-                    const form = document.getElementById('deleteForm');
-                    const nameSpan = document.getElementById('deleteGuestName');
+                        const form = document.getElementById('arrivalForm');
+                        const nameSpan = document.getElementById('arrivalGuestName');
+                        nameSpan.textContent = guestName;
+                        const modal = document.getElementById('arrival-confirm-modal');
+                        window.HSOverlay.open(modal);
 
-                    form.action = `/manage-guest/${guestId}`;
-                    nameSpan.textContent = guestName;
+                        form.addEventListener('submit', function(e) {
+                            e.preventDefault();
 
-                    const modal = document.getElementById('delete-confirm-modal');
-                    window.HSOverlay.open(modal);
-                }
+                            showGuestForm(guestName);
+
+                            // Tutup modal Preline
+                            const modal = document.getElementById('arrival-confirm-modal');
+                            window.HSOverlay.close(modal);
+
+                        })
+                    }
+                });
             });
-        });
-    </script>
+        </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.addEventListener('click', function(e) {
-                if (e.target.closest('.btn-arrival')) {
-                    const button = e.target.closest('.btn-arrival');
-                    const guestId = button.dataset.id;
-                    const guestName = button.dataset.name;
-
-                    const form = document.getElementById('arrivalForm');
-                    const nameSpan = document.getElementById('arrivalGuestName');
-
-                    // form.action = `/manage-guest/${guestId}`;
-                    nameSpan.textContent = guestName;
-
-                    const modal = document.getElementById('arrival-confirm-modal');
-                    window.HSOverlay.open(modal);
-                }
-            });
-        });
-    </script>
-
-    @push('scripts')
         <!-- Include jQuery dan DataTables -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -849,6 +909,91 @@ Best regards,
                     console.error('initializeDataTable is not defined');
                 }
             });
+
+            function showGuestForm(qrResult) {
+                const formModal = document.getElementById('guest-form-modal');
+                const nameInput = document.getElementById('guest-name');
+                const categorySelect = document.getElementById('category_guest');
+
+                if (!formModal || !nameInput || !categorySelect) return;
+
+                nameInput.value = qrResult;
+
+                fetch(`/guest-category?guest_name=${encodeURIComponent(qrResult)}`)
+                    .then(res => res.json())
+                    .then(async data => {
+                        const alreadyExists = data.already_exists;
+                        const guest = data.guest;
+
+                        if (alreadyExists) {
+                            const confirm = await customConfirm(
+                                "Tamu ini sudah pernah diinput. Apakah Anda yakin ingin memasukkan lagi?");
+                            if (!confirm) return;
+                        }
+
+                        if (!guest) {
+                            const confirm = await customConfirm(
+                                "Nama tidak ada dalam daftar undangan. Apakah Anda yakin ingin memasukkan nama ini?"
+                            );
+                            if (!confirm) return;
+                            categorySelect.selectedIndex = 0;
+                        } else {
+                            categorySelect.value = guest.id.toString();
+                        }
+
+                        formModal.classList.remove('hidden');
+                        formModal.classList.add('flex');
+                    })
+                    .catch(err => {
+                        console.error("Gagal ambil data tamu:", err);
+                    });
+            }
+
+            function customConfirm(message) {
+                return new Promise((resolve) => {
+                    const modal = document.getElementById('custom-confirm-modal');
+                    const confirmBtn = document.getElementById('confirm-btn');
+                    const cancelBtn = document.getElementById('cancel-btn');
+                    const msgText = document.getElementById('custom-confirm-message');
+
+                    msgText.textContent = message;
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+
+                    const cleanup = () => {
+                        modal.classList.remove('flex');
+                        modal.classList.add('hidden');
+                        confirmBtn.removeEventListener('click', onConfirm);
+                        cancelBtn.removeEventListener('click', onCancel);
+                    };
+
+                    const onConfirm = () => {
+                        cleanup();
+                        resolve(true);
+                    };
+
+                    const onCancel = () => {
+                        cleanup();
+                        resolve(false);
+                    };
+
+                    confirmBtn.addEventListener('click', onConfirm);
+                    cancelBtn.addEventListener('click', onCancel);
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const closeBtn = document.getElementById('close-guest-form');
+                closeBtn?.addEventListener('click', () => {
+                    const modal = document.getElementById('guest-form-modal');
+                    modal?.classList.add('hidden');
+
+                    const guestCount = document.getElementById('guest-count');
+                    if (guestCount) guestCount.value = '';
+                    const category = document.getElementById('category');
+                    if (category) category.selectedIndex = 0;
+                });
+            })
         </script>
     @endpush
 
