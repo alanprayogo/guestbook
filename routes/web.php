@@ -25,9 +25,7 @@ Route::get('/forgot-password', function () {
     return view('pages.auth.forgot-password');
 });
 
-Route::get('/', function () {
-    return view('pages.dashboard');
-});
+Route::get('/',[SettingController::class, 'showDashboard'])->name('dashboard');
 
 Route::get('/license', function () {
     return view('pages.license');

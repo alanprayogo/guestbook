@@ -2,12 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Broadcast;
+use App\Models\GiftDeposit;
+use App\Models\Guest;
 use App\Models\Setting;
+use App\Models\Souvenir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
+
+    public function showDashboard()
+    {
+        $vip = Guest::join('categories', 'guests.category_id', '=', 'categories.id')
+            ->where('categories.category_name', 'Tamu VIP')
+            ->count();
+        $totalTamuHadir = Guest::sum('guest_count');
+        $totalSouvenir = Souvenir::count();
+        $totalGiftDeposit = GiftDeposit::count();
+        $totalTamuUndangan = Broadcast::count();
+        $tamuHadir = Guest::count();
+        $tamuTidakHadir = $totalTamuUndangan - $tamuHadir;
+        return view('pages.dashboard', compact('vip', 'totalTamuHadir', 'totalSouvenir', 'totalGiftDeposit', 'tamuHadir', 'tamuTidakHadir'));
+    }
+
+
     public function showSettings()
     {
         return view('pages.settings');
