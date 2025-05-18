@@ -277,6 +277,7 @@ class GuestController extends Controller
 
             if ($guest) {
                 $noHP = $guest->guest_phone;
+                $isInvited = true;
             } else {
                 $noHP = $request->whatsapp;
             }
@@ -289,6 +290,7 @@ class GuestController extends Controller
                 'guest_count' => $request->guest_count,
                 'whatsapp' => $noHP,
                 'is_displayed' => false,
+                'is_invited' => $isInvited ?? false,
             ]);
 
             return redirect()->back()->with('success', 'Data tamu berhasil disimpan!');

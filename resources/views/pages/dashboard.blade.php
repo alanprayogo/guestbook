@@ -68,7 +68,7 @@
                             enabled: false
                         }
                     },
-                    series: [5, 1],
+                    series: [tamuHadir, tamuTidakHadir],
                     labels: ['Checked-In', 'Absent / No Show'],
                     title: {
                         show: false

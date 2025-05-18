@@ -22,7 +22,7 @@ class SettingController extends Controller
         $totalSouvenir = Souvenir::count();
         $totalGiftDeposit = GiftDeposit::count();
         $totalTamuUndangan = Broadcast::count();
-        $tamuHadir = Guest::count();
+        $tamuHadir = Guest::where('is_invited', true)->count();
         $tamuTidakHadir = $totalTamuUndangan - $tamuHadir;
         return view('pages.dashboard', compact('vip', 'totalTamuHadir', 'totalSouvenir', 'totalGiftDeposit', 'tamuHadir', 'tamuTidakHadir'));
     }

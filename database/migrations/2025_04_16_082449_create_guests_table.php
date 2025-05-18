@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('whatsapp')->nullable();
             $table->string('photo_guest')->nullable();
             $table->boolean('is_displayed')->default(false);
+            $table->boolean('is_invited')->default(false);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
