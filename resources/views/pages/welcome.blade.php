@@ -10,6 +10,13 @@
 
 <body class="relative h-screen w-screen">
 
+    <!-- Layer Judul -->
+    <div class="absolute left-1/2 top-10 z-20 -translate-x-1/2 text-center text-white drop-shadow-lg">
+        <h1 class="text-4xl font-bold md:text-5xl">The Wedding of</h1>
+        <h2 class="mt-2 text-5xl font-extrabold md:text-6xl">Aku & Kamu</h2>
+    </div>
+
+
     <!-- Layer 1: Video Background -->
     <div id="layer1" class="absolute inset-0 z-10">
         <video autoplay loop muted class="h-full w-full object-cover">
