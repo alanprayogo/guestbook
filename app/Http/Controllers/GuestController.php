@@ -56,9 +56,23 @@ class GuestController extends Controller
         return $phone;
     }
 
-    private function updateKataPengantar($template, $mempelai, $nama)
+    private function updateKataPengantar($template, $mempelai, $nama, $url, $undanganData)
     {
-        $linkUndangan = 'https://attarivitation.com/demo-undangan-buku-tamu/?to=' . urlencode($nama);
+        // $mempelai = Str::slug($mempelai);
+
+        $query = http_build_query([
+            'to' => $nama,
+            'sesi' => $undanganData['sesi'] ?? 1,
+            'cat' => $undanganData['cat'] ?? 1,
+            'lim' => $undanganData['lim'] ?? 1,
+            'meja' => $undanganData['meja'] ?? 1,
+        ]);
+
+        if ($url === 'byattari') {
+            $linkUndangan = 'https://byattari.com/hamid-khalisha/?' . $query;
+        } else {
+            $linkUndangan = 'https://attarivitation.com/demo-undangan-buku-tamu/?' . $query;
+        }
         $kataPengantar = str_replace(
             ['[nama]', '*[mempelai]*', '[link-undangan]'],
             [$nama, $mempelai, $linkUndangan],
@@ -72,13 +86,13 @@ class GuestController extends Controller
     {
         try {
             $validated = $request->validate([
-                'yang_mengundang' => 'required|string',
+                'the_organizer' => 'required|string',
                 'category_id'    => 'required|exists:categories,id',
                 'guest_name'     => 'required|string',
-                'session'        => 'required|in:Sesi 1,Sesi 2,Sesi 3,Sesi 4,Sesi 5',
-                'url'           => 'required|in:byattari,attarivation',
-                'no_table'       => 'required|in:Meja 1,Meja 2,Meja 3,Meja 4,Meja 5',
-                'guest_limit'    => 'required|in:1 Orang,2 Orang,3 Orang,4 Orang,5 Orang,6 Orang',
+                'session'        => 'required|in:1,2,3,4,5',
+                'url'           => 'required|in:byattari,attarivitation',
+                'no_table'       => 'required|in:1,2,3,4,5',
+                'guest_limit'    => 'required|in:1,2,3,4,5,6',
                 'kata_pengantar' => 'required|string',
             ], [
                 'category_id.required'    => 'Kategori harus dipilih.',
@@ -111,16 +125,24 @@ class GuestController extends Controller
                 [$name, $phone] = array_map('trim', explode('-', $line, 2));
                 $phone = $this->normalizePhoneNumber($phone);
 
+                $undanganData = [
+                    'sesi' => $validated['session'],
+                    'cat' => $validated['category_id'],
+                    'lim' => $validated['guest_limit'],
+                    'meja' => $validated['no_table']
+                ];
+
                 if ($name && $phone) {
                     Broadcast::create([
                         'category_id'   => $validated['category_id'],
+                        'the_organizer' => $validated['the_organizer'],
                         'guest_name'   => $name,
                         'guest_phone'  => $phone,
                         'url'          => $validated['url'],
                         'no_table'     => $validated['no_table'],
                         'session'      => $validated['session'],
                         'guest_limit'  => $validated['guest_limit'],
-                        'kata_pengantar' => $this->updateKataPengantar($validated['kata_pengantar'], $validated['yang_mengundang'], $name),
+                        'kata_pengantar' => $this->updateKataPengantar($validated['kata_pengantar'], $validated['the_organizer'], $name, $validated['url'], $undanganData),
                     ]);
                 } else {
                     Log::warning("Data kosong di baris ke-" . ($index + 1) . ": '$line'");

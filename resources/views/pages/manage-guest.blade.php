@@ -169,9 +169,8 @@
                                     <label for="yang-mengundang" class="block text-sm font-medium dark:text-white">
                                         Yang Mengundang
                                     </label>
-                                    <input type="text" id="yang-mengundang" name="yang_mengundang"
-                                        class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                        value="Iki & Iku" readonly>
+                                    <input type="text" id="yang-mengundang" name="the_organizer" placeholder="Aku & Kamu"
+                                        class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                 </div>
                                 <div class="w-full">
                                     <label for="sesi" class="block text-sm font-medium dark:text-white">
@@ -180,11 +179,11 @@
                                     <select id="sesi" name="session"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                         <option selected disabled>Silahkan Pilih Sesi</option>
-                                        <option value="Sesi 1">Sesi 1</option>
-                                        <option value="Sesi 2">Sesi 2</option>
-                                        <option value="Sesi 3">Sesi 3</option>
-                                        <option value="Sesi 4">Sesi 4</option>
-                                        <option value="Sesi 5">Sesi 5</option>
+                                        <option value="1">Sesi 1</option>
+                                        <option value="2">Sesi 2</option>
+                                        <option value="3">Sesi 3</option>
+                                        <option value="4">Sesi 4</option>
+                                        <option value="5">Sesi 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -197,7 +196,7 @@
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                         <option selected disabled>Pilih URL</option>
                                         <option value="byattari">By Attari</option>
-                                        <option value="attarivation">Attarivation</option>
+                                        <option value="attarivitation">Attarivation</option>
                                     </select>
                                 </div>
                                 <div class="w-full">
@@ -207,11 +206,11 @@
                                     <select id="nomor-meha" name="no_table"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                         <option selected disabled>Pilih Nomor Meja</option>
-                                        <option value="Meja 1">Meja 1</option>
-                                        <option value="Meja 2">Meja 2</option>
-                                        <option value="Meja 3">Meja 3</option>
-                                        <option value="Meja 4">Meja 4</option>
-                                        <option value="Meja 5">Meja 5</option>
+                                        <option value="1">Meja 1</option>
+                                        <option value="2">Meja 2</option>
+                                        <option value="3">Meja 3</option>
+                                        <option value="4">Meja 4</option>
+                                        <option value="5">Meja 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -234,11 +233,11 @@
                                     </label>
                                     <select id="limit-tamu" name="guest_limit"
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                        <option value="1 Orang" selected>1 Orang</option>
-                                        <option value="2 Orang">2 Orang</option>
-                                        <option value="3 Orang">3 Orang</option>
-                                        <option value="4 Orang">4 Orang</option>
-                                        <option value="5 Orang">5 Orang</option>
+                                        <option value="1" selected>1 Orang</option>
+                                        <option value="2">2 Orang</option>
+                                        <option value="3">3 Orang</option>
+                                        <option value="4">4 Orang</option>
+                                        <option value="5">5 Orang</option>
                                     </select>
                                 </div>
                             </div>
@@ -523,7 +522,7 @@ Best regards,
                                     class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
                                     <option selected disabled>Pilih URL</option>
                                     <option value="byattari">By Attari</option>
-                                    <option value="attarivation">Attarivation</option>
+                                    <option value="attarivitation">Attarivation</option>
                                 </select>
                             </div>
 
@@ -535,11 +534,11 @@ Best regards,
                                 <select id="editGuestTable" name="no_table" required
                                     class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
                                     <option value="" disabled selected>Pilih Nomor Meja</option>
-                                    <option value="Meja 1">Meja 1</option>
-                                    <option value="Meja 2">Meja 2</option>
-                                    <option value="Meja 3">Meja 3</option>
-                                    <option value="Meja 4">Meja 4</option>
-                                    <option value="Meja 5">Meja 5</option>
+                                    <option value="1">Meja 1</option>
+                                    <option value="2">Meja 2</option>
+                                    <option value="3">Meja 3</option>
+                                    <option value="4">Meja 4</option>
+                                    <option value="5">Meja 5</option>
                                 </select>
                             </div>
 
@@ -552,11 +551,11 @@ Best regards,
                                 <select id="editGuestSession" name="session"
                                     class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
                                     <option selected disabled>Silahkan Pilih Sesi</option>
-                                    <option value="Sesi 1">Sesi 1</option>
-                                    <option value="Sesi 2">Sesi 2</option>
-                                    <option value="Sesi 3">Sesi 3</option>
-                                    <option value="Sesi 4">Sesi 4</option>
-                                    <option value="Sesi 5">Sesi 5</option>
+                                    <option value="1">Sesi 1</option>
+                                    <option value="2">Sesi 2</option>
+                                    <option value="3">Sesi 3</option>
+                                    <option value="4">Sesi 4</option>
+                                    <option value="5">Sesi 5</option>
                                 </select>
                             </div>
 
@@ -567,11 +566,11 @@ Best regards,
                                 </label>
                                 <select id="editGuestLimit" name="guest_limit"
                                     class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white">
-                                    <option value="1 Orang" selected>1 Orang</option>
-                                    <option value="2 Orang">2 Orang</option>
-                                    <option value="3 Orang">3 Orang</option>
-                                    <option value="4 Orang">4 Orang</option>
-                                    <option value="5 Orang">5 Orang</option>
+                                    <option value="1" selected>1 Orang</option>
+                                    <option value="2">2 Orang</option>
+                                    <option value="3">3 Orang</option>
+                                    <option value="4">4 Orang</option>
+                                    <option value="5">5 Orang</option>
                                 </select>
                             </div>
                         </div>

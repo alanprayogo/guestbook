@@ -11,6 +11,7 @@ class Broadcast extends Model
 
     protected $fillable = [
         'category_id',
+        'the_organizer',
         'guest_name',
         'guest_phone',
         'url',
