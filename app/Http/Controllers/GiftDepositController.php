@@ -12,8 +12,8 @@ class GiftDepositController extends Controller
     public function showGiftDeposit()
     {
         $giftDeposits = GiftDeposit::with(['guest', 'guest.category'])
-        ->orderBy('created_at', 'asc')
-        ->get();
+            ->orderBy('created_at', 'asc')
+            ->get();
         if (!request()->ajax()) {
             return view('pages.gift-handling', compact('giftDeposits'));
         }
@@ -27,7 +27,6 @@ class GiftDepositController extends Controller
             })
             ->rawColumns(['status'])
             ->make(true);
-
     }
 
     public function storeGiftDeposit(Request $request)
@@ -51,10 +50,6 @@ class GiftDepositController extends Controller
             })->first();
 
             if ($existingGift) {
-                $foundInGuests = Guest::where('guest_name', $guestName)->first();
-                if ($foundInGuests) {
-                    $guestId = $foundInGuests->id;
-                }
                 return response()->json([
                     'status' => 'exists',
                     'message' => 'Nama ini sudah menitipkan hadiahnya. Apakah Anda yakin ingin memasukkan lagi?',
@@ -74,7 +69,7 @@ class GiftDepositController extends Controller
             }
         }
 
-        GiftDeposit::create([
+        $gift = GiftDeposit::create([
             'guest_id' => $guestId,
             'guest_name' => $guestName,
         ]);
@@ -82,6 +77,24 @@ class GiftDepositController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Data penitipan hadiah berhasil disimpan.',
+            'gift_id' => $gift->id,
+        ]);
+    }
+
+    public function storeNote(Request $request)
+    {
+        $request->validate([
+            'gift_id' => 'required|exists:gift_deposits,id',
+            'note' => 'nullable|string',
+        ]);
+
+        GiftDeposit::where('id', $request->gift_id)->update([
+            'note' => $request->note,
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Catatan berhasil disimpan.',
         ]);
     }
 }

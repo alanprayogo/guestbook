@@ -13,6 +13,7 @@ class GiftDeposit extends Model
         'guest_id',
         'guest_name',
         'status',
+        'note',
     ];
 
     public function guest()

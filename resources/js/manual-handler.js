@@ -9,6 +9,7 @@ export function setupManualHandler({
     submitUrl,
     scannerButtonId = null,
     submitFnName = 'submitData',
+    enableNotesModal = false,
 }) {
     const modalEl = document.getElementById(modalId);
     const form = document.getElementById(formId);
@@ -134,6 +135,7 @@ export function setupManualHandler({
         setTimeout(() => toast.classList.add('hidden'), 4000);
     };
 
+
     const showToastError = (message) => {
         const toast = document.getElementById('toast-error');
         const messageEl = document.getElementById('toast-error-message');
@@ -165,6 +167,8 @@ export function setupManualHandler({
         };
     };
 
+    let lastGiftId = null;
+
     function submitData(guestName, force = false) {
         fetch(submitUrl, {
             method: 'POST',
@@ -177,11 +181,16 @@ export function setupManualHandler({
             .then(res => res.json())
             .then(data => {
                 if (data.status === 'success') {
+                    lastGiftId = data.gift_id || null;
                     closeModal();
                     showToastSuccess(data.message);
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 2000);
+                    if (enableNotesModal){
+                        openNotesModal(guestName);
+                    }else{
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
                 } else if (data.status === 'exists' || data.status === 'not_found_in_guests') {
                     closeModal();
                     showConfirmModal(data.message, () => {
@@ -210,4 +219,51 @@ export function setupManualHandler({
             form.reset();
         }, 300);
     };
+
+    // === MODAL CATATAN ===
+    const notesModal = document.getElementById('notes-modal');
+    const notesTextarea = document.getElementById('notes-textarea');
+    const notesSubmitButton = document.getElementById('notes-submit-button');
+    const notesSkipButton = document.getElementById('notes-skip-button');
+
+    const openNotesModal = (guestName) => {
+        notesTextarea.value = '';
+        notesModal.classList.replace('hidden', 'flex');
+    };
+
+    const closeNotesModal = () => {
+        notesModal.classList.replace('flex', 'hidden');
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
+    };
+
+    notesSubmitButton?.addEventListener('click', () => {
+        const catatan = notesTextarea.value.trim();
+        if (catatan !== '') {
+            fetch(`${submitUrl}/note`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                },
+                body: JSON.stringify({
+                    note: catatan,
+                    gift_id: lastGiftId, // ← kirim ke controller
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                closeNotesModal();
+                showToastSuccess(data.message);
+            })
+            .catch(() => {
+                showToastError('Gagal menyimpan catatan');
+            });
+        } else {
+            closeNotesModal();
+        }
+    });
+
+    notesSkipButton?.addEventListener('click', closeNotesModal);
 }

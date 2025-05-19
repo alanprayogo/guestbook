@@ -93,10 +93,23 @@
                                 <th scope="col" class="px-6 py-3 text-start">
                                     <div class="flex items-center gap-x-2">
                                         <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                            Note
+                                            <span class="sort-icon">
+                                                <span class="up">↑</span>
+                                                <span class="down">↓</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                             Status
                                         </span>
                                     </div>
                                 </th>
+
                             </tr>
                         </thead>
 
@@ -198,6 +211,20 @@
     </div>
     <!-- End Modal Add Manual -->
 
+    <!-- Modal untuk Catatan -->
+    <div id="notes-modal" class="fixed inset-0 h-full z-100 hidden items-center justify-center" style="background: rgba(0, 0, 0, 0.5)">
+        <div class="w-full max-w-md rounded-lg bg-white p-4">
+            <h2 class="mb-2 text-lg font-bold">Tambahkan Catatan (Opsional)</h2>
+            <textarea id="notes-textarea" rows="4" class="w-full rounded border p-2"></textarea>
+            <div class="mt-4 flex justify-end gap-2">
+                <button id="notes-skip-button" class="rounded bg-gray-300 px-4 py-2">Lewati</button>
+                <button id="notes-submit-button" class="rounded bg-blue-600 px-4 py-2 text-white">Simpan</button>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Catatan -->
+
+
     <!-- Modal Konfirmasi -->
     <div id="confirm-modal" class="z-100 fixed inset-0 hidden h-full items-center justify-center"
         style="background: rgba(0, 0, 0, 0.5)">
@@ -266,11 +293,15 @@
                             name: 'guest.category.category_name',
                         },
                         {
+                            data: 'note',
+                            name: 'note',
+                        },
+                        {
                             data: 'status',
                             name: 'status',
                             orderable: false,
                             searchable: false
-                        }
+                        },
                     ];
                     initializeDataTable('#giftTables', '{{ route('gift-handling') }}', columns);
                 } else {

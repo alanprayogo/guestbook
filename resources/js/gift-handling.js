@@ -8,4 +8,5 @@ setupManualHandler({
     closeButtonAttr: 'data-close-manual-modal',
     submitUrl: '/gift-handling',
     scannerButtonId: 'btn-scan-qr',
+    enableNotesModal: true
 });
