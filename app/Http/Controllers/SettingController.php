@@ -18,14 +18,13 @@ class SettingController extends Controller
     {
         $vip = Guest::join('categories', 'guests.category_id', '=', 'categories.id')
             ->where('categories.category_name', 'Tamu VIP')
-            ->count();
-        $totalTamuHadir = Guest::sum('guest_count');
+            ->sum('guests.guest_count');
         $totalSouvenir = Souvenir::count();
-        $totalGiftDeposit = GiftDeposit::count();
         $totalTamuUndangan = Broadcast::count();
-        $tamuHadir = Guest::where('is_invited', true)->count();
-        $tamuTidakHadir = $totalTamuUndangan - $tamuHadir;
-        return view('pages.dashboard', compact('vip', 'totalTamuHadir', 'totalSouvenir', 'totalGiftDeposit', 'tamuHadir', 'tamuTidakHadir'));
+        $tamuCheckin = Guest::where('is_invited', true)->count();
+        $tamuTidakHadir = $totalTamuUndangan - $tamuCheckin;
+        $tamuVenue = Guest::sum('guest_count');
+        return view('pages.dashboard', compact('vip', 'totalSouvenir', 'tamuCheckin', 'tamuTidakHadir', 'tamuVenue'));
     }
 
 

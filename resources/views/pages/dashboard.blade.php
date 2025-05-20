@@ -6,10 +6,10 @@
     <!-- Grid -->
     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {{-- stat-card --}}
-        <x-stat-card title="VIP Attendees" value="{{ $vip }}" href="#" />
-        <x-stat-card title="On-site" value="{{ $totalTamuHadir }}" href="#" />
-        <x-stat-card title="Souvenir Received" value="{{ $totalSouvenir }}" href="#" />
-        <x-stat-card title="Gift Collected" value="{{ $totalGiftDeposit }}" href="#" />
+        <x-stat-card title="Tamu VIP" value="{{ $vip }}" href="#" />
+        <x-stat-card title="Tamu Check-In" value="{{ $tamuCheckin }}" href="#" />
+        <x-stat-card title="Tamu di Venue" value="{{ $tamuVenue }}" href="#" />
+        <x-stat-card title="Jumlah Souvenir" value="{{ $totalSouvenir }}" href="#" />
         {{-- <x-stat-card title="Tamu Hadir" value="{{ $tamuHadir}}" href="#" /> --}}
         {{-- <x-stat-card title="Tamu Belum Hadir" value="{{ $tamuTidakHadir }}" href="#" /> --}}
         {{-- <x-stat-card title="Checked-In" value="75,422" href="#" /> --}}
@@ -55,7 +55,7 @@
     <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
 
     <script>
-        const tamuHadir = {{ $tamuHadir }};
+        const tamuHadir = {{ $tamuCheckin }};
         const tamuTidakHadir = {{ $tamuTidakHadir }};
         window.addEventListener('load', () => {
             // Apex Pie Chart
