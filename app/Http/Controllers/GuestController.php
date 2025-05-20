@@ -231,12 +231,13 @@ class GuestController extends Controller
 
     public function showGuestArrive()
     {
+        $guests = Guest::all();
         $category = Category::all();
         $query = Guest::with(['category'])
             ->orderBy('created_at', 'asc')
             ->get();
         if (!request()->ajax()) {
-            return view('pages.guest-arrival', compact('category', 'query'));
+            return view('pages.guest-arrival', compact('category', 'query', 'guests'));
         }
         return DataTables::of($query)
             ->addIndexColumn()

@@ -6,6 +6,7 @@
     @vite(['resources/js/scanner.js'])
     @vite(['resources/js/datatables-init.js'])
     <link rel="stylesheet" href="{{ asset('assets/css/sort-icon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/random-pick.css') }}">
     <style>
         /* Styling khusus untuk DataTables dalam dark mode */
         .dark .dataTables_wrapper {
@@ -27,6 +28,11 @@
             background-color: #374151 !important;
             border-color: #4b5563 !important;
             color: #ffffff !important;
+        }
+
+        #winner-modal {
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 150;
         }
     </style>
 @endpush
@@ -51,7 +57,9 @@
                             </x-button>
                             <x-button variant="export-excel">Export Excel</x-button>
                             <x-button variant="export-pdf">Export PDF</x-button>
-                            <x-button variant="random-pick">Random Pick</x-button>
+                            <x-button variant="random-pick" aria-haspopup="dialog" aria-expanded="false"
+                                aria-controls="hs-static-backdrop-modal" data-hs-overlay="#modal-random-pick">Random
+                                Pick</x-button>
                         </div>
                     </div>
                     <!-- End Header -->
@@ -336,6 +344,74 @@
     </div>
     <!-- End Modal tampilan foto -->
 
+    <!-- Modal Random Pick -->
+    <div id="modal-random-pick"
+        class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden [--overlay-backdrop:static]"
+        role="dialog" tabindex="-1" aria-labelledby="hs-static-backdrop-modal-label" data-hs-overlay-keyboard="false">
+        <div
+            class="m-3 mt-0 opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
+            <div
+                class="shadow-2xs pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
+                <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-neutral-700">
+                    <h3 id="hs-static-backdrop-modal-label" class="font-bold text-gray-800 dark:text-white">
+                        Random Pick
+                    </h3>
+                    <button type="button"
+                        class="modal-close-btn focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+                        aria-label="Close" data-hs-overlay="#modal-random-pick">
+                        <span class="sr-only">Close</span>
+                        <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="overflow-y-auto p-4">
+                    <div class="card">
+                        <div class="wheel-container">
+                            <div class="marker"></div>
+                            <canvas id="wheel" width="400" height="400"></canvas>
+                        </div>
+
+                        <div class="button-container">
+                            <button id="spin-button" class="button primary-button" disabled>SPIN</button>
+                        </div>
+
+                        <div id="result" class="result"></div>
+                        <div class="mt-4 flex justify-end">
+                            <button type="button"
+                                class="modal-close-btn shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                                data-hs-overlay="#modal-random-pick">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Random Pick -->
+
+    <!-- Modal Pemenang -->
+    <div id="winner-modal" class="fixed inset-0 h-full hidden items-center justify-center">
+        <div class="w-full max-w-sm rounded-lg bg-white p-6 text-center shadow-xl">
+            <h2 class="mb-4 text-xl font-semibold text-gray-800">Pemenang</h2>
+            <p id="winner-name" class="mb-4 text-lg font-bold text-indigo-600"></p>
+            <div class="flex justify-center gap-3">
+                <button id="remove-winner-btn" class="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600">
+                    Hapus dari daftar
+                </button>
+                <button id="close-winner-modal" class="rounded bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+
     @if (session('success'))
         <div id="toast-success"
             class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
@@ -368,7 +444,11 @@
         </div>
     @endif
 
-    <script></script>
+
+    <script>
+        window.guestsData = @json($guests);
+    </script>
+
 
 
     <script>
@@ -518,6 +598,7 @@
     </script>
 
     @push('scripts')
+        <script src="{{ asset('assets/js/random-pick.js') }}"></script>
         <!-- Include jQuery dan DataTables -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
