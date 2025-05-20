@@ -51,6 +51,7 @@
                             </x-button>
                             <x-button variant="export-excel">Export Excel</x-button>
                             <x-button variant="export-pdf">Export PDF</x-button>
+                            <x-button variant="random-pick">Random Pick</x-button>
                         </div>
                     </div>
                     <!-- End Header -->
