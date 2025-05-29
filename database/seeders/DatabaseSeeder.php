@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoleSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,17 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Category::create([
-            'category_name' => 'Tamu Undangan',
-        ]);
-        \App\Models\Category::create([
-            'category_name' => 'Tamu VIP',
-        ]);
-        \App\Models\Category::create([
-            'category_name' => 'Keluarga Mempelai Pria',
-        ]);
-        \App\Models\Category::create([
-            'category_name' => 'Keluarga Mempelai Wanita',
+        $this->call([
+            RoleSeeder::class,
         ]);
     }
 }

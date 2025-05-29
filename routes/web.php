@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\GiftDepositController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SouvenirController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GiftDepositController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,8 @@ Route::get('/profile', function () {
     return view('pages.profile');
 });
 
-Route::get('/manage-user', function () {
-    return view('pages.manage-user');
-});
+Route::get('/manage-user',[UserController::class, 'showUser'])->name('manage-user');
+Route::post('/manage-user', [UserController::class, 'storeUser'])->name('user.store');
 
 Route::get('/welcome', function () {
     return view('pages.welcome');

@@ -8,17 +8,19 @@
         <div class="-m-1.5 overflow-x-auto">
             <div class="inline-block min-w-full p-1.5 align-middle">
                 <div
-                    class="overflow-hidden bg-white border border-gray-200 shadow-2xs rounded-xl dark:border-neutral-700 dark:bg-neutral-800">
+                    class="shadow-2xs overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800">
                     <!-- Header -->
                     <div
-                        class="grid gap-3 px-6 py-4 border-b border-gray-200 md:flex md:items-center md:justify-between dark:border-neutral-700">
+                        class="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
                         <!-- Input -->
                         <x-search-input id="hs-as-table-product-review-search" name="product-review-search"
                             label="Search Produk" placeholder="Search" class="sm:col-span-1" />
                         <!-- End Input -->
 
                         <div>
-                            <x-button variant="add">Add User</x-button>
+                            <x-button variant="add" aria-haspopup="dialog" aria-expanded="false"
+                                aria-controls="hs-static-backdrop-modal" data-hs-overlay="#modal-add-user">Add
+                                User</x-button>
                             <x-button variant="scan-qr">Scan QR</x-button>
                             <x-button variant="export-excel">Export Excel</x-button>
                             <x-button variant="export-pdf">Export PDF</x-button>
@@ -28,12 +30,12 @@
                     <!-- End Header -->
 
                     <!-- Table -->
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                    <table id="userTable" class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
                         <thead class="bg-gray-50 dark:bg-neutral-800">
                             <tr>
                                 <th scope="col" class="py-3 ps-6 text-start">
                                     <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                             No
                                         </span>
                                     </div>
@@ -41,7 +43,7 @@
 
                                 <th scope="col" class="py-3 pe-6 ps-6 text-start lg:ps-3 xl:ps-0">
                                     <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                             Username
                                         </span>
                                     </div>
@@ -49,7 +51,7 @@
 
                                 <th scope="col" class="px-6 py-3 text-start">
                                     <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                             Phone
                                         </span>
                                     </div>
@@ -57,16 +59,8 @@
 
                                 <th scope="col" class="px-6 py-3 text-start">
                                     <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                        <span class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                             Role
-                                        </span>
-                                    </div>
-                                </th>
-
-                                <th scope="col" class="px-6 py-3 text-start">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
-                                            Created
                                         </span>
                                     </div>
                                 </th>
@@ -76,62 +70,18 @@
                         </thead>
 
                         <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                            <tr>
-                                <td class="h-px w-[8.3%] whitespace-nowrap">
-                                    <div class="py-3 ps-6">
-                                        <span
-                                            class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">1</span>
-                                    </div>
-                                </td>
-                                <td class="w-1/4 h-px whitespace-nowrap">
-                                    <div class="py-3 pe-6 ps-6 lg:ps-3 xl:ps-0">
-                                        <div class="grow">
-                                            <span
-                                                class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Jessica
-                                                Williams</span>
-                                            <span
-                                                class="block text-sm text-gray-500 dark:text-neutral-500">myhairisred@site.com</span>
-                                        </div>
-                                </td>
-                                <td class="h-px w-[16.7%] whitespace-nowrap">
-                                    <div class="px-6 py-3">
-                                        <span
-                                            class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">085791174251</span>
-                                    </div>
-                                </td>
-                                <td class="h-px w-[16.7%] whitespace-nowrap">
-                                    <div class="px-6 py-3">
-                                        <span
-                                            class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">admin</span>
-                                    </div>
-                                </td>
-                                <td class="h-px w-[16.7%] whitespace-nowrap">
-                                    <div class="px-6 py-3">
-                                        <span class="text-sm text-gray-500 dark:text-neutral-500">18 Dec, 15:20</span>
-                                    </div>
-                                </td>
-                                <td class="size-px whitespace-nowrap">
-                                    <div class="px-6 py-1.5">
-                                        <div class="flex items-center gap-x-3">
 
-                                            <x-action-button variant="edit" />
-                                            <x-action-button variant="delete" />
-
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                     <!-- End Table -->
 
                     <!-- Footer -->
                     <div
-                        class="grid gap-3 px-6 py-4 border-t border-gray-200 md:flex md:items-center md:justify-between dark:border-neutral-700">
+                        class="grid gap-3 border-t border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
                         <div class="max-w-sm space-y-3">
                             <span class="font-semibold text-gray-800 dark:text-neutral-200">Show</span>
                             <select
-                                class="inline px-3 py-2 text-sm border-gray-200 rounded-lg pe-9 focus:border-blue-500 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
+                                class="inline rounded-lg border-gray-200 px-3 py-2 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -172,4 +122,182 @@
         </div>
     </div>
     <!-- End Card -->
+
+    <!-- Modal Add Manual -->
+    <div id="modal-add-user"
+        class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden [--overlay-backdrop:static]"
+        role="dialog" tabindex="-1" aria-labelledby="hs-static-backdrop-modal-label" data-hs-overlay-keyboard="false">
+        <div
+            class="m-3 mt-0 opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
+            <div
+                class="shadow-2xs pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
+                <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-neutral-700">
+                    <h3 id="hs-static-backdrop-modal-label" class="font-bold text-gray-800 dark:text-white">
+                        Masukkan Data User
+                    </h3>
+                    <button type="button"
+                        class="focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+                        aria-label="Close" data-hs-overlay="#modal-add-user">
+                        <span class="sr-only">Close</span>
+                        <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="overflow-y-auto p-4">
+                    <form action="{{ route('user.store') }}" method="POST" id="form-add-user">
+                        @csrf
+                        <div class="mb-2">
+                            <label class="mb-2 block font-medium text-gray-700 dark:text-gray-300">Nama</label>
+                            <input type="text" id="name" name="name" class="w-full rounded border p-2"
+                                required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="mb-2 block font-medium text-gray-700 dark:text-gray-300">Email</label>
+                            <input type="email" id="email" name="email" class="w-full rounded border p-2"
+                                required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="mb-2">
+                                <label class="mb-2 block font-medium text-gray-700 dark:text-gray-300">Password</label>
+                                <input type="password" name="password" required>
+                            </div>
+                            <div class="mb-2">
+                                <label class="mb-2 block font-medium text-gray-700 dark:text-gray-300">Konfirmasi
+                                    Password</label>
+                                <input type="password" name="password_confirmation" required>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label class="mb-2 block font-medium text-gray-700 dark:text-gray-300">No HP</label>
+                            <input type="text" id="phone" name="phone" class="w-full rounded border p-2"
+                                required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="role_name"
+                                class="mb-2 block font-medium text-gray-700 dark:text-gray-300">Role</label>
+                            <select id="role_name" name="role_id"
+                                class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                <option selected disabled>Pilih Role</option>
+                                @foreach ($role as $data)
+                                    <option value="{{ $data->id }}">{{ $data->role_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                </div>
+
+                <div
+                    class="flex items-center justify-end gap-x-2 border-t border-gray-200 px-4 py-3 dark:border-neutral-700">
+                    <button type="button"
+                        class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                        data-hs-overlay="#modal-add-user">
+                        Close
+                    </button>
+                    <button type="submit"
+                        class="focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:bg-blue-700 disabled:pointer-events-none disabled:opacity-50">
+                        Save changes
+                    </button>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <!-- End Modal Add Manual -->
+
+    @push('scripts')
+        <!-- Include jQuery dan DataTables -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof initializeDataTable !== 'undefined') {
+                    const columns = [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                            orderable: false
+                        },
+                        {
+                            data: 'name',
+                            name: 'name'
+                        },
+                        {
+                            data: 'email',
+                            name: 'email'
+                        },
+                        {
+                            data: 'phone',
+                            name: 'phone'
+                        },
+                        {
+                            data: 'password',
+                            name: 'password'
+                        },
+                        {
+                            data: 'role_name',
+                            name: 'user.role.role_name'
+                        }
+                    ];
+                    initializeDataTable('#userTable', '{{ route('manage-user') }}', columns);
+                } else {
+                    console.error('initializeDataTable is not defined');
+                }
+            });
+        </script>
+    @endpush
+
+    @if (session('success'))
+        <div id="toast-success"
+            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
+            role="alert">
+            <div class="flex items-center">
+                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414L8.414 15l-4.121-4.121a1 1 0 111.414-1.414L8.414 12.586l7.879-7.879a1 1 0 011.414 0z"
+                        clip-rule="evenodd">
+                    </path>
+                </svg>
+                <span>{{ session('success') }}</span>
+            </div>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div id="toast-error"
+            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-red-100 p-4 text-red-800 shadow-lg dark:bg-red-800 dark:text-red-200"
+            role="alert">
+            <div class="flex items-center">
+                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11V7a1 1 0 10-2 0v4a1 1 0 102 0zm-1 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                        clip-rule="evenodd">
+                    </path>
+                </svg>
+                <span>{{ session('error') }}</span>
+            </div>
+        </div>
+    @endif
+
+    @push('head')
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const toastSuccess = document.getElementById("toast-success");
+                const toastError = document.getElementById("toast-error");
+
+                if (toastSuccess) {
+                    toastSuccess.classList.remove("hidden");
+                    setTimeout(() => toastSuccess.classList.add("hidden"), 4000);
+                }
+
+                if (toastError) {
+                    toastError.classList.remove("hidden");
+                    setTimeout(() => toastError.classList.add("hidden"), 4000);
+                }
+            });
+        </script>
+    @endpush
 @endsection
