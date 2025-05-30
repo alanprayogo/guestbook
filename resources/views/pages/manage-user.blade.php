@@ -68,22 +68,43 @@
                                     <div class="flex items-center gap-x-2">
                                         <span class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                             Username
+                                            <span class="sort-icon">
+                                                <span class="up">↑</span>
+                                                <span class="down">↓</span>
+                                            </span>
                                         </span>
                                     </div>
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-start">
+                                <th scope="col" class="py-3 pe-6 ps-6 text-start lg:ps-3 xl:ps-0">
                                     <div class="flex items-center gap-x-2">
                                         <span class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
-                                            Phone
+                                            Email
+                                            <span class="sort-icon">
+                                                <span class="up">↑</span>
+                                                <span class="down">↓</span>
+                                            </span>
                                         </span>
                                     </div>
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-start">
+                                <th scope="col" class="py-3 pe-6 ps-6 text-start lg:ps-3 xl:ps-0">
                                     <div class="flex items-center gap-x-2">
                                         <span class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                             Role
+                                            <span class="sort-icon">
+                                                <span class="up">↑</span>
+                                                <span class="down">↓</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <div class="flex items-center gap-x-2">
+                                        <span
+                                            class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                            Status
                                         </span>
                                     </div>
                                 </th>
@@ -153,11 +174,6 @@
                             </div>
                         </div>
                         <div class="mb-2">
-                            <label class="block mb-2 font-medium text-gray-700 dark:text-gray-300">No HP</label>
-                            <input type="text" id="phone" name="phone" class="w-full p-2 border rounded"
-                                required>
-                        </div>
-                        <div class="mb-2">
                             <label for="role_name"
                                 class="block mb-2 font-medium text-gray-700 dark:text-gray-300">Role</label>
                             <select id="role_name" name="role_id"
@@ -211,16 +227,20 @@
                             name: 'email'
                         },
                         {
-                            data: 'phone',
-                            name: 'phone'
-                        },
-                        {
-                            data: 'password',
-                            name: 'password'
-                        },
-                        {
                             data: 'role_name',
-                            name: 'user.role.role_name'
+                            name: 'role.role_name'
+                        },
+                        {
+                            data: 'status',
+                            name: 'status',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
                         }
                     ];
                     initializeDataTable('#userTable', '{{ route('manage-user') }}', columns);

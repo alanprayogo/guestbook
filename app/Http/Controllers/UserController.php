@@ -21,7 +21,16 @@ class UserController extends Controller
     }
     return DataTables::of($user)
         ->addIndexColumn()
-        ->addColumn('role_name', fn($row) => $row->user->role->role_name ?? '-')
+        ->addColumn('role_name', fn($row) => $row->role->role_name)
+        ->addColumn('status', function ($row) {
+            return view('components.status-badge', [
+                'status' => $row->status ?? 'accepted'
+            ])->render();
+        })
+        ->addColumn('action', function ($row) {
+            return view('components.action-btn-datatables.guest-action', compact('row'))->render();
+        })
+        ->rawColumns(['action', 'status'])
         ->make(true);
 }
 
@@ -30,7 +39,6 @@ class UserController extends Controller
     $validated = $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
-        'phone' => 'required|string|max:20',
         'password' => 'required|string|confirmed',
         'role_id' => 'required|exists:roles,id',
     ]);
@@ -38,8 +46,7 @@ class UserController extends Controller
     $user = User::create([
         'name' => $validated['name'],
         'email' => $validated['email'],
-        'phone' => $validated['phone'],
-        'password' => \Hash::make($validated['password']),
+        'password' => Hash::make($validated['password']),
         'role_id' => $validated['role_id'],
     ]);
 
