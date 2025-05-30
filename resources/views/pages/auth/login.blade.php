@@ -79,7 +79,8 @@
 
             <div class="mt-5">
                 <!-- Form -->
-                <form>
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
                     <div class="grid gap-y-4">
                         <!-- Form Group Email -->
                         <div>
@@ -120,13 +121,16 @@
                                     </svg>
                                 </div>
                             </div>
-                            <p class="mt-2 hidden text-xs text-red-600" id="password-error">8+ characters required</p>
+                            <p class="mt-2 hidden text-xs text-red-600" id="password-error">password required</p>
                         </div>
 
                         <button type="submit"
                             class="focus:outline-hidden inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-medium text-white hover:bg-blue-700 focus:bg-blue-700 disabled:pointer-events-none disabled:opacity-50">
                             Sign in
                         </button>
+                        @if ($errors->any())
+                            <div>{{ $errors->first() }}</div>
+                        @endif
                     </div>
                 </form>
                 <!-- End Form -->

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\SettingController;
@@ -18,15 +19,15 @@ use App\Http\Controllers\GiftDepositController;
 |
 */
 
-Route::get('/login', function () {
-    return view('pages.auth.login');
-});
+route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+route::post('/login', [AuthController::class, 'login']);
+route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/forgot-password', function () {
     return view('pages.auth.forgot-password');
 });
 
-Route::get('/',[SettingController::class, 'showDashboard'])->name('dashboard');
+Route::get('/',[SettingController::class, 'showDashboard'])->name('dashboard')->middleware('auth');
 
 Route::get('/license', function () {
     return view('pages.license');

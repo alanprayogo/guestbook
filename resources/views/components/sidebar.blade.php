@@ -2,10 +2,10 @@
 <div id="hs-application-sidebar"
     class="hs-overlay w-65 z-60 fixed inset-y-0 start-0 hidden h-full -translate-x-full transform border-e border-gray-200 bg-white transition-all duration-300 [--auto-close:lg] hs-overlay-open:translate-x-0 lg:bottom-0 lg:end-auto lg:block lg:translate-x-0 dark:border-neutral-700 dark:bg-neutral-800"
     role="dialog" tabindex="-1" aria-label="Sidebar">
-    <div class="relative flex h-full max-h-full flex-col">
+    <div class="relative flex flex-col h-full max-h-full">
         <div class="flex items-center px-6 pt-4">
             <!-- Logo -->
-            <a class="focus:outline-hidden inline-block flex-none rounded-xl text-xl font-semibold focus:opacity-80"
+            <a class="flex-none inline-block text-xl font-semibold focus:outline-hidden rounded-xl focus:opacity-80"
                 href="#" aria-label="Preline">
                 <svg class="h-auto w-28" width="116" height="32" viewBox="0 0 116 32" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@
         <!-- Content -->
         <div
             class="h-full overflow-y-auto [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 [&::-webkit-scrollbar]:w-2">
-            <nav class="hs-accordion-group flex w-full flex-col flex-wrap p-3" data-hs-accordion-always-open>
+            <nav class="flex flex-col flex-wrap w-full p-3 hs-accordion-group" data-hs-accordion-always-open>
                 <ul class="flex flex-col space-y-1">
                     <li>
                         <a class="focus:outline-hidden {{ request()->is('/') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
@@ -43,7 +43,7 @@
                         </a>
                     </li>
 
-                    <li><a class="focus:outline-hidden {{ request()->is('license') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
+                    {{-- <li><a class="focus:outline-hidden {{ request()->is('license') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
                             href="/license">
                             <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -55,9 +55,9 @@
                                 <line x1="10" y1="9" x2="8" y2="9" />
                             </svg>
                             License
-                        </a></li>
+                        </a></li> --}}
 
-                    <li><a class="focus:outline-hidden {{ request()->is('profile') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
+                    {{-- <li><a class="focus:outline-hidden {{ request()->is('profile') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
                             href="/profile">
                             <svg class="mt-0.5 size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -75,26 +75,34 @@
                                 <path d="m20.7 13.8 1-.4" />
                             </svg>
                             Profile
-                        </a></li>
+                        </a></li> --}}
 
-                    <li><a class="focus:outline-hidden {{ request()->is('manage-user') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
-                            href="/manage-user">
-                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                            User Management
-                        </a></li>
+                    @php
+                        use Illuminate\Support\Facades\Auth;
+                    @endphp
+
+                    @if (Auth::check() && Auth::user()->role_id === 1)
+                        <li>
+                            <a class="focus:outline-hidden {{ request()->is('manage-user') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
+                                href="/manage-user">
+                                <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                                User Management
+                            </a>
+                        </li>
+                    @endif
 
                     <li><a class="focus:outline-hidden {{ request()->is('manage-guest') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
                             href="/manage-guest">
                             <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                                 <circle cx="9" cy="7" r="4" />
                                 <line x1="19" y1="8" x2="19" y2="14" />
@@ -106,8 +114,8 @@
                     <li><a class="focus:outline-hidden {{ request()->is('guest-arrival') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
                             href="/guest-arrival">
                             <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="5" r="3" />
                                 <path d="M12 22V8M5 12H2a10 10 0 0 0 20 0h-3" />
                             </svg>
@@ -140,38 +148,40 @@
                             Gift Handling
                         </a></li>
 
-                    <li><a class="focus:outline-hidden flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm
-        {{ request()->is('settings') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }}"
-                            href="/settings">
-                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-                                <circle cx="12" cy="12" r="3" />
-                            </svg>
-                            Settings
-                        </a></li>
+                    @if (Auth::check() && Auth::user()->role_id === 1)
+                        <li><a class="focus:outline-hidden {{ request()->is('settings') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
+                                href="/settings">
+                                <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                                Settings
+                            </a></li>
+                    @endif
 
-                    <li><a class="focus:outline-hidden flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm
-        {{ request()->is('event') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }}"
-                            href="/event">
-                            <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-                                <line x1="16" x2="16" y1="2" y2="6" />
-                                <line x1="8" x2="8" y1="2" y2="6" />
-                                <line x1="3" x2="21" y1="10" y2="10" />
-                                <path d="M8 14h.01" />
-                                <path d="M12 14h.01" />
-                                <path d="M16 14h.01" />
-                                <path d="M8 18h.01" />
-                                <path d="M12 18h.01" />
-                                <path d="M16 18h.01" />
-                            </svg>
-                            Event
-                        </a></li>
+                    @if (Auth::check() && Auth::user()->role_id === 1)
+                        <li><a class="focus:outline-hidden {{ request()->is('event') ? 'bg-gray-100 text-gray-800 dark:bg-neutral-700 dark:text-white' : 'text-gray-800 hover:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700' }} flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm"
+                                href="/event">
+                                <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                                    <line x1="16" x2="16" y1="2" y2="6" />
+                                    <line x1="8" x2="8" y1="2" y2="6" />
+                                    <line x1="3" x2="21" y1="10" y2="10" />
+                                    <path d="M8 14h.01" />
+                                    <path d="M12 14h.01" />
+                                    <path d="M16 14h.01" />
+                                    <path d="M8 18h.01" />
+                                    <path d="M12 18h.01" />
+                                    <path d="M16 18h.01" />
+                                </svg>
+                                Event
+                            </a></li>
+                    @endif
 
                     <li class="hs-accordion" id="projects-accordion">
                         <button type="button"
@@ -185,14 +195,14 @@
                             </svg>
                             Tutorial & Info
 
-                            <svg class="ms-auto hidden size-4 hs-accordion-active:block"
+                            <svg class="hidden ms-auto size-4 hs-accordion-active:block"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
                                 <path d="m18 15-6-6-6 6" />
                             </svg>
 
-                            <svg class="ms-auto block size-4 hs-accordion-active:hidden"
+                            <svg class="block ms-auto size-4 hs-accordion-active:hidden"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round">
@@ -203,7 +213,7 @@
                         <div id="projects-accordion-child"
                             class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
                             role="region" aria-labelledby="projects-accordion">
-                            <ul class="space-y-1 ps-8 pt-1">
+                            <ul class="pt-1 space-y-1 ps-8">
                                 <li>
                                     <a class="focus:outline-hidden flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
                                         href="#">
