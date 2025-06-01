@@ -44,10 +44,6 @@
                             <x-button variant="add" aria-haspopup="dialog" aria-expanded="false"
                                 aria-controls="hs-static-backdrop-modal" data-hs-overlay="#modal-add-user">Add
                                 User</x-button>
-                            <x-button variant="scan-qr">Scan QR</x-button>
-                            <x-button variant="export-excel">Export Excel</x-button>
-                            <x-button variant="export-pdf">Export PDF</x-button>
-                            <x-button variant="import-excel">Import Excel</x-button>
                         </div>
                     </div>
                     <!-- End Header -->
@@ -102,8 +98,7 @@
 
                                 <th scope="col" class="px-6 py-3 text-start">
                                     <div class="flex items-center gap-x-2">
-                                        <span
-                                            class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
+                                        <span class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
                                             Status
                                         </span>
                                     </div>
@@ -154,13 +149,11 @@
                         @csrf
                         <div class="mb-2">
                             <label class="block mb-2 font-medium text-gray-700 dark:text-gray-300">Nama</label>
-                            <input type="text" id="name" name="name" class="w-full p-2 border rounded"
-                                required>
+                            <input type="text" id="name" name="name" class="w-full p-2 border rounded" required>
                         </div>
                         <div class="mb-2">
                             <label class="block mb-2 font-medium text-gray-700 dark:text-gray-300">Email</label>
-                            <input type="email" id="email" name="email" class="w-full p-2 border rounded"
-                                required>
+                            <input type="email" id="email" name="email" class="w-full p-2 border rounded" required>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="mb-2">
@@ -205,6 +198,36 @@
     </div>
     </div>
     <!-- End Modal Add Manual -->
+
+    <!-- Modal Konfirmasi Delete -->
+    <div id="delete-confirm-modal"
+        class="fixed top-0 left-0 hidden w-full h-full overflow-x-hidden overflow-y-auto hs-overlay z-100">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg dark:bg-neutral-800">
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Konfirmasi Hapus</h2>
+                <p class="mt-2 text-sm text-gray-600 dark:text-neutral-300">
+                    Apakah Anda yakin ingin menghapus user <span id="deleteUser"
+                        class="font-semibold text-red-600"></span>?
+                </p>
+                <form method="POST" id="deleteForm" class="mt-4">
+                    @csrf
+                    @method('DELETE')
+                    <div class="flex justify-end space-x-2">
+                        <button type="button"
+                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded hover:bg-gray-300 dark:bg-neutral-700 dark:text-white"
+                            data-hs-overlay="#delete-confirm-modal">
+                            Batal
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700">
+                            Hapus
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Konfirmasi Delete -->
 
     @push('scripts')
         <!-- Include jQuery dan DataTables -->
@@ -298,6 +321,27 @@
                     toastError.classList.remove("hidden");
                     setTimeout(() => toastError.classList.add("hidden"), 4000);
                 }
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.addEventListener('click', function(e) {
+                    if (e.target.closest('.btn-delete')) {
+                        const button = e.target.closest('.btn-delete');
+                        const userId = button.dataset.id;
+                        const userName = button.dataset.name;
+
+                        const form = document.getElementById('deleteForm');
+                        const nameSpan = document.getElementById('deleteUser');
+
+                        form.action = `/manage-user/${userId}`;
+                        nameSpan.textContent = userName;
+
+                        const modal = document.getElementById('delete-confirm-modal');
+                        window.HSOverlay.open(modal);
+                    }
+                });
             });
         </script>
     @endpush

@@ -39,6 +39,8 @@ Route::get('/profile', function () {
 
 Route::get('/manage-user',[UserController::class, 'showUser'])->name('manage-user');
 Route::post('/manage-user', [UserController::class, 'storeUser'])->name('user.store');
+// Route::put('/manage-user', [UserController::class, 'updateUser'])->name('manage-user.update');
+Route::delete('/manage-user/{id}', [UserController::class, 'deleteUser'])->name('manage-user.destroy');
 
 Route::get('/welcome', function () {
     return view('pages.welcome');
