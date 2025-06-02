@@ -66,10 +66,12 @@ Route::get('arrival/export-excel', [GuestController::class, 'exportArrival'])->n
 
 Route::get('/souvenir-desk', [SouvenirController::class, 'showSouvenirs'])->name('souvenir-desk');
 Route::post('/souvenir-desk', [SouvenirController::class, 'storeSouvenirs'])->name('souvenir-desk.store');
+Route::get('souvenir/export-excel', [SouvenirController::class, 'exportSouvenir'])->name('exportSouvenir');
 
 Route::get('/gift-handling', [GiftDepositController::class, 'showGiftDeposit'])->name('gift-handling');
 Route::post('/gift-handling', [GiftDepositController::class, 'storeGiftDeposit'])->name('gift-handling.store');
 Route::post('gift-handling/note', [GiftDepositController::class, 'storeNote'])->name('gift-handling.note');
+Route::get('gift-handling/export-excel', [GiftDepositController::class, 'exportGift'])->name('exportGift');
 
 Route::get('/settings', [SettingController::class, 'showSettings'])->name('settings');
 Route::post('/settings', [SettingController::class, 'storeSettings'])->name('settings.store');

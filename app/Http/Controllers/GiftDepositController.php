@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\GiftDeposit;
 use App\Models\Guest;
+use App\Exports\GiftExport;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GiftDepositController extends Controller
 {
@@ -96,5 +98,10 @@ class GiftDepositController extends Controller
             'status' => 'success',
             'message' => 'Catatan berhasil disimpan.',
         ]);
+    }
+
+    public function exportGift()
+    {
+        return Excel::download(new GiftExport, 'data-gift.xlsx');
     }
 }

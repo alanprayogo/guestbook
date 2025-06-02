@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Guest;
 use App\Models\Souvenir;
+use App\Exports\SouvenirExport;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SouvenirController extends Controller
 {
@@ -76,5 +78,10 @@ class SouvenirController extends Controller
             'status' => 'success',
             'message' => 'Data souvenir berhasil disimpan.',
         ]);
+    }
+
+    public function exportSouvenir()
+    {
+        return Excel::download(new SouvenirExport, 'data-souvenir.xlsx');
     }
 }
