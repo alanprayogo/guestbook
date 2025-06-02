@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Broadcast;
 use App\Models\Category;
 use App\Models\Guest;
+use App\Exports\GuestExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GuestController extends Controller
 {
@@ -245,10 +247,10 @@ class GuestController extends Controller
             ->editColumn('photo_guest', function ($row) {
                 if ($row->photo_guest) {
                     $url = Storage::url($row->photo_guest);
-                    return '<img src="' . $url . '" alt="Photo" class="w-10 h-10 object-cover rounded cursor-pointer"
+                    return '<img src="' . $url . '" alt="Photo" class="object-cover w-10 h-10 rounded cursor-pointer"
                                 onclick="showPhotoModal(\'' . $url . '\', \'' . e($row->guest_name) . '\')">';
                 }
-                return '<span class="text-gray-400 italic">Tidak ada foto</span>';
+                return '<span class="italic text-gray-400">Tidak ada foto</span>';
             })
             ->addColumn('status', function ($row) {
                 return view('components.status-badge', [
@@ -401,5 +403,10 @@ class GuestController extends Controller
             });
 
         return response()->json($guests);
+    }
+
+    public function exportGuest()
+    {
+        return Excel::download(new GuestExport, 'data-guest.xlsx');
     }
 }

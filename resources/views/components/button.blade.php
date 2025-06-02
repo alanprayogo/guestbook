@@ -1,9 +1,10 @@
 @props([
-    'href' => '#',
+    'href' => null,
     'variant' => 'primary',
     'icon' => null,
     'disabled' => false,
     'size' => 'medium',
+    'type' => 'button', // tambahkan prop 'type'
 ])
 
 @php
@@ -22,7 +23,7 @@
         {{ $slot }}
     </a>
 @else
-    <button type="button" {{ $attributes }}>
+    <button type="{{ $type }}" {{ $attributes }}>
         @if ($icon ?? $defaultIcons())
             {!! $icon ?? $defaultIcons() !!}
         @endif

@@ -56,6 +56,7 @@ Route::get('/manage-guest',[GuestController::class, 'showGuest'])->name('manage-
 Route::post('/manage-guest', [GuestController::class, 'storeGuest'])->name('manage-guest.store');
 Route::put('/manage-guest', [GuestController::class, 'updateGuest'])->name('manage-guest.update');
 Route::delete('/manage-guest/{id}', [GuestController::class, 'deleteGuest'])->name('manage-guest.destroy');
+Route::get('guest/export-excel', [GuestController::class, 'exportGuest'])->name('exportGuest');
 
 Route::get('/guest-arrival',[GuestController::class, 'showGuestArrive'])->name('guest-arrival');
 Route::get('/guest-category', [GuestController::class, 'getGuestCategory']);

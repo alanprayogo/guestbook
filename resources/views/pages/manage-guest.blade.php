@@ -50,7 +50,7 @@
                                 <div>
                                     <x-button variant="add">Add Guess</x-button>
                                     <x-button variant="import-excel">Import Excel</x-button>
-                                    <x-button variant="export-excel">Export Excel</x-button>
+                                    <x-button href="{{ route('exportGuest') }}" variant="export-excel">Export Excel</x-button>
                                     <x-button variant="export-pdf">Export PDF</x-button>
                                 </div>
                             </div>
@@ -169,7 +169,8 @@
                                     <label for="yang-mengundang" class="block text-sm font-medium dark:text-white">
                                         Yang Mengundang
                                     </label>
-                                    <input type="text" id="yang-mengundang" name="the_organizer" placeholder="Aku & Kamu" required
+                                    <input type="text" id="yang-mengundang" name="the_organizer" placeholder="Aku & Kamu"
+                                        required
                                         class="shadow-2xs block w-full rounded-lg border-gray-200 px-3 py-1.5 pe-11 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:py-2 sm:text-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                 </div>
                                 <div class="w-full">
