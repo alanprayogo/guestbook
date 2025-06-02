@@ -56,22 +56,23 @@ Route::get('/manage-guest',[GuestController::class, 'showGuest'])->name('manage-
 Route::post('/manage-guest', [GuestController::class, 'storeGuest'])->name('manage-guest.store');
 Route::put('/manage-guest', [GuestController::class, 'updateGuest'])->name('manage-guest.update');
 Route::delete('/manage-guest/{id}', [GuestController::class, 'deleteGuest'])->name('manage-guest.destroy');
-Route::get('guest/export-excel', [GuestController::class, 'exportGuest'])->name('exportGuest');
+Route::get('/guest/export-excel', [GuestController::class, 'exportGuest'])->name('exportGuest');
+Route::post('/guest/import-excel', [GuestController::class, 'importGuest'])->name('importGuest');
 
 Route::get('/guest-arrival',[GuestController::class, 'showGuestArrive'])->name('guest-arrival');
 Route::get('/guest-category', [GuestController::class, 'getGuestCategory']);
 Route::post('/guest-arrival', [GuestController::class, 'storeGuestArrive'])->name('guest-arrival.store');
 Route::post('/guests/upload-photo', [GuestController::class, 'uploadPhoto'])->name('guests.upload-photo');
-Route::get('arrival/export-excel', [GuestController::class, 'exportArrival'])->name('exportArrival');
+Route::get('/arrival/export-excel', [GuestController::class, 'exportArrival'])->name('exportArrival');
 
 Route::get('/souvenir-desk', [SouvenirController::class, 'showSouvenirs'])->name('souvenir-desk');
 Route::post('/souvenir-desk', [SouvenirController::class, 'storeSouvenirs'])->name('souvenir-desk.store');
-Route::get('souvenir/export-excel', [SouvenirController::class, 'exportSouvenir'])->name('exportSouvenir');
+Route::get('/souvenir/export-excel', [SouvenirController::class, 'exportSouvenir'])->name('exportSouvenir');
 
 Route::get('/gift-handling', [GiftDepositController::class, 'showGiftDeposit'])->name('gift-handling');
 Route::post('/gift-handling', [GiftDepositController::class, 'storeGiftDeposit'])->name('gift-handling.store');
-Route::post('gift-handling/note', [GiftDepositController::class, 'storeNote'])->name('gift-handling.note');
-Route::get('gift-handling/export-excel', [GiftDepositController::class, 'exportGift'])->name('exportGift');
+Route::post('/gift-handling/note', [GiftDepositController::class, 'storeNote'])->name('gift-handling.note');
+Route::get('/gift-handling/export-excel', [GiftDepositController::class, 'exportGift'])->name('exportGift');
 
 Route::get('/settings', [SettingController::class, 'showSettings'])->name('settings');
 Route::post('/settings', [SettingController::class, 'storeSettings'])->name('settings.store');

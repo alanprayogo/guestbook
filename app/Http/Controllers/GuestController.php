@@ -6,6 +6,7 @@ use App\Models\Broadcast;
 use App\Models\Category;
 use App\Models\Guest;
 use App\Exports\GuestExport;
+use App\Imports\GuestImport;
 use App\Exports\ArrivalExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -414,5 +415,16 @@ class GuestController extends Controller
     public function exportArrival()
     {
         return Excel::download(new ArrivalExport, 'data-arrival.xlsx');
+    }
+
+    public function importGuest(Request $request)
+    {
+        $request->validate([
+           'file' => 'required|mimes:xlsx,xls' 
+        ]);
+
+        Excel::import(new GuestImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Import Berhasil');
     }
 }
