@@ -6,6 +6,7 @@ use App\Models\Broadcast;
 use App\Models\Category;
 use App\Models\Guest;
 use App\Exports\GuestExport;
+use App\Exports\ArrivalExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -408,5 +409,10 @@ class GuestController extends Controller
     public function exportGuest()
     {
         return Excel::download(new GuestExport, 'data-guest.xlsx');
+    }
+    
+    public function exportArrival()
+    {
+        return Excel::download(new ArrivalExport, 'data-arrival.xlsx');
     }
 }

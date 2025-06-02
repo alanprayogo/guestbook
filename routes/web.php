@@ -62,6 +62,7 @@ Route::get('/guest-arrival',[GuestController::class, 'showGuestArrive'])->name('
 Route::get('/guest-category', [GuestController::class, 'getGuestCategory']);
 Route::post('/guest-arrival', [GuestController::class, 'storeGuestArrive'])->name('guest-arrival.store');
 Route::post('/guests/upload-photo', [GuestController::class, 'uploadPhoto'])->name('guests.upload-photo');
+Route::get('arrival/export-excel', [GuestController::class, 'exportArrival'])->name('exportArrival');
 
 Route::get('/souvenir-desk', [SouvenirController::class, 'showSouvenirs'])->name('souvenir-desk');
 Route::post('/souvenir-desk', [SouvenirController::class, 'storeSouvenirs'])->name('souvenir-desk.store');
