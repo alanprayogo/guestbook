@@ -48,7 +48,7 @@
                             <div
                                 class="grid gap-3 px-6 py-4 border-b border-gray-200 md:flex md:items-center md:justify-between dark:border-neutral-700">
                                 <div>
-                                    <x-button variant="add">Add Guess</x-button>
+                                    <x-button variant="import-excel">Import Excel</x-button>
                                     <form action="{{ route('importGuest') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <input type="file" name="file" required>
@@ -56,7 +56,6 @@
                                     </form>
                                     <x-button href="{{ route('exportGuest') }}" variant="export-excel">Export
                                         Excel</x-button>
-                                    <x-button variant="export-pdf">Export PDF</x-button>
                                 </div>
                             </div>
                             <!-- End Header -->

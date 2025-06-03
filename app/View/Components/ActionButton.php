@@ -63,6 +63,8 @@ class ActionButton extends Component
             'qr-code' => 'bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:bg-purple-600',
             'check' => 'bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 dark:focus:bg-emerald-600',
             'plus' => 'bg-indigo-600 hover:bg-indigo-700 focus:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:bg-indigo-600',
+            'gift' => 'bg-purple-600 hover:bg-purple-700 focus:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:bg-purple-600',
+            'souvenir' => 'bg-emerald-600 hover:bg-emerald-700 focus:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 dark:focus:bg-emerald-600',
         ];
 
         return implode(' ', [
@@ -85,8 +87,9 @@ class ActionButton extends Component
             'download' => '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line>',
             'qr-code' => '<path d="M3 3h4v4H3V3Z"></path><path d="M17 3h4v4h-4V3Z"></path><path d="M17 17h4v4h-4v-4Z"></path><path d="M3 17h4v4H3v-4Z"></path><path d="M7 7h10v10H7V7Z"></path>',
             'check' => '<path d="M5 13l4 4L19 7"></path>',
-            'plus' => '<line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>'
-
+            'plus' => '<line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>',
+            'gift' => '<path d="M20 12v10H4V12"></path><path d="M2 7h20v5H2z"></path><path d="M12 22V7"></path><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>',
+            'souvenir' => '<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path>'
         ];
 
         return $icons[$this->variant] ?? $icons['edit'];

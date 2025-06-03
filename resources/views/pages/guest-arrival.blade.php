@@ -56,7 +56,6 @@
                                 Scan QR
                             </x-button>
                             <x-button href="{{ route('exportArrival') }}" variant="export-excel">Export Excel</x-button>
-                            <x-button variant="export-pdf">Export PDF</x-button>
                             <x-button variant="random-pick" aria-haspopup="dialog" aria-expanded="false"
                                 aria-controls="hs-static-backdrop-modal" data-hs-overlay="#modal-random-pick">Random
                                 Pick</x-button>
