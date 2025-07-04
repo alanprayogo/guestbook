@@ -43,10 +43,10 @@
         <div class="-m-1.5 overflow-x-auto">
             <div class="inline-block min-w-full p-1.5 align-middle">
                 <div
-                    class="overflow-hidden bg-white border border-gray-200 shadow-2xs rounded-xl dark:border-neutral-700 dark:bg-neutral-800">
+                    class="shadow-2xs overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800">
                     <!-- Header -->
                     <div
-                        class="grid gap-3 px-6 py-4 border-b border-gray-200 md:flex md:items-center md:justify-between dark:border-neutral-700">
+                        class="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between dark:border-neutral-700">
                         <div>
                             <x-button variant="add" aria-haspopup="dialog" aria-expanded="false"
                                 aria-controls="hs-static-backdrop-modal" data-hs-overlay="#modal-add-manual">Add
@@ -71,7 +71,7 @@
                                     <th scope="col" class="py-3 ps-6 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span
-                                                class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                 No
                                             </span>
                                         </div>
@@ -80,7 +80,7 @@
                                     <th scope="col" class="py-3 pe-6 ps-6 text-start lg:ps-3 xl:ps-0">
                                         <div class="flex items-center gap-x-2">
                                             <span
-                                                class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                 Name
                                                 <span class="sort-icon">
                                                     <span class="up">↑</span>
@@ -93,7 +93,7 @@
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span
-                                                class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                 Tanggal
                                                 <span class="sort-icon">
                                                     <span class="up">↑</span>
@@ -106,7 +106,7 @@
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span
-                                                class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                 Jam Kehadiran
                                                 <span class="sort-icon">
                                                     <span class="up">↑</span>
@@ -119,7 +119,7 @@
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span
-                                                class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                 Tamu
                                                 <span class="sort-icon">
                                                     <span class="up">↑</span>
@@ -132,7 +132,7 @@
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span
-                                                class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                 Status
                                             </span>
                                         </div>
@@ -141,7 +141,7 @@
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span
-                                                class="text-xs font-semibold text-gray-800 uppercase dark:text-neutral-200">
+                                                class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                                                 Foto Kehadiran
                                             </span>
                                         </div>
@@ -168,12 +168,12 @@
         class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden [--overlay-backdrop:static]"
         role="dialog" tabindex="-1" aria-labelledby="hs-static-backdrop-modal-label" data-hs-overlay-keyboard="false">
         <div
-            class="m-3 mt-0 transition-all ease-out opacity-0 hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
+            class="m-3 mt-0 opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
             <div
-                class="flex flex-col bg-white border border-gray-200 pointer-events-auto shadow-2xs rounded-xl dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
-                <div class="flex items-center justify-end px-4 py-3 border-b border-gray-200 dark:border-neutral-700">
+                class="shadow-2xs pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
+                <div class="flex items-center justify-end border-b border-gray-200 px-4 py-3 dark:border-neutral-700">
                     <button type="button"
-                        class="inline-flex items-center justify-center text-gray-800 bg-gray-100 border border-transparent rounded-full focus:outline-hidden size-8 gap-x-2 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+                        class="focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
                         aria-label="Close" data-hs-overlay="#hs-static-backdrop-modal">
                         <span class="sr-only">Close</span>
                         <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -184,14 +184,14 @@
                         </svg>
                     </button>
                 </div>
-                <div class="p-4 overflow-y-auto">
-                    <div id="reader" class="w-full h-full border border-gray-300 rounded"></div>
+                <div class="overflow-y-auto p-4">
+                    <div id="reader" class="h-full w-full rounded border border-gray-300"></div>
                 </div>
 
                 <div
-                    class="flex items-center justify-end px-4 py-3 border-t border-gray-200 gap-x-2 dark:border-neutral-700">
+                    class="flex items-center justify-end gap-x-2 border-t border-gray-200 px-4 py-3 dark:border-neutral-700">
                     <button type="button"
-                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-2xs focus:outline-hidden gap-x-2 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                        class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
                         data-hs-overlay="#hs-static-backdrop-modal">
                         Close
                     </button>
@@ -202,21 +202,21 @@
     <!-- End Modal QR Code-->
 
     <!-- Modal Add Guess -->
-    <div id="guest-form-modal" class="fixed inset-0 items-center justify-center hidden h-full z-100"
+    <div id="guest-form-modal" class="z-100 fixed inset-0 hidden h-full items-center justify-center"
         style="background-color: rgba(0, 0, 0, 0.5)">
-        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+        <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <h2 class="mb-4 text-xl font-semibold">Input Tamu</h2>
             <form action="{{ route('guest-arrival.store') }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="guest-name" class="block text-sm font-medium">Nama</label>
-                    <input type="text" id="guest-name" name="guest_name" class="w-full p-2 border rounded" readonly>
+                    <input type="text" id="guest-name" name="guest_name" class="w-full rounded border p-2" readonly>
                 </div>
 
                 <div class="mb-4">
                     <label for="guest-count" class="block text-sm font-medium">Jumlah Tamu</label>
                     <input type="number" id="guest-count" min="1" name="guest_count"
-                        class="w-full p-2 border rounded" required>
+                        class="w-full rounded border p-2" required>
                 </div>
 
                 <div class="mb-4">
@@ -232,9 +232,9 @@
 
                 <div class="flex justify-end gap-2">
                     <button type="button" id="close-guest-form"
-                        class="px-4 py-2 text-black bg-gray-300 rounded hover:bg-gray-400">Batal</button>
+                        class="rounded bg-gray-300 px-4 py-2 text-black hover:bg-gray-400">Batal</button>
                     <button type="submit"
-                        class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">Simpan</button>
+                        class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Simpan</button>
                 </div>
             </form>
         </div>
@@ -246,15 +246,15 @@
         class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden [--overlay-backdrop:static]"
         role="dialog" tabindex="-1" aria-labelledby="hs-static-backdrop-modal-label" data-hs-overlay-keyboard="false">
         <div
-            class="m-3 mt-0 transition-all ease-out opacity-0 hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
+            class="m-3 mt-0 opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
             <div
-                class="flex flex-col bg-white border border-gray-200 pointer-events-auto shadow-2xs rounded-xl dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
-                <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-neutral-700">
+                class="shadow-2xs pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
+                <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-neutral-700">
                     <h3 id="hs-static-backdrop-modal-label" class="font-bold text-gray-800 dark:text-white">
                         Masukkan Nama Tamu
                     </h3>
                     <button type="button"
-                        class="inline-flex items-center justify-center text-gray-800 bg-gray-100 border border-transparent rounded-full focus:outline-hidden size-8 gap-x-2 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+                        class="focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
                         aria-label="Close" data-hs-overlay="#modal-add-manual">
                         <span class="sr-only">Close</span>
                         <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -265,23 +265,23 @@
                         </svg>
                     </button>
                 </div>
-                <div class="p-4 overflow-y-auto">
+                <div class="overflow-y-auto p-4">
                     <form id="form-add-manual">
                         <div class="mb-4">
                             <label for="guest-name-manual" class="block text-sm font-medium">Nama</label>
                             <input type="text" id="guest-name-manual" name="guest_name"
-                                class="w-full p-2 border rounded" required>
+                                class="w-full rounded border p-2" required>
                         </div>
 
                         <div
-                            class="flex items-center justify-end px-4 py-3 border-t border-gray-200 gap-x-2 dark:border-neutral-700">
+                            class="flex items-center justify-end gap-x-2 border-t border-gray-200 px-4 py-3 dark:border-neutral-700">
                             <button type="button"
-                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg shadow-2xs focus:outline-hidden gap-x-2 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                                class="shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
                                 data-hs-overlay="#modal-add-manual">
                                 Close
                             </button>
                             <button type="submit"
-                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg focus:outline-hidden gap-x-2 hover:bg-blue-700 focus:bg-blue-700 disabled:pointer-events-none disabled:opacity-50">
+                                class="focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:bg-blue-700 disabled:pointer-events-none disabled:opacity-50">
                                 Save changes
                             </button>
                         </div>
@@ -294,24 +294,24 @@
     <!-- End Modal Add Manual -->
 
     <!-- Modal Konfirmasi -->
-    <div id="custom-confirm-modal" class="fixed inset-0 items-center justify-center hidden h-full z-100"
+    <div id="custom-confirm-modal" class="z-100 fixed inset-0 hidden h-full items-center justify-center"
         style="background-color: rgba(0, 0, 0, 0.5)">
-        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+        <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <h2 class="mb-4 text-lg font-semibold text-gray-800">Konfirmasi</h2>
             <p class="mb-6 text-sm text-gray-600" id="custom-confirm-message">Apakah Anda yakin?</p>
             <div class="flex justify-end gap-2">
-                <button id="cancel-btn" class="px-4 py-2 text-black bg-gray-300 rounded hover:bg-gray-400">Batal</button>
-                <button id="confirm-btn" class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">Ya</button>
+                <button id="cancel-btn" class="rounded bg-gray-300 px-4 py-2 text-black hover:bg-gray-400">Batal</button>
+                <button id="confirm-btn" class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Ya</button>
             </div>
         </div>
     </div>
     <!-- End Modal Konfirmasi -->
 
     <!-- Modal Camera -->
-    <div id="camera-modal" class="fixed inset-0 items-center justify-center hidden h-full z-100"
+    <div id="camera-modal" class="z-100 fixed inset-0 hidden h-full items-center justify-center"
         style="background-color: rgba(0, 0, 0, 0.5)">
-        <div class="relative w-full max-w-md p-6 bg-white rounded-lg">
-            <button id="close-camera-modal" class="absolute text-gray-500 right-2 top-2 hover:text-gray-800">
+        <div class="relative w-full max-w-md rounded-lg bg-white p-6">
+            <button id="close-camera-modal" class="absolute right-2 top-2 text-gray-500 hover:text-gray-800">
                 &times;
             </button>
             <h2 class="mb-2 text-lg font-semibold">
@@ -322,7 +322,7 @@
             <input type="hidden" id="guest-name-input" name="guest_name">
 
             <video id="webcam-video" autoplay class="w-full rounded"></video>
-            <button id="capture-btn" class="px-4 py-2 mt-4 text-white bg-blue-600 rounded hover:bg-blue-700">
+            <button id="capture-btn" class="mt-4 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
                 Ambil Foto
             </button>
             <canvas id="canvas" class="hidden"></canvas>
@@ -331,32 +331,62 @@
     <!-- End Modal Camera -->
 
     <!-- Modal tampilan foto -->
-    <div id="photo-modal" class="fixed inset-0 items-center justify-center hidden h-full z-100"
+    <div id="photo-modal" class="z-100 fixed inset-0 hidden h-full items-center justify-center"
         style="background-color: rgba(0, 0, 0, 0.5)">
-        <div class="relative w-full max-w-lg p-4 bg-white rounded-lg">
-            <button onclick="closePhotoModal()" class="absolute text-2xl text-gray-500 right-2 top-2 hover:text-gray-800">
+        <div class="relative w-full max-w-lg rounded-lg bg-white p-4">
+            <button onclick="closePhotoModal()" class="absolute right-2 top-2 text-2xl text-gray-500 hover:text-gray-800">
                 &times;
             </button>
-            <h2 class="mb-2 text-lg font-semibold text-center" id="photo-modal-name"></h2>
-            <img id="photo-modal-image" src="" class="w-full h-auto rounded shadow">
+            <h2 class="mb-2 text-center text-lg font-semibold" id="photo-modal-name"></h2>
+            <img id="photo-modal-image" src="" class="h-auto w-full rounded shadow">
         </div>
     </div>
     <!-- End Modal tampilan foto -->
+
+    <!-- Modal Konfirmasi Delete -->
+    <div id="delete-confirm-modal"
+        class="hs-overlay z-100 fixed left-0 top-0 hidden h-full w-full overflow-y-auto overflow-x-hidden">
+        <div class="flex min-h-screen items-center justify-center px-4">
+            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800">
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Konfirmasi Hapus</h2>
+                <p class="mt-2 text-sm text-gray-600 dark:text-neutral-300">
+                    Apakah Anda yakin ingin menghapus tamu <span id="deleteGuestName"
+                        class="font-semibold text-red-600"></span>?
+                </p>
+                <form method="POST" id="deleteForm" class="mt-4">
+                    @csrf
+                    @method('DELETE')
+                    <div class="flex justify-end space-x-2">
+                        <button type="button"
+                            class="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-neutral-700 dark:text-white"
+                            data-hs-overlay="#delete-confirm-modal">
+                            Batal
+                        </button>
+                        <button type="submit"
+                            class="rounded bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700">
+                            Hapus
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Konfirmasi Delete -->
 
     <!-- Modal Random Pick -->
     <div id="modal-random-pick"
         class="hs-overlay z-80 pointer-events-none fixed start-0 top-0 hidden size-full overflow-y-auto overflow-x-hidden [--overlay-backdrop:static]"
         role="dialog" tabindex="-1" aria-labelledby="hs-static-backdrop-modal-label" data-hs-overlay-keyboard="false">
         <div
-            class="m-3 mt-0 transition-all ease-out opacity-0 hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
+            class="m-3 mt-0 opacity-0 transition-all ease-out hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 sm:mx-auto sm:w-full sm:max-w-lg">
             <div
-                class="flex flex-col bg-white border border-gray-200 pointer-events-auto shadow-2xs rounded-xl dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
-                <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-neutral-700">
+                class="shadow-2xs pointer-events-auto flex flex-col rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
+                <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-neutral-700">
                     <h3 id="hs-static-backdrop-modal-label" class="font-bold text-gray-800 dark:text-white">
                         Random Pick
                     </h3>
                     <button type="button"
-                        class="inline-flex items-center justify-center text-gray-800 bg-gray-100 border border-transparent rounded-full modal-close-btn focus:outline-hidden size-8 gap-x-2 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
+                        class="modal-close-btn focus:outline-hidden inline-flex size-8 items-center justify-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-600 dark:focus:bg-neutral-600"
                         aria-label="Close" data-hs-overlay="#modal-random-pick">
                         <span class="sr-only">Close</span>
                         <svg class="size-4 shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -367,7 +397,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="p-4 overflow-y-auto">
+                <div class="overflow-y-auto p-4">
                     <div class="card">
                         <div class="wheel-container">
                             <div class="marker"></div>
@@ -379,9 +409,9 @@
                         </div>
 
                         <div id="result" class="result"></div>
-                        <div class="flex justify-end mt-4">
+                        <div class="mt-4 flex justify-end">
                             <button type="button"
-                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-800 bg-white border border-gray-200 rounded-lg modal-close-btn shadow-2xs focus:outline-hidden gap-x-2 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+                                class="modal-close-btn shadow-2xs focus:outline-hidden inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 focus:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
                                 data-hs-overlay="#modal-random-pick">
                                 Close
                             </button>
@@ -395,15 +425,15 @@
     <!-- End Modal Random Pick -->
 
     <!-- Modal Pemenang -->
-    <div id="winner-modal" class="fixed inset-0 items-center justify-center hidden h-full">
-        <div class="w-full max-w-sm p-6 text-center bg-white rounded-lg shadow-xl">
+    <div id="winner-modal" class="fixed inset-0 hidden h-full items-center justify-center">
+        <div class="w-full max-w-sm rounded-lg bg-white p-6 text-center shadow-xl">
             <h2 class="mb-4 text-xl font-semibold text-gray-800">Pemenang</h2>
             <p id="winner-name" class="mb-4 text-lg font-bold text-indigo-600"></p>
             <div class="flex justify-center gap-3">
-                <button id="remove-winner-btn" class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">
+                <button id="remove-winner-btn" class="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600">
                     Hapus dari daftar
                 </button>
-                <button id="close-winner-modal" class="px-4 py-2 text-gray-700 bg-gray-300 rounded hover:bg-gray-400">
+                <button id="close-winner-modal" class="rounded bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400">
                     Tutup
                 </button>
             </div>
@@ -413,10 +443,10 @@
 
     @if (session('success'))
         <div id="toast-success"
-            class="fixed z-50 hidden w-full max-w-xs p-4 text-green-800 bg-green-100 rounded-lg shadow-lg right-5 top-5 dark:bg-green-800 dark:text-green-200"
+            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
             role="alert">
             <div class="flex items-center">
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414L8.414 15l-4.121-4.121a1 1 0 111.414-1.414L8.414 12.586l7.879-7.879a1 1 0 011.414 0z"
                         clip-rule="evenodd">
@@ -429,10 +459,10 @@
 
     @if (session('error'))
         <div id="toast-error"
-            class="fixed z-50 hidden w-full max-w-xs p-4 text-red-800 bg-red-100 rounded-lg shadow-lg right-5 top-5 dark:bg-red-800 dark:text-red-200"
+            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-red-100 p-4 text-red-800 shadow-lg dark:bg-red-800 dark:text-red-200"
             role="alert">
             <div class="flex items-center">
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11V7a1 1 0 10-2 0v4a1 1 0 102 0zm-1 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
                         clip-rule="evenodd">
@@ -447,6 +477,28 @@
     <script>
         window.guestsData = @json($guests);
     </script>
+
+    {{-- Delete Guest --}}
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.addEventListener('click', function(e) {
+                    if (e.target.closest('.btn-delete')) {
+                        const button = e.target.closest('.btn-delete');
+                        const guestId = button.dataset.id;
+                        const guestName = button.dataset.name;
+
+                        const form = document.getElementById('deleteForm');
+                        const nameSpan = document.getElementById('deleteGuestName');
+
+                        form.action = `/guest-arrival/${guestId}`;
+                        nameSpan.textContent = guestName;
+
+                        const modal = document.getElementById('delete-confirm-modal');
+                        window.HSOverlay.open(modal);
+                    }
+                });
+            });
+        </script>
 
 
 

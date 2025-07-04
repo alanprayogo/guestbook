@@ -62,6 +62,7 @@ Route::post('/guest/import-excel', [GuestController::class, 'importGuest'])->nam
 Route::get('/guest-arrival',[GuestController::class, 'showGuestArrive'])->name('guest-arrival');
 Route::get('/guest-category', [GuestController::class, 'getGuestCategory']);
 Route::post('/guest-arrival', [GuestController::class, 'storeGuestArrive'])->name('guest-arrival.store');
+Route::delete('/guest-arrival/{id}', [GuestController::class, 'deleteGuestArrival'])->name('guest-arrival.destroy');
 Route::post('/guests/upload-photo', [GuestController::class, 'uploadPhoto'])->name('guests.upload-photo');
 Route::get('/arrival/export-excel', [GuestController::class, 'exportArrival'])->name('exportArrival');
 

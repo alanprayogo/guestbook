@@ -407,11 +407,19 @@ class GuestController extends Controller
         return response()->json($guests);
     }
 
+    public function deleteGuestArrival($id)
+    {
+        $guest = Guest::findOrFail($id);
+        $guest->delete();
+
+        return redirect()->back()->with('success', 'Data tamu berhasil dihapus.');
+    }
+
     public function exportGuest()
     {
         return Excel::download(new GuestExport, 'data-guest.xlsx');
     }
-    
+
     public function exportArrival()
     {
         return Excel::download(new ArrivalExport, 'data-arrival.xlsx');
@@ -420,7 +428,7 @@ class GuestController extends Controller
     public function importGuest(Request $request)
     {
         $request->validate([
-           'file' => 'required|mimes:xlsx,xls' 
+            'file' => 'required|mimes:xlsx,xls'
         ]);
 
         Excel::import(new GuestImport, $request->file('file'));
