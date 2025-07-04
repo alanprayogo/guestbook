@@ -375,22 +375,75 @@
     </div>
     <!-- End Modal Konfirmasi Add Souvenir -->
 
-    <!-- Modal Konfirmasi Souvenir -->
-    <div id="confirm-modal" class="fixed inset-0 items-center justify-center hidden h-full z-100"
-        style="background: rgba(0, 0, 0, 0.5)">
-        <div class="w-full max-w-sm p-6 bg-white rounded shadow-xl">
-            <p id="confirm-message" class="mb-4 text-sm text-gray-800"></p>
-            <div class="flex justify-end gap-2">
-                <button id="cancel-button" class="px-4 py-2 text-sm bg-gray-200 rounded hover:bg-gray-300">
-                    Batal
-                </button>
-                <button id="confirm-button" class="px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">
-                    Lanjutkan
-                </button>
+    <!-- Modal Konfirmasi Add Gift -->
+    <div id="gift-confirm-modal"
+        class="hs-overlay z-100 fixed left-0 top-0 hidden h-full w-full overflow-y-auto overflow-x-hidden">
+        <div class="flex min-h-screen items-center justify-center px-4">
+            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800">
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Konfirmasi Hapus</h2>
+                <p class="mt-2 text-sm text-gray-600 dark:text-neutral-300">
+                    Apakah Anda yakin ingin menambahkan hadiah kepada tamu <span id="giftGuestName"
+                        class="font-semibold text-green-600"></span>?
+                </p>
+                <form method="POST" id="giftForm" class="mt-4">
+                    @csrf
+                    @method('POST')
+                    <div class="flex justify-end space-x-2">
+                        <input type="hidden" id="guest_id_input" name="guest_id">
+                        <input type="hidden" id="guest_name_input" name="guest_name">
+                        <button type="button"
+                            class="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-neutral-700 dark:text-white"
+                            data-hs-overlay="#gift-confirm-modal">
+                            Batal
+                        </button>
+                        <button type="submit"
+                            class="rounded bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <!-- End Modal Konfirmasi -->
+    <!-- End Modal Konfirmasi Add Gift -->
+
+    <!-- Modal Input Catatan -->
+    <div id="gift-notes-modal"
+        class="hs-overlay z-100 fixed left-0 top-0 hidden h-full w-full overflow-y-auto overflow-x-hidden">
+        <div class="flex min-h-screen items-center justify-center px-4">
+            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800">
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Catatan Tambahan (Opsional)</h2>
+                <form id="giftNotesForm" class="mt-4">
+                    @csrf
+                    <input type="hidden" name="guest_id" id="note_guest_id">
+                    <input type="hidden" name="gift_id" id="note_gift_id">
+                    <div class="mb-4">
+                        <label for="note"
+                            class="block text-sm font-medium text-gray-700 dark:text-white">Catatan</label>
+                        <textarea name="note" id="note" rows="3"
+                            class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"></textarea>
+                    </div>
+                    <div class="flex justify-end gap-2">
+                        <!-- Tombol Lewati / Lanjutkan -->
+                        <button type="button"
+                            onclick="window.HSOverlay.close(document.getElementById('gift-notes-modal')); location.reload();"
+                            class="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300">
+                            Lanjutkan
+                        </button>
+
+
+                        <!-- Tombol Simpan Catatan -->
+                        <button type="submit"
+                            class="rounded bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Input Catatan -->
+
 
     <!-- Modal Konfirmasi Delete -->
     <div id="delete-confirm-modal"
@@ -490,42 +543,66 @@
     </div>
 
 
-    @if (session('success'))
-        <div id="toast-success"
-            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200"
-            role="alert">
-            <div class="flex items-center">
-                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414L8.414 15l-4.121-4.121a1 1 0 111.414-1.414L8.414 12.586l7.879-7.879a1 1 0 011.414 0z"
-                        clip-rule="evenodd">
-                    </path>
-                </svg>
-                <span>{{ session('success') }}</span>
-            </div>
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div id="toast-error"
-            class="fixed right-5 top-5 z-50 hidden w-full max-w-xs rounded-lg bg-red-100 p-4 text-red-800 shadow-lg dark:bg-red-800 dark:text-red-200"
-            role="alert">
-            <div class="flex items-center">
-                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11V7a1 1 0 10-2 0v4a1 1 0 102 0zm-1 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
-                        clip-rule="evenodd">
-                    </path>
-                </svg>
-                <span>{{ session('error') }}</span>
-            </div>
-        </div>
-    @endif
-
-
     <script>
         window.guestsData = @json($guests);
+        window.flashMessage = {
+            success: @json(session('success')),
+            error: @json(session('error'))
+        };
     </script>
+
+    {{-- Toast Manual --}}
+    <script>
+        function showToastSuccess(message) {
+            let toast = document.createElement('div');
+            toast.className =
+                'fixed right-5 top-5 z-50 max-w-xs rounded-lg bg-green-100 p-4 text-green-800 shadow-lg dark:bg-green-800 dark:text-green-200';
+            toast.innerHTML = `
+        <div class="flex items-center">
+            <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414L8.414 15l-4.121-4.121a1 1 0 111.414-1.414L8.414 12.586l7.879-7.879a1 1 0 011.414 0z"
+                    clip-rule="evenodd">
+                </path>
+            </svg>
+            <span>${message}</span>
+        </div>
+    `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        function showToastError(message) {
+            let toast = document.createElement('div');
+            toast.className =
+                'fixed right-5 top-5 z-50 max-w-xs rounded-lg bg-red-100 p-4 text-red-800 shadow-lg dark:bg-red-800 dark:text-red-200';
+            toast.innerHTML = `
+        <div class="flex items-center">
+            <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11V7a1 1 0 10-2 0v4a1 1 0 102 0zm-1 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                    clip-rule="evenodd">
+                </path>
+            </svg>
+            <span>${message}</span>
+        </div>
+    `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.flashMessage?.success) {
+                showToastSuccess(window.flashMessage.success);
+            }
+
+            if (window.flashMessage?.error) {
+                showToastError(window.flashMessage.error);
+            }
+        });
+    </script>
+
+
 
     {{-- Add Souvenir --}}
     <script>
@@ -550,6 +627,81 @@
                     window.HSOverlay.open(modal);
                 }
             });
+        });
+    </script>
+
+    {{-- Add Gift --}}
+    <script>
+        document.body.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-gift')) {
+                const button = e.target.closest('.btn-gift');
+                const guestId = button.dataset.id;
+                const guestName = button.dataset.name;
+
+                // Set nilai ke input hidden di form
+                document.getElementById('guest_id_input').value = guestId;
+                document.getElementById('guest_name_input').value = guestName;
+                document.getElementById('giftGuestName').textContent = guestName;
+
+                // Buka modal konfirmasi
+                window.HSOverlay.open(document.getElementById('gift-confirm-modal'));
+            }
+        });
+
+        document.getElementById('giftForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const guestId = document.getElementById('guest_id_input').value;
+            const guestName = document.getElementById('guest_name_input').value;
+
+            fetch('/gift-handling', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        guest_id: guestId,
+                        guest_name: guestName
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        window.HSOverlay.close(document.getElementById('gift-confirm-modal'));
+                        showToastSuccess(data.message || 'Hadiah berhasil ditambahkan');
+
+                        document.getElementById('note_guest_id').value = guestId;
+                        document.getElementById('note_gift_id').value = data.gift_id;
+
+                        window.HSOverlay.open(document.getElementById('gift-notes-modal'));
+                    } else {
+                        alert(data.message || 'Gagal menambahkan hadiah');
+                        showToastError(data.message || 'Gagal menambahkan hadiah');
+                    }
+                });
+        });
+
+        document.getElementById('giftNotesForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('/gift-handling/note', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    window.HSOverlay.close(document.getElementById('gift-notes-modal'));
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 500);
+                    showToastSuccess(data.message || 'Catatan berhasil disimpan');
+                });
         });
     </script>
 

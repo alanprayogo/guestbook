@@ -4,7 +4,10 @@
             <x-action-button variant="souvenir" aria-haspopup="dialog" data-hs-overlay="#souvenir-confirm-modal"
                 class="btn-souvenir" data-id="{{ $row->id }}" data-name="{{ $row->guest_name }}" />
         @endif
-        <x-action-button variant="gift" />
+        @if ($row->giftDeposits->isEmpty())
+            <x-action-button variant="gift" aria-haspopup="dialog" data-hs-overlay="#gift-confirm-modal" class="btn-gift"
+                data-id="{{ $row->id }}" data-name="{{ $row->guest_name }}" />
+        @endif
         <x-action-button variant="delete" aria-haspopup="dialog" data-hs-overlay="#delete-confirm-modal"
             class="btn-delete" data-id="{{ $row->id }}" data-name="{{ $row->guest_name }}" />
         <button onclick="openCameraModal(this)" data-guest-name="{{ $row->guest_name }}"
