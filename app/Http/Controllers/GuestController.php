@@ -237,7 +237,7 @@ class GuestController extends Controller
     {
         $guests = Guest::all();
         $category = Category::all();
-        $query = Guest::with(['category'])
+        $query = Guest::with(['category', 'souvenirs'])
             ->orderBy('created_at', 'asc')
             ->get();
         if (!request()->ajax()) {

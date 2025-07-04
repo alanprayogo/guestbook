@@ -343,6 +343,55 @@
     </div>
     <!-- End Modal tampilan foto -->
 
+    <!-- Modal Konfirmasi Add Souvenir -->
+    <div id="souvenir-confirm-modal"
+        class="hs-overlay z-100 fixed left-0 top-0 hidden h-full w-full overflow-y-auto overflow-x-hidden">
+        <div class="flex min-h-screen items-center justify-center px-4">
+            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800">
+                <h2 class="text-lg font-semibold text-gray-800 dark:text-white">Konfirmasi Hapus</h2>
+                <p class="mt-2 text-sm text-gray-600 dark:text-neutral-300">
+                    Apakah Anda yakin ingin menambahkan souvenir kepada tamu <span id="souvenirGuestName"
+                        class="font-semibold text-green-600"></span>?
+                </p>
+                <form method="POST" id="souvenirForm" class="mt-4">
+                    @csrf
+                    @method('POST')
+                    <div class="flex justify-end space-x-2">
+                        <input type="hidden" id="guest_id_input" name="guest_id">
+                        <input type="hidden" id="guest_name_input" name="guest_name">
+                        <button type="button"
+                            class="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-neutral-700 dark:text-white"
+                            data-hs-overlay="#souvenir-confirm-modal">
+                            Batal
+                        </button>
+                        <button type="submit"
+                            class="rounded bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Konfirmasi Add Souvenir -->
+
+    <!-- Modal Konfirmasi Souvenir -->
+    <div id="confirm-modal" class="fixed inset-0 items-center justify-center hidden h-full z-100"
+        style="background: rgba(0, 0, 0, 0.5)">
+        <div class="w-full max-w-sm p-6 bg-white rounded shadow-xl">
+            <p id="confirm-message" class="mb-4 text-sm text-gray-800"></p>
+            <div class="flex justify-end gap-2">
+                <button id="cancel-button" class="px-4 py-2 text-sm bg-gray-200 rounded hover:bg-gray-300">
+                    Batal
+                </button>
+                <button id="confirm-button" class="px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">
+                    Lanjutkan
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Konfirmasi -->
+
     <!-- Modal Konfirmasi Delete -->
     <div id="delete-confirm-modal"
         class="hs-overlay z-100 fixed left-0 top-0 hidden h-full w-full overflow-y-auto overflow-x-hidden">
@@ -478,27 +527,53 @@
         window.guestsData = @json($guests);
     </script>
 
+    {{-- Add Souvenir --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-souvenir')) {
+                    const button = e.target.closest('.btn-souvenir');
+                    const guestId = button.dataset.id;
+                    const guestName = button.dataset.name;
+
+                    const form = document.getElementById('souvenirForm');
+                    const guestIdInput = document.getElementById('guest_id_input');
+                    const guestNameInput = document.getElementById('guest_name_input');
+                    const nameSpan = document.getElementById('souvenirGuestName');
+
+                    guestIdInput.value = guestId;
+                    guestNameInput.value = guestName;
+                    form.action = "/souvenir-desk";
+                    nameSpan.textContent = guestName;
+
+                    const modal = document.getElementById('souvenir-confirm-modal');
+                    window.HSOverlay.open(modal);
+                }
+            });
+        });
+    </script>
+
     {{-- Delete Guest --}}
     <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                document.body.addEventListener('click', function(e) {
-                    if (e.target.closest('.btn-delete')) {
-                        const button = e.target.closest('.btn-delete');
-                        const guestId = button.dataset.id;
-                        const guestName = button.dataset.name;
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-delete')) {
+                    const button = e.target.closest('.btn-delete');
+                    const guestId = button.dataset.id;
+                    const guestName = button.dataset.name;
 
-                        const form = document.getElementById('deleteForm');
-                        const nameSpan = document.getElementById('deleteGuestName');
+                    const form = document.getElementById('deleteForm');
+                    const nameSpan = document.getElementById('deleteGuestName');
 
-                        form.action = `/guest-arrival/${guestId}`;
-                        nameSpan.textContent = guestName;
+                    form.action = `/guest-arrival/${guestId}`;
+                    nameSpan.textContent = guestName;
 
-                        const modal = document.getElementById('delete-confirm-modal');
-                        window.HSOverlay.open(modal);
-                    }
-                });
+                    const modal = document.getElementById('delete-confirm-modal');
+                    window.HSOverlay.open(modal);
+                }
             });
-        </script>
+        });
+    </script>
 
 
 
