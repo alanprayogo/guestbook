@@ -74,10 +74,14 @@ class SouvenirController extends Controller
             'guest_name' => $guestName,
         ]);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Data souvenir berhasil disimpan.',
-        ]);
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data souvenir berhasil ditambahkan.',
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Data Souvenir berhasil ditambahkan.');
     }
 
     public function exportSouvenir()

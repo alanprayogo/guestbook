@@ -175,6 +175,7 @@ export function setupManualHandler({
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'X-Requested-With': 'XMLHttpRequest',
             },
             body: JSON.stringify({ guest_name: guestName, force })
         })
@@ -189,7 +190,7 @@ export function setupManualHandler({
                     }else{
                         setTimeout(() => {
                             window.location.reload();
-                        }, 2000);
+                        }, 1000);
                     }
                 } else if (data.status === 'exists' || data.status === 'not_found_in_guests') {
                     closeModal();
