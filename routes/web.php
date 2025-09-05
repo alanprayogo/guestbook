@@ -84,6 +84,7 @@ Route::middleware(['preventBack'])->group(function () {
 
         Route::get('/event', [SettingController::class, 'showCategories'])->name('event');
         Route::post('/event', [SettingController::class, 'storeCategory'])->name('event.store');
+        Route::delete('/categories/{id}', [SettingController::class, 'deleteCategory'])->name('categories.delete');
     });
 });
 

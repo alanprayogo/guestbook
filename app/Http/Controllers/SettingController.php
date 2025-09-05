@@ -72,4 +72,12 @@ class SettingController extends Controller
 
         return back()->with('success', 'Kategori berhasil ditambahkan.');
     }
+
+    public function deleteCategory($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return back()->with('success', 'Kategori berhasil dihapus.');
+    }
 }
