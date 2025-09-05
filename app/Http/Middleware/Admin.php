@@ -11,9 +11,9 @@ class Admin
     public function handle($request,Closure $next)
     {
         if (Auth::check()) {
-            $role = Auth::user()->role;
+            $role = Auth::user()->role_id;
 
-            if ($role == 'admin') {
+            if ($role == 1) {
                 return $next($request);
             } else {
                 return redirect()->route('dashboard');

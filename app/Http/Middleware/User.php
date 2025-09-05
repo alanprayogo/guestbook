@@ -11,9 +11,9 @@ class User
     public function handle($request,Closure $next)
     {
         if (Auth::check()) {
-            $role = Auth::user()->role;
+            $role = Auth::user()->role_id;
 
-            if ($role == 'user') {
+            if ($role == 2) {
                 return $next($request);
             } else {
                 return redirect()->route('login');
