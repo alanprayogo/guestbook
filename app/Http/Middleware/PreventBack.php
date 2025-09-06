@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class PreventBack
 {
@@ -11,8 +12,13 @@ class PreventBack
     {
         $response = $next($request);
 
-        return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
-                        ->header('Pragma', 'no-cache')
-                        ->header('Expires', '0');
+        // Hanya tambahkan header jika bukan download file (BinaryFileResponse)
+        if (!($response instanceof BinaryFileResponse)) {
+            $response->headers->set('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+            $response->headers->set('Pragma', 'no-cache');
+            $response->headers->set('Expires', '0');
+        }
+
+        return $response;
     }
 }
